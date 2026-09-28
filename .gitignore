@@ -13,7 +13,7 @@ output.txt
 
 # ---- ความลับ: cookie / session ของ grader ----
 tools/secrets.fish
-tools/.cookies.txt
+tools/.cookies.*.txt
 
 # ---- editor / OS ----
 .vscode/*.log
@@ -21,3 +21,7 @@ tools/.cookies.txt
 .DS_Store
 Thumbs.db
 *~
+
+# ---- Python ----
+__pycache__/
+*.pyc

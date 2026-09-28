@@ -30,16 +30,18 @@ olympicComputer-camp1-2569/
 │   │   ├── cmu-grader/      + _done/  ← C1PC* C1PE* C1PR*
 │   │   ├── codeforces/
 │   │   └── programming.in.th/
-│   ├── 2_incamp/          ระหว่างค่าย
-│   │   ├── cmu-grader/      + _done/  ← ย้ายอัตโนมัติเมื่อได้ 100
-│   │   ├── yrc-grader/      + _done/
-│   │   ├── pretest/
-│   │   ├── exam/
+│   ├── 2_incamp/          ระหว่างค่าย — แยกตามช่วงเหมือนที่เว็บแบ่ง
+│   │   ├── 1_first_half/cmu-grader/    + _done/
+│   │   ├── 2_second_half/cmu-grader/   + _done/
+│   │   ├── exam/ex1/                   + _done/
+│   │   ├── exam/ex2/                   + _done/
+│   │   ├── pretest/                    + _done/
+│   │   ├── yrc-grader/                 + _done/
 │   │   └── sheets/          โค้ดตัวอย่างที่อาจารย์แจก
 │   └── 3_endcamp/         หลังค่าย
 │
 ├── notes/               ← สรุป / cheatsheet ที่เขียนเอง
-└── tools/               ← สคริปต์ช่วยงาน
+└── tools/               ← สคริปต์ช่วยงาน — ดู tools/README.md
 ```
 
 ### กติกาการตั้งชื่อ
@@ -60,41 +62,37 @@ olympicComputer-camp1-2569/
 
 ## 🔄 ขั้นตอนทำงาน
 
+โจทย์โหลดมือจาก <https://www.cs.science.cmu.ac.th/compo/> — ไม่มีสคริปต์ดึงอัตโนมัติ
+
 ```fish
-# 0. ตั้งค่าล็อกอินครั้งเดียว — คัดลอกแล้วเติมรหัส
-cp tools/secrets.fish.example tools/secrets.fish
+# 1. เปิดหน้าเว็บของ contest โหลด Statement ที่ยังขาดมาก่อน
+#    (ดูว่าข้อไหนขาดด้วยคำสั่งนี้ — ไม่แก้อะไร แค่อ่าน)
+python3 tools/find_missed.py
 
-# 1. ดึง statement + สร้างโฟลเดอร์ + ไฟล์ .cpp จาก template ให้เลย
-fish tools/fetch_statements.fish C1PR01 C1PR02 C1PR03
+# 2. จัด PDF ที่โหลดมาเข้าโฟลเดอร์ + สร้าง .cpp จาก template ให้เลย
+fish tools/organize.fish ~/Downloads --cpp
 
-#    หรือดึงทั้งชุดที่ระบุไว้ใน tools/tasks.txt (ตอนนี้มี 36 ข้อของพรีแคมป์)
-fish tools/fetch_statements.fish --from-list
-
-#    ล็อกอินค้างอยู่ที่ tools/.cookies.txt — รันครั้งต่อไปไม่ต้องล็อกอินใหม่
-#    ถ้า session หมดอายุกลางทาง สคริปต์จะล็อกอินให้ใหม่เองหนึ่งครั้ง
-
-# 1b. ไฟล์ที่โหลดมือมาแบบลอย ๆ (สไลด์/โจทย์นอก grader) — จัดเข้าโฟลเดอร์ให้
+#    สไลด์/ชีทเรียนก็ใช้ตัวเดียวกัน แต่มักต้องเติมวันที่นำหน้า
 fish tools/organize.fish docs/sheets --prefix 20261005_AM --dry-run
 
-# 2. เขียนโค้ดที่  problems/1_precamp/cmu-grader/C1PR01/C1PR01.cpp
+# 3. เขียนโค้ดที่  problems/1_precamp/cmu-grader/C1PR01/C1PR01.cpp
 #    กด Ctrl+Shift+B ใน VSCode เพื่อ build + run (อ่าน input จาก .run/input.in)
 
-# 3. ก็อปตารางคะแนนจากหน้า grader มาวางทับ tools/score.txt แล้วรัน
+# 4. ก็อปตารางคะแนนจากหน้าเว็บ → tools/scores/precamp.txt แล้วรัน
 python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 → _done/ และอัปเดตตารางข้างล่าง
-python3 tools/find_missed.py   # เช็คว่าข้อไหนใน score.txt ยังไม่มีโฟลเดอร์
 ```
 
-`tools/secrets.fish` กับ `tools/.cookies.txt` เก็บรหัสและ session ของ grader
-— **ไม่ขึ้น git** (ดู `tools/secrets.fish.example`)
+รหัสโจทย์ไม่ซ้ำกันระหว่างค่าย — `sync_done.py` หาโฟลเดอร์เจอเองโดยไม่ต้องบอกว่า
+ข้อไหนอยู่ช่วงไหน ส่วนรายชื่อ contest ทั้งหมดดูที่ `tools/graders.txt`
 
 ---
 
 ## 🏆 ตารางคะแนน
 
-> สร้างอัตโนมัติโดย `python3 tools/sync_done.py` จาก `tools/score.txt` — อย่าแก้มือ
+> สร้างอัตโนมัติโดย `python3 tools/sync_done.py` จาก `tools/scores/*.txt` — อย่าแก้มือ
 
 <!-- SCORE:START -->
-_ยังไม่มีข้อมูล — วางตารางคะแนนจาก grader ลง `tools/score.txt` แล้วรัน `python3 tools/sync_done.py`_
+_ยังไม่มีข้อมูล — วางตารางคะแนนจากหน้าเว็บลง `tools/scores/<ชื่อ contest>.txt` แล้วรัน `python3 tools/sync_done.py`_
 <!-- SCORE:END -->
 
 ---

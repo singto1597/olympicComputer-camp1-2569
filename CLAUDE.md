@@ -9,10 +9,10 @@
 |---|---|
 | `docs/` | เอกสารค่าย: `syllabus/` กำหนดการ · `sheets/` สไลด์เรียน · `exams/` ตัวข้อสอบ |
 | `problems/1_precamp/` | พรีแคมป์ — `cmu-grader/` (ชุด C1PC / C1PE / C1PR), `codeforces/`, `programming.in.th/` |
-| `problems/2_incamp/` | โจทย์ระหว่างค่าย (`cmu-grader/`, `yrc-grader/`, `pretest/`, `exam/`, `sheets/`) |
+| `problems/2_incamp/` | โจทย์ระหว่างค่าย — แยกตามช่วงที่เว็บแบ่ง: `1_first_half/cmu-grader/`, `2_second_half/cmu-grader/`, `exam/ex1/`, `exam/ex2/`, `pretest/`, `yrc-grader/`, `sheets/` |
 | `problems/3_endcamp/` | งานหลังค่าย |
 | `notes/` | สรุป/cheatsheet ที่ผู้ใช้เขียนเอง |
-| `tools/` | สคริปต์ช่วยงาน + `score.txt` + `secrets.fish` (gitignored) |
+| `tools/` | สคริปต์ช่วยงาน + `graders.txt` + `scores/` — ดู `tools/README.md` |
 
 ## กติกาในโฟลเดอร์นี้
 
@@ -21,21 +21,21 @@
 - ข้อที่ได้ 100/100 เต็ม จะถูก **ย้ายเข้า `_done/`** ของ grader นั้นด้วย
   `sync_done.py` — อย่าย้ายมือ
 - ตารางคะแนนใน `README.md` อยู่ระหว่าง `<!-- SCORE:START -->` / `<!-- SCORE:END -->`
-  **สร้างจาก `tools/score.txt` อัตโนมัติ — ห้ามแก้มือ** ของจริงคือ `score.txt`
+  **สร้างอัตโนมัติจาก `tools/scores/*.txt` — ห้ามแก้มือ** ของจริงคือไฟล์ในนั้น
+  หนึ่งไฟล์ต่อหนึ่ง contest (ชื่อไฟล์ต้องตรงกับ `tools/graders.txt`)
 - สไลด์ตั้งชื่อ `YYYYMMDD_AM_Topic` / `YYYYMMDD_PM_Topic`
 - `template.cpp` คือโค้ดตั้งต้นของทุกข้อ — แก้ได้ตามใจ ผู้ใช้เป็นเจ้าของสไตล์นี้
 
 ## เรื่องที่ต้องระวัง
 
-- **`tools/secrets.fish` (รหัส grader) กับ `tools/.cookies.txt` (session)
-  — ห้าม cat ห้าม commit ห้ามส่งเนื้อหาออกที่ไหน** ถ้าต้องแก้ให้ผู้ใช้ทำเอง
-- Grader พรีแคมป์คือ `https://www.cs.science.cmu.ac.th/compo/09_pre_camp1`
-  เป็น CMS/Zebra: ล็อกอินด้วยฟอร์ม (`_xsrf` + `POST /login`) แล้วดึง statement ที่
-  `/tasks/{id}/statements/th` — บาง task ให้ HTML ไม่ใช่ PDF
-  รหัสโจทย์อยู่ใน `tools/tasks.txt` (อัปเดตจากหน้า contest overview)
-- `tools/score.txt` เป็นข้อความที่ก็อปมาจากหน้าเว็บ grader — มีชื่อโจทย์ภาษาไทย
-  ระวัง encoding (UTF-8) ตอนเขียนสคริปต์อ่าน
-- ชื่อไฟล์/โฟลเดอร์ภาษาไทยมีอยู่จริงใน `score.txt` และ PDF — quote ใน shell เสมอ
+- **โจทย์โหลดมือจากเว็บ grader — ไม่มีสคริปต์ดึงอัตโนมัติ และไม่มีรหัสอะไรเก็บใน
+  repo นี้เลย** อย่าเสนอให้เขียนสคริปต์ล็อกอิน/สแครป grader ผู้ใช้เลือกโหลดเองแล้ว
+- เว็บ `https://www.cs.science.cmu.ac.th/compo/` มีหลาย contest (พรีแคมป์ ·
+  ครึ่งแรก · ครึ่งหลัง · pretest · สอบ 2 ครั้ง) เป็น CMS/Zebra คนละตัวกัน
+  ทะเบียนอยู่ที่ `tools/graders.txt` — เพิ่ม contest = เพิ่ม 1 บรรทัด ไม่ต้องแก้สคริปต์
+- `tools/scores/<ชื่อ>.txt` คือข้อความที่ก็อปมาจากหน้าเว็บ grader — มีชื่อโจทย์
+  ภาษาไทย ระวัง encoding (UTF-8) ตอนเขียนสคริปต์อ่าน
+- ชื่อไฟล์/โฟลเดอร์ภาษาไทยมีอยู่จริงในไฟล์คะแนนและ PDF — quote ใน shell เสมอ
 - ของใน `docs/` กับ PDF โจทย์เป็น**หลักฐานผลงาน** — ห้ามลบ/ย้ายโดยไม่ถาม
 - ไฟล์ที่คอมไพล์ (`.out`, `.exe`) ไม่ขึ้น git · ไฟล์รันชั่วคราวอยู่ `.run/` (gitignored)
 

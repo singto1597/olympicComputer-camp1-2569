@@ -1,0 +1,717 @@
+<title>คู่มือ Tools ค่าย 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=IBM+Plex+Sans+Thai+Looped:wght@600;700&display=swap">
+
+<style>
+  :root {
+    color-scheme: light;
+    --paper:      #e9edf0;
+    --surface:    #ffffff;
+    --surface-2:  #f4f7f8;
+    --ink:        #12161b;
+    --ink-2:      #39424d;
+    --muted:      #6a7481;
+    --line:       #d2d9e0;
+    --line-2:     #e2e8ee;
+    --accent:     #0a5c6b;
+    --accent-ink: #07434e;
+    --accent-soft:#dbeaec;
+    --warm:       #8f4d0c;
+    --warm-soft:  #f6e8d8;
+    --term-bg:    #111519;
+    --term-ink:   #dbe3ea;
+    --term-dim:   #7d8b98;
+    --term-key:   #7fd3c4;
+    --term-line:  transparent;
+
+    --step: clamp(1.55rem, 1.15rem + 1.6vw, 2.1rem);
+    --h2:   clamp(1.15rem, 1.02rem + .5vw, 1.4rem);
+    --body: 1rem;
+    --mono: .845rem;
+
+    --shadow: 0 1px 2px rgba(14, 26, 34, .06), 0 8px 24px -18px rgba(14, 26, 34, .35);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --paper:      #0e1216;
+      --surface:    #151a20;
+      --surface-2:  #1a2027;
+      --ink:        #e5eaf0;
+      --ink-2:      #b6c0cb;
+      --muted:      #808b98;
+      --line:       #29313a;
+      --line-2:     #212830;
+      --accent:     #5fc7d6;
+      --accent-ink: #93dde8;
+      --accent-soft:#11333a;
+      --warm:       #dfa05f;
+      --warm-soft:  #322510;
+      --term-bg:    #090c0f;
+      --term-ink:   #d7dfe6;
+      --term-dim:   #6f7d8a;
+      --term-key:   #7fd3c4;
+      --term-line:  var(--line);
+      --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px -18px rgba(0, 0, 0, .9);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper:      #0e1216;
+    --surface:    #151a20;
+    --surface-2:  #1a2027;
+    --ink:        #e5eaf0;
+    --ink-2:      #b6c0cb;
+    --muted:      #808b98;
+    --line:       #29313a;
+    --line-2:     #212830;
+    --accent:     #5fc7d6;
+    --accent-ink: #93dde8;
+    --accent-soft:#11333a;
+    --warm:       #dfa05f;
+    --warm-soft:  #322510;
+    --term-bg:    #090c0f;
+    --term-ink:   #d7dfe6;
+    --term-dim:   #6f7d8a;
+    --term-key:   #7fd3c4;
+    --term-line:  var(--line);
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px -18px rgba(0, 0, 0, .9);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans Thai", "Noto Sans Thai", "Sarabun", system-ui, sans-serif;
+    font-size: var(--body);
+    line-height: 1.68;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 60rem;
+    margin-inline: auto;
+    padding-inline: max(1rem, 4vw);
+    padding-block: 0 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 5;
+    margin-inline: calc(-1 * max(1rem, 4vw));
+    padding: .6rem max(1rem, 4vw);
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line-2);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: .35rem .9rem;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .78rem;
+  }
+  .masthead .repo { color: var(--ink); font-weight: 500; letter-spacing: -.01em; }
+  .masthead .path { color: var(--muted); }
+
+  /* ---------- hero ---------- */
+  .hero { padding-top: 2.5rem; display: flex; flex-direction: column; gap: 1.1rem; }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .72rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1 {
+    font-family: "IBM Plex Sans Thai Looped", "IBM Plex Sans Thai", "Noto Sans Thai", sans-serif;
+    font-size: var(--step);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -.01em;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .lede { font-size: 1.06rem; color: var(--ink-2); max-width: 46ch; margin: 0; }
+
+  .facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem .6rem;
+    margin-top: .4rem;
+    padding: 0;
+    list-style: none;
+  }
+  .facts li {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .76rem;
+    padding: .3rem .65rem;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    color: var(--ink-2);
+    background: var(--surface);
+  }
+  .facts b { color: var(--accent-ink); font-weight: 500; }
+
+  /* ---------- sections ---------- */
+  section { display: flex; flex-direction: column; gap: 1.35rem; }
+
+  .sec-head { display: flex; flex-direction: column; gap: .4rem; }
+  .sec-num {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .72rem;
+    letter-spacing: .14em;
+    color: var(--muted);
+  }
+  h2 {
+    font-family: "IBM Plex Sans Thai Looped", "IBM Plex Sans Thai", "Noto Sans Thai", sans-serif;
+    font-size: var(--h2);
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 0;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+  .sec-sub { color: var(--ink-2); margin: 0; max-width: 52ch; font-size: .97rem; }
+
+  /* ---------- intent list ---------- */
+  .intent { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .intent li {
+    display: grid;
+    gap: .5rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--line-2);
+  }
+  @media (min-width: 760px) {
+    .intent li {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+      align-items: center;
+      gap: 2rem;
+    }
+  }
+  .intent .q { color: var(--ink); }
+  .intent .q em { font-style: normal; color: var(--muted); display: block; font-size: .86rem; }
+
+  /* ---------- command ---------- */
+  .cmd {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: var(--mono);
+    background: var(--term-bg);
+    color: var(--term-ink);
+    border-radius: 3px;
+    padding: .5rem .7rem;
+    display: block;
+    overflow-x: auto;
+    white-space: pre;
+    line-height: 1.5;
+    border: 1px solid var(--term-line);
+  }
+  .cmd .flag { color: var(--term-key); }
+
+  code.inline {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .88em;
+    background: var(--surface-2);
+    border: 1px solid var(--line-2);
+    border-radius: 3px;
+    padding: .1em .35em;
+    color: var(--accent-ink);
+  }
+
+  /* ---------- tool blocks ---------- */
+  .tool {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 1.4rem 1.35rem;
+    display: flex;
+    flex-direction: column;
+    gap: .95rem;
+    box-shadow: var(--shadow);
+  }
+  .tool-head { display: flex; flex-direction: column; gap: .3rem; }
+  .tool-name {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 1.02rem;
+    font-weight: 500;
+    color: var(--accent-ink);
+    letter-spacing: -.015em;
+    margin: 0;
+  }
+  .tool-role { color: var(--muted); font-size: .84rem; font-family: "IBM Plex Mono", ui-monospace, monospace; }
+  .tool p { margin: 0; color: var(--ink-2); font-size: .95rem; }
+  .tool .cmd + .cmd { margin-top: .4rem; }
+
+  .note {
+    font-size: .9rem;
+    color: var(--ink-2);
+    border-left: 2px solid var(--accent);
+    padding-left: .8rem;
+  }
+  .note.warn { border-left-color: var(--warm); }
+
+  /* ---------- tables ---------- */
+  .scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .92rem; min-width: 34rem; }
+  caption { text-align: left; caption-side: top; padding: .85rem 1rem .2rem; color: var(--muted); font-size: .84rem; }
+  th, td { text-align: left; padding: .7rem 1rem; border-bottom: 1px solid var(--line-2); vertical-align: top; }
+  thead th {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .74rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.mono, th.mono { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: .82rem; }
+  td.mono { color: var(--accent-ink); }
+  tbody th { font-weight: 500; }
+  .nowrap { white-space: nowrap; }
+
+  /* ---------- steps ---------- */
+  .steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1.6rem; counter-reset: s; }
+  .steps > li { display: grid; grid-template-columns: 1.6rem minmax(0, 1fr); gap: 1rem; }
+  .steps > li::before {
+    counter-increment: s;
+    content: counter(s);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .82rem;
+    color: var(--accent);
+    border-top: 1px solid var(--line);
+    padding-top: .35rem;
+    line-height: 1.2;
+  }
+  .step-body { display: flex; flex-direction: column; gap: .55rem; }
+  .step-body > p { margin: 0; }
+  .step-title { font-weight: 600; color: var(--ink); }
+
+  /* ---------- tree ---------- */
+  .tree {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .8rem;
+    line-height: 1.75;
+    background: var(--term-bg);
+    color: var(--term-ink);
+    border: 1px solid var(--term-line);
+    border-radius: 3px;
+    padding: 1.1rem 1.2rem;
+    overflow-x: auto;
+    margin: 0;
+    white-space: pre;
+  }
+  .tree .dir { color: var(--term-key); }
+  .tree .cmt { color: var(--term-dim); }
+
+  /* ---------- misc ---------- */
+  .legend { display: flex; flex-wrap: wrap; gap: .35rem 1.3rem; font-size: .86rem; color: var(--ink-2); margin: 0; padding: 0; list-style: none; }
+  .legend li { display: flex; align-items: center; gap: .45rem; }
+  .dot { width: .5rem; height: .5rem; border-radius: 50%; flex: none; }
+  .dot.g { background: #1a8a5a; }
+  .dot.y { background: #c58a12; }
+  .dot.r { background: #b8383f; }
+
+  .rules {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+  }
+  .rules li {
+    position: relative;
+    padding: .8rem 0 .8rem 1.15rem;
+    border-bottom: 1px solid var(--line-2);
+    color: var(--ink-2);
+    font-size: .95rem;
+  }
+  .rules li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1.3rem;
+    width: .4rem;
+    height: .4rem;
+    border-radius: 1px;
+    background: var(--accent);
+  }
+  .rules b { color: var(--ink); font-weight: 600; }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding-top: 1.2rem;
+    color: var(--muted);
+    font-size: .84rem;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+  }
+
+  a { color: var(--accent-ink); text-underline-offset: .18em; }
+  a:focus-visible, .cmd:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <div class="masthead">
+    <span class="repo">olympicComputer-camp1-2569</span>
+    <span class="path">03_Academics/OCom_2026/Camp1</span>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">สอวน. คอมพิวเตอร์ ค่าย 1 · 2569</p>
+    <h1>คู่มือ Tools กับ Grader</h1>
+    <p class="lede">
+      สคริปต์ใน <code class="inline">tools/</code> มีน้อยพอจำได้ แต่เวลาลืมก็ลืมจริง ๆ
+      หน้านี้รวมว่าตัวไหนทำอะไร รันยังไง และ grader หลายตัวแยกกันยังไง
+    </p>
+    <ul class="facts">
+      <li><b>3</b> สคริปต์ที่ต้องรัน</li>
+      <li><b>6</b> contest</li>
+      <li>โจทย์<b>โหลดมือ</b></li>
+      <li>ไม่มีรหัสเก็บใน repo</li>
+    </ul>
+  </header>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <h2>อยากทำอะไร ใช้ตัวไหน</h2>
+      <p class="sec-sub">สามบรรทัดนี้คือทั้งหมดที่ต้องจำ</p>
+    </div>
+
+    <ul class="intent">
+      <li>
+        <span class="q">โหลด PDF มาแล้ว อยากให้เข้าโฟลเดอร์เป็นระเบียบ<em>สร้าง .cpp จาก template ให้ด้วย</em></span>
+        <code class="cmd">fish tools/<span class="flag">organize.fish</span> ~/Downloads --cpp</code>
+      </li>
+      <li>
+        <span class="q">ได้คะแนนแล้ว อยากอัปเดตตาราง + ย้ายข้อที่เต็ม<em>ย้ายเข้า _done/ แล้วสร้าง README ใหม่</em></span>
+        <code class="cmd">python3 tools/<span class="flag">sync_done.py</span></code>
+      </li>
+      <li>
+        <span class="q">อยากรู้ว่ายังขาดข้อไหน<em>อ่านอย่างเดียว ไม่แก้อะไร</em></span>
+        <code class="cmd">python3 tools/<span class="flag">find_missed.py</span></code>
+      </li>
+    </ul>
+
+    <p class="note">
+      โจทย์ทุกข้อโหลดมือจาก <a href="https://www.cs.science.cmu.ac.th/compo/">cs.science.cmu.ac.th/compo</a>
+      — ไม่มีสคริปต์ล็อกอิน ไม่มีรหัสผ่านเก็บไว้ที่ไหนในโปรเจกต์
+    </p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <h2>แต่ละตัวทำอะไร</h2>
+    </div>
+
+    <div class="tool">
+      <div class="tool-head">
+        <h3 class="tool-name">organize.fish</h3>
+        <span class="tool-role">fish · ตัวที่ใช้บ่อยที่สุด</span>
+      </div>
+      <p>
+        ไฟล์ที่โหลดมาชื่อมักรก — <code class="inline">โจทย์ สอวน (th).pdf</code> —
+        มันจะสร้างโฟลเดอร์ชื่อสะอาดให้ แล้วย้ายไฟล์เข้าไป ตัดวงเล็บทิ้ง แทนเว้นวรรคด้วย
+        <code class="inline">_</code> ส่วนชื่อไทยเก็บไว้ครบ
+      </p>
+      <div>
+        <code class="cmd">fish tools/organize.fish ~/Downloads --dry-run   # ดูเฉย ๆ ยังไม่ย้าย</code>
+        <code class="cmd">fish tools/organize.fish ~/Downloads --cpp       # ย้าย + สร้าง .cpp</code>
+        <code class="cmd">fish tools/organize.fish docs/sheets --prefix 20261005_AM</code>
+      </div>
+      <p class="note">
+        ถ้าโหลด Statement มาแล้วชื่อเป็นรหัสโจทย์อยู่แล้ว (<code class="inline">C1PR01.pdf</code>)
+        จะได้ <code class="inline">C1PR01/C1PR01.pdf</code> กับ <code class="inline">C1PR01/C1PR01.cpp</code>
+        ตรงตามกติกาพอดี
+      </p>
+    </div>
+
+    <div class="tool">
+      <div class="tool-head">
+        <h3 class="tool-name">sync_done.py</h3>
+        <span class="tool-role">python · ตัวหลักหลังได้คะแนน</span>
+      </div>
+      <p>
+        อ่านตารางคะแนนทุกไฟล์ใน <code class="inline">tools/scores/</code> ข้อไหนได้เต็มก็ย้าย
+        เข้า <code class="inline">_done/</code> ของโฟลเดอร์นั้น แล้วสร้างตารางคะแนนใน
+        <code class="inline">README.md</code> ใหม่ทั้งบล็อก ปิดท้ายด้วยรายการข้อที่ยังไม่มีโฟลเดอร์
+      </p>
+      <div>
+        <code class="cmd">python3 tools/sync_done.py</code>
+      </div>
+      <p class="note">
+        <code class="inline">tools/scores/*.txt</code> คือความจริง — ตารางใน README ห้ามแก้มือ
+        รันซ้ำได้เรื่อย ๆ ข้อที่ย้ายแล้วจะข้าม
+      </p>
+    </div>
+
+    <div class="tool">
+      <div class="tool-head">
+        <h3 class="tool-name">find_missed.py</h3>
+        <span class="tool-role">python · อ่านอย่างเดียว</span>
+      </div>
+      <p>
+        เทียบตารางคะแนนกับโฟลเดอร์จริงในเครื่อง บอกว่าข้อไหนมีในระบบแต่ยังไม่ได้โหลด
+        <b>ไม่แก้อะไรเลย</b> ต่างจาก sync_done
+      </p>
+      <div>
+        <code class="cmd">python3 tools/find_missed.py</code>
+      </div>
+    </div>
+
+    <div class="tool">
+      <div class="tool-head">
+        <h3 class="tool-name">scorelib.py</h3>
+        <span class="tool-role">python · โมดูลกลาง ไม่มี CLI</span>
+      </div>
+      <p>
+        ไม่ได้รันเอง — สองตัวข้างบนเรียกใช้ร่วมกัน มีหน้าที่อ่านทะเบียน contest อ่านไฟล์คะแนน
+        และหารหัสโจทย์เจอโดยเดินทั่ว <code class="inline">problems/</code>
+        ไม่ต้องบอกว่าข้อไหนอยู่ช่วงไหน เพราะรหัสโจทย์ไม่ซ้ำกันอยู่แล้ว
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2>Contest มีหลายตัว แยกกันยังไง</h2>
+      <p class="sec-sub">
+        เว็บ <span class="nowrap">cs.science.cmu.ac.th/compo</span> มีหลาย contest
+        แต่ละอันเป็น CMS คนละตัว คนละชุดรหัสโจทย์ ทะเบียนอยู่ที่
+        <code class="inline">tools/graders.txt</code>
+      </p>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <caption>ชื่อในสคริปต์ → โฟลเดอร์ปลายทาง</caption>
+        <thead>
+          <tr>
+            <th scope="col">ชื่อในสคริปต์</th>
+            <th scope="col">คือ</th>
+            <th scope="col">ปลายทาง</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" class="mono">precamp</th>
+            <td>พรีแคมป์ <span class="nowrap">(ช่วงนี้อยู่)</span></td>
+            <td class="mono">problems/1_precamp/cmu-grader/</td>
+          </tr>
+          <tr>
+            <th scope="row" class="mono">camp1_1</th>
+            <td>ค่าย 1 ครึ่งแรก</td>
+            <td class="mono">problems/2_incamp/1_first_half/cmu-grader/</td>
+          </tr>
+          <tr>
+            <th scope="row" class="mono">camp1_2</th>
+            <td>ค่าย 1 ครึ่งหลัง</td>
+            <td class="mono">problems/2_incamp/2_second_half/cmu-grader/</td>
+          </tr>
+          <tr>
+            <th scope="row" class="mono">pretest</th>
+            <td>Pretest</td>
+            <td class="mono">problems/2_incamp/pretest/</td>
+          </tr>
+          <tr>
+            <th scope="row" class="mono">camp1_ex1</th>
+            <td>สอบครั้งที่ 1 ค่าย 1</td>
+            <td class="mono">problems/2_incamp/exam/ex1/</td>
+          </tr>
+          <tr>
+            <th scope="row" class="mono">camp1_ex2</th>
+            <td>สอบครั้งที่ 2 ค่าย 1</td>
+            <td class="mono">problems/2_incamp/exam/ex2/</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note">
+      อยากเพิ่ม contest ใหม่ = เพิ่ม 1 บรรทัดใน <code class="inline">graders.txt</code>
+      กับสร้างไฟล์ใน <code class="inline">tools/scores/</code> — ไม่ต้องแก้สคริปต์เลย
+      <br>
+      บนเว็บยังมีอีก 4 อันที่ไม่ได้ตั้งไว้: <code class="inline">02_Soft_Study</code> (โจทย์ซ้อม) ·
+      <code class="inline">06_sandbox</code> · <code class="inline">12_TA_ONLY</code> (นักเรียนเข้าไม่ได้) ·
+      <code class="inline">zz_cscmu_coding_challenge23</code> (ของปี 2023)
+    </p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <h2>ลำดับใช้งานปกติ</h2>
+      <p class="sec-sub">วนซ้ำแบบนี้ไปเรื่อย ๆ จนจบค่าย</p>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <div class="step-body">
+          <p class="step-title">เปิดเว็บ grader โหลด Statement ที่ยังขาด</p>
+          <code class="cmd">python3 tools/find_missed.py</code>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <p class="step-title">จัดเข้าโฟลเดอร์ + สร้าง .cpp ให้เลย</p>
+          <code class="cmd">fish tools/organize.fish ~/Downloads --cpp</code>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <p class="step-title">เขียนโค้ด</p>
+          <p>
+            ที่ <code class="inline">problems/1_precamp/cmu-grader/C1PR01/C1PR01.cpp</code>
+            กด <b>Ctrl+Shift+B</b> ใน VSCode เพื่อ build + run (อ่าน input จาก
+            <code class="inline">.run/input.in</code>)
+          </p>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <p class="step-title">ก็อปตารางคะแนนจากหน้าเว็บ</p>
+          <p>วางที่ <code class="inline">tools/scores/precamp.txt</code></p>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <p class="step-title">ปิดรอบ</p>
+          <code class="cmd">python3 tools/sync_done.py</code>
+          <p class="note">
+            ได้เต็มก็เข้า <code class="inline">_done/</code> ให้เอง พร้อมสถานะในตาราง:
+          </p>
+          <ul class="legend">
+            <li><span class="dot g"></span>ได้เต็ม</li>
+            <li><span class="dot y"></span>ได้บางส่วน</li>
+            <li><span class="dot r"></span>ยังไม่ได้คะแนน</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">05</span>
+      <h2>หน้าตาโฟลเดอร์</h2>
+    </div>
+    <pre class="tree">olympicComputer-camp1-2569/
+├── README.md          <span class="cmt">← สารบัญ + ตารางคะแนน (สร้างอัตโนมัติ)</span>
+├── CLAUDE.md          <span class="cmt">← บริบทให้ AI ช่วยงาน</span>
+├── template.cpp       <span class="cmt">← โค้ดตั้งต้นของทุกข้อ</span>
+│
+├── <span class="dir">docs/</span>              <span class="cmt">← สไลด์ · กำหนดการ · ข้อสอบ</span>
+├── <span class="dir">problems/</span>
+│   ├── <span class="dir">1_precamp/cmu-grader/</span>        + <span class="dir">_done/</span>
+│   ├── <span class="dir">2_incamp/</span>
+│   │   ├── <span class="dir">1_first_half/cmu-grader/</span>   + <span class="dir">_done/</span>
+│   │   ├── <span class="dir">2_second_half/cmu-grader/</span>  + <span class="dir">_done/</span>
+│   │   ├── <span class="dir">exam/ex1/</span>  <span class="dir">exam/ex2/</span>        + <span class="dir">_done/</span>
+│   │   ├── <span class="dir">pretest/</span>                   + <span class="dir">_done/</span>
+│   │   └── <span class="dir">yrc-grader/</span>                + <span class="dir">_done/</span>
+│   └── <span class="dir">3_endcamp/</span>
+├── <span class="dir">notes/</span>             <span class="cmt">← สรุปที่เขียนเอง</span>
+└── <span class="dir">tools/</span>             <span class="cmt">← สคริปต์ + graders.txt + scores/</span>
+</pre>
+    <p class="note">
+      โฟลเดอร์โจทย์ตั้งชื่อตามรหัสบน grader ตรง ๆ (<code class="inline">C1PR01/</code>)
+      ข้างในมี <code class="inline">C1PR01.cpp</code> กับ <code class="inline">C1PR01.pdf</code>
+      — ไม่ใส่เลขนำหน้า เพราะรหัสเรียงอยู่แล้ว
+    </p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">06</span>
+      <h2>กติกาที่ควรจำ</h2>
+    </div>
+
+    <ul class="rules">
+      <li>
+        <b>อย่าแก้ตารางคะแนนใน README ด้วยมือ</b> — มันสร้างจาก
+        <code class="inline">tools/scores/*.txt</code> รัน <code class="inline">sync_done.py</code> ทับได้เสมอ
+      </li>
+      <li>
+        <b>อย่าย้ายโฟลเดอร์ที่ได้เต็มเข้า <code class="inline">_done/</code> เอง</b> — ให้
+        <code class="inline">sync_done.py</code> ทำ จะได้ตรงกับตาราง
+      </li>
+      <li>
+        <b>โฟลเดอร์โจทย์ตั้งชื่อตามรหัสบน grader ตรง ๆ</b> ไม่ใส่เลขนำหน้า
+        เพราะรหัสเรียงลำดับอยู่แล้ว
+      </li>
+      <li>
+        <b>PDF กับสไลด์เป็นหลักฐานผลงาน</b> — อย่าลบหรือย้ายโดยไม่ถาม
+      </li>
+      <li>
+        <b>ไฟล์ที่คอมไพล์แล้วไม่ขึ้น git</b> (<code class="inline">.out</code>,
+        <code class="inline">.exe</code>) ส่วนไฟล์รันชั่วคราวอยู่ใน <code class="inline">.run/</code>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">07</span>
+      <h2>เจอปัญหา</h2>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">อาการ</th>
+            <th scope="col">สาเหตุ / ทางแก้</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">organize: มีโฟลเดอร์อยู่แล้ว</td>
+            <td>โฟลเดอร์โจทย์ข้อนั้นมีแล้ว — ย้าย PDF เข้าไปเองได้เลย</td>
+          </tr>
+          <tr>
+            <td class="mono">sync_done: ยังไม่มีไฟล์คะแนน</td>
+            <td>ต้องวางที่ <code class="inline">tools/scores/&lt;ชื่อใน graders.txt&gt;.txt</code></td>
+          </tr>
+          <tr>
+            <td class="mono">sync_done: อ่านได้ 0 บรรทัด</td>
+            <td>ตารางที่ก็อปมาต้องมีคอลัมน์คะแนนแบบ <code class="inline">0 / 100</code> และคั่นด้วย TAB</td>
+          </tr>
+          <tr>
+            <td class="mono">ชื่อโจทย์ในตารางเป็นช่องว่าง</td>
+            <td>ปกติ — grader บางหน้าตัดชื่อโจทย์ออก คะแนนยังถูกต้อง</td>
+          </tr>
+          <tr>
+            <td class="mono">ตารางใน README ไม่ตรง</td>
+            <td>อย่าแก้ README — แก้ที่ <code class="inline">tools/scores/*.txt</code> แล้วรันใหม่</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    อัปเดต 28 ก.ย. 2569 · คู่มือฉบับเต็มอยู่ใน tools/README.md ของ repo
+  </footer>
+
+</div>
