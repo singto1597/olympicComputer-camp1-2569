@@ -11,8 +11,9 @@ a.out
 input.in
 output.txt
 
-# ---- ความลับ: cookie ของ grader ----
+# ---- ความลับ: cookie / session ของ grader ----
 tools/secrets.fish
+tools/.cookies.txt
 
 # ---- editor / OS ----
 .vscode/*.log

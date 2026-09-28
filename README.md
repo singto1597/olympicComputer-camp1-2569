@@ -26,7 +26,8 @@ olympicComputer-camp1-2569/
 │   └── exams/             ตัวข้อสอบ pretest / midterm / final
 │
 ├── problems/            ← โจทย์ทั้งหมด
-│   ├── 1_precamp/         ก่อนเข้าค่าย
+│   ├── 1_precamp/         พรีแคมป์ (ก่อนเข้าค่าย)
+│   │   ├── cmu-grader/      + _done/  ← C1PC* C1PE* C1PR*
 │   │   ├── codeforces/
 │   │   └── programming.in.th/
 │   ├── 2_incamp/          ระหว่างค่าย
@@ -45,8 +46,9 @@ olympicComputer-camp1-2569/
 
 | อะไร | ตั้งชื่อว่า | ตัวอย่าง |
 |---|---|---|
-| โฟลเดอร์โจทย์ 1 ข้อ | รหัสโจทย์ตรงกับบน grader | `C1P01/` |
-| ไฟล์ในโฟลเดอร์โจทย์ | ชื่อเดียวกับโฟลเดอร์ | `C1P01.cpp`, `C1P01.pdf` |
+| โฟลเดอร์โจทย์ 1 ข้อ | รหัสโจทย์ตรงกับบน grader | `C1PR01/` |
+| ไฟล์ในโฟลเดอร์โจทย์ | ชื่อเดียวกับโฟลเดอร์ | `C1PR01.cpp`, `C1PR01.pdf` |
+| statement ที่เว็บให้มาเป็น HTML | เก็บเป็น `.html` | `C1PR01.html` |
 | สไลด์/ชีทเรียน | `YYYYMMDD_AM\|PM_หัวข้อ` | `20261005_AM_BasicC/` |
 | เทสเคส | `testcases/1.in`, `1.out` | ซ้อนในโฟลเดอร์โจทย์ |
 
@@ -59,26 +61,31 @@ olympicComputer-camp1-2569/
 ## 🔄 ขั้นตอนทำงาน
 
 ```fish
-# 1. ดึงโจทย์ PDF + สร้างไฟล์ .cpp จาก template ให้เลย
-fish tools/fetch_statements.fish C1P01 C1P02 C1P03
+# 0. ตั้งค่าล็อกอินครั้งเดียว — คัดลอกแล้วเติมรหัส
+cp tools/secrets.fish.example tools/secrets.fish
 
-#    หรือดึงทั้งชุดที่ระบุไว้ใน tools/tasks.txt
+# 1. ดึง statement + สร้างโฟลเดอร์ + ไฟล์ .cpp จาก template ให้เลย
+fish tools/fetch_statements.fish C1PR01 C1PR02 C1PR03
+
+#    หรือดึงทั้งชุดที่ระบุไว้ใน tools/tasks.txt (ตอนนี้มี 36 ข้อของพรีแคมป์)
 fish tools/fetch_statements.fish --from-list
+
+#    ล็อกอินค้างอยู่ที่ tools/.cookies.txt — รันครั้งต่อไปไม่ต้องล็อกอินใหม่
+#    ถ้า session หมดอายุกลางทาง สคริปต์จะล็อกอินให้ใหม่เองหนึ่งครั้ง
 
 # 1b. ไฟล์ที่โหลดมือมาแบบลอย ๆ (สไลด์/โจทย์นอก grader) — จัดเข้าโฟลเดอร์ให้
 fish tools/organize.fish docs/sheets --prefix 20261005_AM --dry-run
 
-# 2. เขียนโค้ดที่  problems/2_incamp/cmu-grader/C1P01/C1P01.cpp
+# 2. เขียนโค้ดที่  problems/1_precamp/cmu-grader/C1PR01/C1PR01.cpp
 #    กด Ctrl+Shift+B ใน VSCode เพื่อ build + run (อ่าน input จาก .run/input.in)
 
-# 3. ก็อปตารางคะแนนจากหน้า grader มาวางทับ tools/score.txt
-#    แล้วรัน
+# 3. ก็อปตารางคะแนนจากหน้า grader มาวางทับ tools/score.txt แล้วรัน
 python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 → _done/ และอัปเดตตารางข้างล่าง
-
 python3 tools/find_missed.py   # เช็คว่าข้อไหนใน score.txt ยังไม่มีโฟลเดอร์
 ```
 
-`tools/secrets.fish` เก็บ cookie ของ grader — **ไม่ขึ้น git** (ดู `tools/secrets.fish.example`)
+`tools/secrets.fish` กับ `tools/.cookies.txt` เก็บรหัสและ session ของ grader
+— **ไม่ขึ้น git** (ดู `tools/secrets.fish.example`)
 
 ---
 
