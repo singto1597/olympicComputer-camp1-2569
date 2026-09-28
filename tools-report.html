@@ -556,6 +556,13 @@
       <code class="inline">06_sandbox</code> · <code class="inline">12_TA_ONLY</code> (นักเรียนเข้าไม่ได้) ·
       <code class="inline">zz_cscmu_coding_challenge23</code> (ของปี 2023)
     </p>
+
+    <p class="note warn">
+      <b>YRC</b> เป็น grader คนละเว็บ ไม่ได้อยู่ใน CMS นี้ — โฟลเดอร์
+      <code class="inline">yrc-grader/</code> จึงมีทั้งครึ่งแรกและครึ่งหลัง ตอนนี้ยังไม่รู้ URL
+      กับรูปแบบตารางคะแนน พอเปิดใช้แล้วถ้าได้ตารางเดียวก็เพิ่ม 1 บรรทัดใน
+      <code class="inline">graders.txt</code> ถ้าแยกสองครึ่งก็เพิ่ม 2 บรรทัด
+    </p>
   </section>
 
   <section>
@@ -625,11 +632,14 @@
 ├── <span class="dir">problems/</span>
 │   ├── <span class="dir">1_precamp/cmu-grader/</span>        + <span class="dir">_done/</span>
 │   ├── <span class="dir">2_incamp/</span>
-│   │   ├── <span class="dir">1_first_half/cmu-grader/</span>   + <span class="dir">_done/</span>
-│   │   ├── <span class="dir">2_second_half/cmu-grader/</span>  + <span class="dir">_done/</span>
+│   │   ├── <span class="dir">1_first_half/</span>
+│   │   │   ├── <span class="dir">cmu-grader/</span>            + <span class="dir">_done/</span>
+│   │   │   └── <span class="dir">yrc-grader/</span>            + <span class="dir">_done/</span>
+│   │   ├── <span class="dir">2_second_half/</span>
+│   │   │   ├── <span class="dir">cmu-grader/</span>            + <span class="dir">_done/</span>
+│   │   │   └── <span class="dir">yrc-grader/</span>            + <span class="dir">_done/</span>
 │   │   ├── <span class="dir">exam/ex1/</span>  <span class="dir">exam/ex2/</span>        + <span class="dir">_done/</span>
-│   │   ├── <span class="dir">pretest/</span>                   + <span class="dir">_done/</span>
-│   │   └── <span class="dir">yrc-grader/</span>                + <span class="dir">_done/</span>
+│   │   └── <span class="dir">pretest/</span>                   + <span class="dir">_done/</span>
 │   └── <span class="dir">3_endcamp/</span>
 ├── <span class="dir">notes/</span>             <span class="cmt">← สรุปที่เขียนเอง</span>
 └── <span class="dir">tools/</span>             <span class="cmt">← สคริปต์ + graders.txt + scores/</span>

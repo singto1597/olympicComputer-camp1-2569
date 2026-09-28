@@ -9,7 +9,7 @@
 |---|---|
 | `docs/` | เอกสารค่าย: `syllabus/` กำหนดการ · `sheets/` สไลด์เรียน · `exams/` ตัวข้อสอบ |
 | `problems/1_precamp/` | พรีแคมป์ — `cmu-grader/` (ชุด C1PC / C1PE / C1PR), `codeforces/`, `programming.in.th/` |
-| `problems/2_incamp/` | โจทย์ระหว่างค่าย — แยกตามช่วงที่เว็บแบ่ง: `1_first_half/cmu-grader/`, `2_second_half/cmu-grader/`, `exam/ex1/`, `exam/ex2/`, `pretest/`, `yrc-grader/`, `sheets/` |
+| `problems/2_incamp/` | โจทย์ระหว่างค่าย — แยกตามช่วงที่เว็บแบ่ง: `1_first_half/` กับ `2_second_half/` (ในแต่ละอันมี `cmu-grader/` + `yrc-grader/`), `exam/ex1/`, `exam/ex2/`, `pretest/`, `sheets/` |
 | `problems/3_endcamp/` | งานหลังค่าย |
 | `notes/` | สรุป/cheatsheet ที่ผู้ใช้เขียนเอง |
 | `tools/` | สคริปต์ช่วยงาน + `graders.txt` + `scores/` — ดู `tools/README.md` |

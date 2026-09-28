@@ -31,12 +31,11 @@ olympicComputer-camp1-2569/
 │   │   ├── codeforces/
 │   │   └── programming.in.th/
 │   ├── 2_incamp/          ระหว่างค่าย — แยกตามช่วงเหมือนที่เว็บแบ่ง
-│   │   ├── 1_first_half/cmu-grader/    + _done/
-│   │   ├── 2_second_half/cmu-grader/   + _done/
-│   │   ├── exam/ex1/                   + _done/
-│   │   ├── exam/ex2/                   + _done/
-│   │   ├── pretest/                    + _done/
-│   │   ├── yrc-grader/                 + _done/
+│   │   ├── 1_first_half/    cmu-grader/ · yrc-grader/   (+ _done/ ในแต่ละอัน)
+│   │   ├── 2_second_half/   cmu-grader/ · yrc-grader/   (+ _done/)
+│   │   ├── exam/ex1/                    + _done/
+│   │   ├── exam/ex2/                    + _done/
+│   │   ├── pretest/                     + _done/
 │   │   └── sheets/          โค้ดตัวอย่างที่อาจารย์แจก
 │   └── 3_endcamp/         หลังค่าย
 │
