@@ -1,0 +1,64 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build + run (C++)",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "mkdir -p '${workspaceFolder}/.run' && touch '${workspaceFolder}/.run/input.in' && g++ -std=c++17 -O2 -Wall -Wextra '${file}' -o '${fileDirname}/${fileBasenameNoExtension}.out' && '${fileDirname}/${fileBasenameNoExtension}.out' < '${workspaceFolder}/.run/input.in' > '${workspaceFolder}/.run/output.txt'; code=$?; echo \"----- output.txt (exit $code) -----\"; cat '${workspaceFolder}/.run/output.txt'"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": "$gcc"
+    },
+    {
+      "label": "build only (C++)",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "${file}",
+        "-o",
+        "${fileDirname}/${fileBasenameNoExtension}.out"
+      ],
+      "group": "build",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": "$gcc"
+    },
+    {
+      "label": "run with testcases/ (C++)",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "cd '${fileDirname}' && g++ -std=c++17 -O2 '${fileBasename}' -o '${fileBasenameNoExtension}.out' || exit 1; ok=0; all=0; for f in testcases/*.in; do [ -e \"$f\" ] || continue; all=$((all+1)); base=\"${f%.in}\"; ./'${fileBasenameNoExtension}.out' < \"$f\" > /tmp/_got.txt; if diff -q -b /tmp/_got.txt \"$base.out\" > /dev/null 2>&1; then echo \"  PASS  $f\"; ok=$((ok+1)); else echo \"  FAIL  $f\"; diff -b \"$base.out\" /tmp/_got.txt | head -20; fi; done; echo \"----- $ok / $all passed -----\""
+      ],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}

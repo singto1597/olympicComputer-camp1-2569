@@ -1,0 +1,16 @@
+# normalize line endings
+* text=auto eol=lf
+
+# binary — อย่าแตะ
+*.pdf  binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.zip  binary
+*.exe  binary
+*.out  binary
+*.o    binary
+*.bmp  binary
+*.docx binary
+*.pptx binary

@@ -1,0 +1,22 @@
+# ---- ไฟล์ที่คอมไพล์ออกมา ----
+*.out
+*.exe
+*.o
+*.obj
+*.gch
+a.out
+
+# ---- ไฟล์รันชั่วคราว (VSCode task ใช้โฟลเดอร์นี้) ----
+.run/
+input.in
+output.txt
+
+# ---- ความลับ: cookie ของ grader ----
+tools/secrets.fish
+
+# ---- editor / OS ----
+.vscode/*.log
+*.code-workspace
+.DS_Store
+Thumbs.db
+*~

@@ -1,0 +1,17 @@
+{
+  "files.associations": {
+    "*.tcc": "cpp",
+    "bits/stdc++.h": "cpp"
+  },
+  "C_Cpp.default.cppStandard": "c++17",
+  "C_Cpp.default.cStandard": "c17",
+  "C_Cpp.default.compilerPath": "/usr/bin/g++",
+  "C_Cpp.default.intelliSenseMode": "linux-gcc-x64",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "editor.tabSize": 4,
+  "files.exclude": {
+    "**/*.out": true,
+    "**/.run": true
+  }
+}
