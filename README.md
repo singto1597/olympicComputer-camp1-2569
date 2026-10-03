@@ -91,7 +91,46 @@ python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 →
 > สร้างอัตโนมัติโดย `python3 tools/sync_done.py` จาก `tools/scores/*.txt` — อย่าแก้มือ
 
 <!-- SCORE:START -->
-_ยังไม่มีข้อมูล — วางตารางคะแนนจากหน้าเว็บลง `tools/scores/<ชื่อ contest>.txt` แล้วรัน `python3 tools/sync_done.py`_
+### พรีแคมป์ — ได้เต็ม **0 / 36** ข้อ
+
+| สถานะ | คะแนน | Task | ชื่อโจทย์ | ลิมิต | ไฟล์ |
+| :---: | :---: | :--- | :--- | :---: | :---: |
+| 🔴 | 0 / 100 | **C1PC01** | Alice and Bob | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PC01) |
+| 🔴 | 0 / 100 | **C1PC02** | Existence | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PC02) |
+| 🔴 | 0 / 100 | **C1PC03** | Banana-Thief | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PC03) |
+| 🔴 | 0 / 100 | **C1PC04** | Calculus survival | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PC04) |
+| 🔴 | 0 / 100 | **C1PC05** | Banana Mega-Trading | 1.500 seconds / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PC05) |
+| 🔴 | 0 / 100 | **C1PC06** | Banana Smuggling | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PC06) |
+| 🔴 | 0 / 100 | **C1PC07** | Narak Turing | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PC07) |
+| 🔴 | 0 / 100 | **C1PC08** | Pretender | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PC08) |
+| 🔴 | 0 / 100 | **C1PC09** | Box | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PC09) |
+| 🔴 | 0 / 100 | **C1PC10** | Charlie Takkie | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PC10) |
+| 🔴 | 0 / 100 | **C1PC11** | The Kuduy Bank | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PC11) |
+| 🔴 | 0 / 100 | **C1PC12** | Minesweeper | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PC12) |
+| 🔴 | 0 / 100 | **C1PR01** | Test | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PR01) |
+| 🔴 | 0 / 100 | **C1PR02** | KrisTerraFirmaGreg | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PR02) |
+| 🔴 | 0 / 100 | **C1PR03** | Binaemon DORA-Yaki Delirium | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PR03) |
+| 🔴 | 0 / 100 | **C1PR04** | Binaemon DORA-Yaki Delirium V2 | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PR04) |
+| 🔴 | 0 / 100 | **C1PR05** | Uma_Musume | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PR05) |
+| 🔴 | 0 / 100 | **C1PR06** | Summarize | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PR06) |
+| 🔴 | 0 / 100 | **C1PR07** | Box Box Box | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PR07) |
+| 🔴 | 0 / 100 | **C1PR08** | WRP7 | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PR08) |
+| 🔴 | 0 / 100 | **C1PR09** | Sebastian Vettel | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PR09) |
+| 🔴 | 0 / 100 | **C1PR10** | Bossfight | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PR10) |
+| 🔴 | 0 / 100 | **C1PR11** | Funko Pop | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PR11) |
+| 🔴 | 0 / 100 | **C1PR12** | Racing Game | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PR12) |
+| 🔴 | 0 / 100 | **C1PR13** | Food Stall | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PR13) |
+| 🔴 | 0 / 100 | **C1PR14** | Restaurant | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PR14) |
+| 🔴 | 0 / 100 | **C1PR15** | Delivery | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PR15) |
+| 🔴 | 0 / 100 | **C1PR16** | PrimeQ | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PR16) |
+| 🔴 | 0 / 100 | **C1PR17** | PrimeSweepi-N | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PR17) |
+| 🔴 | 0 / 100 | **C1PR18** | ClosingTime | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PR18) |
+| 🔴 | 0 / 100 | **C1PE01** | C1PE01 - Constructor | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PE01) |
+| 🔴 | 0 / 100 | **C1PE02** | C1PE02 - IPO | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PE02) |
+| 🔴 | 0 / 100 | **C1PE03** | C1PE03 - Mike Rock | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PE03) |
+| 🔴 | 0 / 100 | **C1PE04** | C1PE04 - Egypt | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PE04) |
+| 🔴 | 0 / 100 | **C1PC13** | Guess the song | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PC13) |
+| 🔴 | 0 / 100 | **C1PC14** | Judgement | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/C1PC14) |
 <!-- SCORE:END -->
 
 ---
