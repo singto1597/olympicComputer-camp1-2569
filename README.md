@@ -96,7 +96,7 @@ python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 →
 > สร้างอัตโนมัติโดย `python3 tools/sync_done.py` จาก `tools/scores/*.txt` — อย่าแก้มือ
 
 <!-- SCORE:START -->
-### พรีแคมป์ — ได้เต็ม **0 / 36** ข้อ
+### พรีแคมป์ — ได้เต็ม **18 / 36** ข้อ
 
 | สถานะ | คะแนน | Task | ชื่อโจทย์ | ลิมิต | ไฟล์ |
 | :---: | :---: | :--- | :--- | :---: | :---: |
@@ -112,24 +112,24 @@ python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 →
 | 🔴 | 0 / 100 | **C1PC10** | Charlie Takkie | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/10_C1PC10_Charlie_Takkie) |
 | 🔴 | 0 / 100 | **C1PC11** | The Kuduy Bank | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/11_C1PC11_The_Kuduy_Bank) |
 | 🔴 | 0 / 100 | **C1PC12** | Minesweeper | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/12_C1PC12_Minesweeper) |
-| 🔴 | 0 / 100 | **C1PR01** | Test | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/13_C1PR01_Test) |
-| 🔴 | 0 / 100 | **C1PR02** | KrisTerraFirmaGreg | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/14_C1PR02_KrisTerraFirmaGreg) |
-| 🔴 | 0 / 100 | **C1PR03** | Binaemon DORA-Yaki Delirium | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/15_C1PR03_Binaemon_DORA-Yaki_Delirium) |
-| 🔴 | 0 / 100 | **C1PR04** | Binaemon DORA-Yaki Delirium V2 | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/16_C1PR04_Binaemon_DORA-Yaki_Delirium_V2) |
-| 🔴 | 0 / 100 | **C1PR05** | Uma_Musume | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/17_C1PR05_Uma_Musume) |
-| 🔴 | 0 / 100 | **C1PR06** | Summarize | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/18_C1PR06_Summarize) |
-| 🔴 | 0 / 100 | **C1PR07** | Box Box Box | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/19_C1PR07_Box_Box_Box) |
-| 🔴 | 0 / 100 | **C1PR08** | WRP7 | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/20_C1PR08_WRP7) |
-| 🔴 | 0 / 100 | **C1PR09** | Sebastian Vettel | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/21_C1PR09_Sebastian_Vettel) |
-| 🔴 | 0 / 100 | **C1PR10** | Bossfight | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/22_C1PR10_Bossfight) |
-| 🔴 | 0 / 100 | **C1PR11** | Funko Pop | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/23_C1PR11_Funko_Pop) |
-| 🔴 | 0 / 100 | **C1PR12** | Racing Game | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/24_C1PR12_Racing_Game) |
-| 🔴 | 0 / 100 | **C1PR13** | Food Stall | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/25_C1PR13_Food_Stall) |
-| 🔴 | 0 / 100 | **C1PR14** | Restaurant | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/26_C1PR14_Restaurant) |
-| 🔴 | 0 / 100 | **C1PR15** | Delivery | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/27_C1PR15_Delivery) |
-| 🔴 | 0 / 100 | **C1PR16** | PrimeQ | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/28_C1PR16_PrimeQ) |
-| 🔴 | 0 / 100 | **C1PR17** | PrimeSweepi-N | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/29_C1PR17_PrimeSweepi-N) |
-| 🔴 | 0 / 100 | **C1PR18** | ClosingTime | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/30_C1PR18_ClosingTime) |
+| 🟢 | 100 / 100 | **C1PR01** | Test | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/_done/13_C1PR01_Test) |
+| 🟢 | 100 / 100 | **C1PR02** | KrisTerraFirmaGreg | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/_done/14_C1PR02_KrisTerraFirmaGreg) |
+| 🟢 | 100 / 100 | **C1PR03** | Binaemon DORA-Yaki Delirium | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/_done/15_C1PR03_Binaemon_DORA-Yaki_Delirium) |
+| 🟢 | 100 / 100 | **C1PR04** | Binaemon DORA-Yaki Delirium V2 | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/_done/16_C1PR04_Binaemon_DORA-Yaki_Delirium_V2) |
+| 🟢 | 100 / 100 | **C1PR05** | Uma_Musume | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/_done/17_C1PR05_Uma_Musume) |
+| 🟢 | 100 / 100 | **C1PR06** | Summarize | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/_done/18_C1PR06_Summarize) |
+| 🟢 | 100 / 100 | **C1PR07** | Box Box Box | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/_done/19_C1PR07_Box_Box_Box) |
+| 🟢 | 100 / 100 | **C1PR08** | WRP7 | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/_done/20_C1PR08_WRP7) |
+| 🟢 | 100 / 100 | **C1PR09** | Sebastian Vettel | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/_done/21_C1PR09_Sebastian_Vettel) |
+| 🟢 | 100 / 100 | **C1PR10** | Bossfight | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/_done/22_C1PR10_Bossfight) |
+| 🟢 | 100 / 100 | **C1PR11** | Funko Pop | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/_done/23_C1PR11_Funko_Pop) |
+| 🟢 | 100 / 100 | **C1PR12** | Racing Game | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/_done/24_C1PR12_Racing_Game) |
+| 🟢 | 100 / 100 | **C1PR13** | Food Stall | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/_done/25_C1PR13_Food_Stall) |
+| 🟢 | 100 / 100 | **C1PR14** | Restaurant | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/_done/26_C1PR14_Restaurant) |
+| 🟢 | 100 / 100 | **C1PR15** | Delivery | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/_done/27_C1PR15_Delivery) |
+| 🟢 | 100 / 100 | **C1PR16** | PrimeQ | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/_done/28_C1PR16_PrimeQ) |
+| 🟢 | 100 / 100 | **C1PR17** | PrimeSweepi-N | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/_done/29_C1PR17_PrimeSweepi-N) |
+| 🟢 | 100 / 100 | **C1PR18** | ClosingTime | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/_done/30_C1PR18_ClosingTime) |
 | 🔴 | 0 / 100 | **C1PE01** | C1PE01 - Constructor | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/31_C1PE01_Constructor) |
 | 🔴 | 0 / 100 | **C1PE02** | C1PE02 - IPO | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/32_C1PE02_IPO) |
 | 🔴 | 0 / 100 | **C1PE03** | C1PE03 - Mike Rock | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/33_C1PE03_Mike_Rock) |
