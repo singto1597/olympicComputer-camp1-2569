@@ -1,0 +1,164 @@
+# 💻 สอวน. คอม ค่าย 1 (2569) — Lessons จากเวิร์กสเปซโจทย์และเครื่องมือ
+
+> ส่วนนี้บันทึกบทเรียนที่เจอจริงระหว่างทำเวิร์กสเปซค่าย 1 สอวน. คอมพิวเตอร์ 2569
+> ตั้งแต่โครงสร้างโฟลเดอร์ → กติกาการตั้งชื่อ → สคริปต์ใน `tools/` → ขั้นตอนทำงาน → ข้อจำกัดของเครื่อง
+
+### 🛠️ ข้อมูลจริงอยู่บน `/mnt/storage` ไม่ใช่ `/home` — เข้าได้สองทางผ่าน symlink
+- **Context/Problem:** repo อยู่ที่ `/mnt/storage/03_Academics/OCom_2026/Camp1/olympicComputer-camp1-2569` แต่เปิดจาก IDE ได้ทาง `/home/singto1597/Academics/OCom_2026/Camp1/olympicComputer-camp1-2569` — path เดียวกันโผล่ได้ 2 หน้าตาใน log, สคริปต์ และข้อความ error
+- **Root Cause:** `~/Academics` เป็น symlink ชี้ไป `/mnt/storage/03_Academics` (ดิสก์ลูกที่เก็บข้อมูลจริง 885 GB) — ไม่ใช่ที่เก็บจริง
+- **Correct Pattern/Solution:** เวลาอ้าง path ในสคริปต์/เอกสารให้ใช้ฝั่ง `/mnt/storage` เป็นหลัก · `tools/organize.fish` แก้ปัญหานี้โดยตั้ง `$root` จาก `realpath` ของตัวสคริปต์เอง → รันจากโฟลเดอร์ไหนก็ได้ และ path ที่ไม่ขึ้นต้น `/` จะถูกต่อกับ `$root` ให้อัตโนมัติ
+- **Date Added:** 2026-09-28
+
+### 🛠️ โฟลเดอร์โจทย์ 1 ข้อ = รหัสโจทย์ตรงกับบน grader (ไม่ใส่เลขนำหน้า)
+- **Context/Problem:** ต้องมีกติกาเดียวทั้ง repo ว่าโจทย์ 1 ข้อเก็บยังไง ไม่งั้นแต่ละช่วงค่ายจะตั้งชื่อไม่เหมือนกัน
+- **Root Cause:** รหัสโจทย์ (`C1PC01`) เรียงลำดับได้เองอยู่แล้ว และ `sync_done.py` หาโฟลเดอร์ด้วยรหัสนี้ (ไม่ต้องรู้ว่าข้อไหนอยู่ contest ไหน) — ใส่เลขนำหน้าจะทำให้รหัสไม่ตรงกับที่อื่น
+- **Correct Pattern/Solution:** `<grader-dir>/C1PC01/C1PC01.cpp` + `C1PC01.pdf` · statement ที่เว็บให้เป็น HTML เก็บเป็น `C1PR01.html` · เทสเคสซ้อนใน `testcases/1.in`, `1.out` · เลขนำหน้ามีแค่ระดับ phase (`1_precamp` → `2_incamp` → `3_endcamp`) เพราะต้องเรียงตามเวลา
+- **Date Added:** 2026-09-28
+
+### 🛠️ `_done/` ให้สคริปต์ย้าย ไม่ย้ายมือ — และต้องมี `.gitkeep` ค้างไว้
+- **Context/Problem:** ข้อที่ได้ 100/100 ต้องย้ายเข้า `_done/` ของ grader นั้น แต่พอ clone repo ใหม่โฟลเดอร์ `_done/` หายไป
+- **Root Cause:** git ไม่ track โฟลเดอร์เปล่า
+- **Correct Pattern/Solution:** อย่าย้ายมือ — ปล่อยให้ `python3 tools/sync_done.py` ย้าย (ใช้ `git mv` ถ้าไฟล์ถูก track แล้ว ไม่งั้น fallback เป็น `shutil.move`) · โฟลเดอร์ `_done/` ทุกอันมี `.gitkeep` ค้างไว้ (commit `c4fbc5d`) · ถ้าปลายทางมีอยู่แล้วสคริปต์จะข้ามและเตือน ไม่ทับ
+- **Date Added:** 2026-09-28
+
+### 🛠️ ตารางคะแนนใน `README.md` สร้างอัตโนมัติ — ห้ามแก้มือ
+- **Context/Problem:** อยากแก้ตัวเลขคะแนน/ชื่อโจทย์ในตาราง README ตรง ๆ
+- **Root Cause:** ตารางอยู่ในบล็อก `<!-- SCORE:START -->` / `<!-- SCORE:END -->` ที่ `sync_done.py` เขียนทับใหม่ทั้งบล็อกทุกครั้งที่รัน
+- **Correct Pattern/Solution:** ของจริงคือ `tools/scores/<ชื่อ contest>.txt` — แก้ที่ไฟล์นั้นแล้วรัน `python3 tools/sync_done.py` · ถ้าหา marker ไม่เจอ สคริปต์จะข้ามและพิมพ์เตือน ไม่ไปทำ README พัง
+- **Date Added:** 2026-09-28
+
+### 🛠️ ชื่อไฟล์จาก grader มี suffix ภาษาไทยติดมา `(th)` `(TH)` `(th2)` `(th3)` `(th0)`
+- **Context/Problem:** 36 ไฟล์พรีแคมป์ชื่อ `C1PC01 (th).pdf`, `C1PC08 (th2).pdf`, `C1PR02 (TH).pdf`, `C1PR01 (th3).pdf`, `C1PE01 (th0).pdf` — หน้าตาไม่เหมือนกันเลย ถ้าวางโฟลเดอร์ตามชื่อไฟล์ตรง ๆ จะได้โฟลเดอร์ชื่อมีวงเล็บ
+- **Root Cause:** เว็บให้โหลดหลายฉบับ (ไทย/อังกฤษ/เวอร์ชันแก้) แล้วต่อ suffix ท้ายชื่อไฟล์ — **ไม่ใช่โจทย์คนละข้อ** รหัสโจทย์คือส่วนหน้าเท่านั้น
+- **Correct Pattern/Solution:** `organize.fish` ตัดด้วย `string replace -ra '\s*\([^)]*\)' ''` (ตัดเฉพาะวงเล็บ + ช่องว่างที่นำหน้า) แล้วแทนเว้นวรรคด้วย `_` → `C1PC01 (th).pdf` = `C1PC01/C1PC01.pdf` · ข้อจำกัดที่รู้: regex ตัดวงเล็บ**ทุกชนิด** ถ้าอนาคตมีชื่อโจทย์ที่มีวงเล็บเป็นส่วนของชื่อจริงจะโดนตัดไปด้วย
+- **Date Added:** 2026-10-03
+
+### 🛠️ `organize.fish` มี `--dry-run` — ดูก่อนย้ายจริงเสมอ
+- **Context/Problem:** ต้องย้าย PDF 36 ไฟล์รวดเดียว พลาดแล้วต้องมานั่งไล่ย้อน
+- **Root Cause:** งานที่แตะไฟล์เยอะควรเห็นรายการปลายทางก่อนลงมือ
+- **Correct Pattern/Solution:** `fish tools/organize.fish <โฟลเดอร์> --dry-run` จะพิมพ์ `ไฟล์ → โฟลเดอร์/ไฟล์` ให้ดูก่อน แล้วค่อยรันจริง · ถ้ามีโฟลเดอร์ปลายทางอยู่แล้วจะ **ข้าม** และทิ้ง PDF ไว้ข้างนอก (ไม่ทับ ไม่ย้าย) · สคริปต์ทำทีละโฟลเดอร์ จึงย้อนง่ายถ้าจัดผิดที่
+- **Date Added:** 2026-10-03
+
+### 🛠️ `--cpp` ก็อป `template.cpp` ให้ทุกข้อ — template มีแค่ 63 bytes
+- **Context/Problem:** ทุกข้อต้องเริ่มจากโครงเดียวกัน ไม่งั้นต้องมานั่งสร้างไฟล์เปล่าเอง 36 ครั้ง
+- **Root Cause:** ลดงานซ้ำตอนเปิดโจทย์ใหม่
+- **Correct Pattern/Solution:** `fish tools/organize.fish <โฟลเดอร์> --cpp` — สร้าง `<ID>.cpp` จาก `template.cpp` ให้ทุกข้อ · **ไม่ทับ** `.cpp` ที่มีอยู่แล้ว · ถ้าไม่เจอ `template.cpp` จะสร้างไฟล์เปล่าแทน · `template.cpp` เป็นของผู้ใช้ ปรับได้ตามใจ
+- **Date Added:** 2026-10-03
+
+### 🛠️ format บรรทัดคะแนนที่ `scorelib.py` อ่านออก
+- **Context/Problem:** วางตารางคะแนนจากเว็บลง `tools/scores/*.txt` แล้ว `sync_done.py` บอก "อ่านได้ 0 บรรทัด"
+- **Root Cause:** ตัวจับบรรทัดคือ `_LINE_RE = ^\s*(\d+)\s*/\s*(\d+)\s+([A-Za-z0-9_][A-Za-z0-9_.\-]*)\s*(.*)$` — ต้องขึ้นต้นด้วย `คะแนน / เต็ม` แล้วตามด้วยรหัสโจทย์ ถ้าไม่มีคอลัมน์คะแนนบรรทัดนั้นถูกข้ามทันที
+- **Correct Pattern/Solution:** ก็อปตารางจากเว็บมาวางทั้งหัวตารางได้ (บรรทัดที่จับไม่ได้จะถูกข้ามเอง) · ฟิลด์หลังรหัสโจทย์แยกด้วย TAB (`\t+`) **หรือ** ช่องว่าง 2 ตัวขึ้นไป (`_FIELD_SPLIT_RE`) · task_id ซ้ำจะถูก dedup เก็บอันแรก
+- **Date Added:** 2026-09-28
+
+### 🛠️ ชื่อโจทย์มีช่องว่างเดี่ยว — ต้องคั่นฟิลด์ด้วย TAB ไม่ใช่ช่องว่าง
+- **Context/Problem:** ตอนสร้าง `tools/scores/precamp.txt` ด้วยสคริปต์ ถ้าใช้ช่องว่างเดี่ยวคั่นฟิลด์ ชื่อโจทย์จะกลืนกับ time limit
+- **Root Cause:** `_FIELD_SPLIT_RE` แยกที่ TAB หรือช่องว่าง **2 ตัวขึ้นไป** — ชื่ออย่าง `Box Box Box`, `Banana Mega-Trading`, `C1PE01 - Constructor` มีช่องว่างเดี่ยวเต็มไปหมด
+- **Correct Pattern/Solution:** คั่นด้วย `\t` ตามที่เว็บ grader ให้มา (`"\t".join([...])`) · ชื่อโจทย์ที่มีช่องว่างเดี่ยวปลอดภัย เพราะไม่ถึงเกณฑ์ 2 ตัว · เขียนไฟล์ด้วย `encoding="utf-8"` เสมอ
+- **Date Added:** 2026-10-03
+
+### 🛠️ ลำดับบรรทัดใน `tools/scores/*.txt` = ลำดับที่โชว์ใน README
+- **Context/Problem:** หน้าพรีแคมป์บนเว็บเรียงโจทย์แปลก ๆ — `C1PC01`–`C1PC12` → `C1PR01`–`C1PR18` → `C1PE01`–`C1PE04` → แล้วค่อย `C1PC13`, `C1PC14` มาท้ายสุด
+- **Root Cause:** `parse_score()` คงลำดับในไฟล์ตามเดิม, `render_group()` วนตามนั้น — **ไม่มีการ sort** และเว็บก็ไม่ได้เรียงตามรหัส
+- **Correct Pattern/Solution:** อย่าไป sort ไฟล์คะแนนถ้าอยากได้ลำดับเหมือนเว็บ · โฟลเดอร์ในเครื่องเรียงตามชื่อเองอยู่แล้ว (`C1PC*` → `C1PE*` → `C1PR*`) → **ลำดับใน README กับการเรียงโฟลเดอร์ในเครื่องจะไม่ตรงกันเป็นเรื่องปกติ** ไม่ใช่บั๊ก
+- **Date Added:** 2026-10-03
+
+### 🛠️ `find_missed.py` อ่านอย่างเดียว — `sync_done.py` เป็นตัวแก้ของ
+- **Context/Problem:** ต้องรู้ว่าข้อไหนยังไม่ได้โหลด โดยไม่อยากให้มีอะไรถูกย้าย/เขียนทับระหว่างเช็ค
+- **Root Cause:** สองงานนี้ต้องแยกกัน — เช็คเฉย ๆ กับลงมือแก้
+- **Correct Pattern/Solution:** `python3 tools/find_missed.py` = รายงานอย่างเดียว ปลอดภัยที่จะรันบ่อย ๆ · `python3 tools/sync_done.py` = ย้ายข้อที่ได้เต็มเข้า `_done/` + เขียนตาราง README ใหม่ + บอกข้อที่ยังไม่มีโฟลเดอร์ · ทั้งคู่แชร์โค้ดอ่านไฟล์กันผ่าน `tools/scorelib.py` (ไม่มี CLI รันเอง)
+- **Date Added:** 2026-09-28
+
+### 🛠️ เพิ่ม contest ใหม่ = เพิ่ม 1 บรรทัดใน `tools/graders.txt` + 1 ไฟล์ใน `scores/`
+- **Context/Problem:** เว็บ <https://www.cs.science.cmu.ac.th/compo/> มีหลาย contest แต่ละอันเป็น CMS คนละตัว คนละชุดรหัสโจทย์
+- **Root Cause:** อยากให้เพิ่ม contest ได้โดยไม่ต้องแก้โค้ด Python/fish เลย
+- **Correct Pattern/Solution:** `graders.txt` ใช้ `<ชื่อไฟล์ใน scores/>` + TAB + `<ชื่อที่โชว์>` · `#` = คอมเมนต์ · **ลำดับในไฟล์ = ลำดับหัวข้อใน README** · แล้ววางตารางคะแนนที่ `tools/scores/<ชื่อนั้น>.txt` · `sync_done.py` หาโฟลเดอร์โจทย์เจอเองจากรหัส จึงไม่ต้องมีตารางว่า contest ไหนอยู่โฟลเดอร์ไหน
+- **Date Added:** 2026-09-28
+
+### 🛠️ ห้ามเสนอสคริปต์ล็อกอิน/สแครป grader — โจทย์โหลดมือเท่านั้น
+- **Context/Problem:** อยากได้โจทย์ครบเร็ว ๆ ก็คิดว่าจะเขียนสคริปต์ดึงอัตโนมัติ
+- **Root Cause:** ผู้ใช้เลือกโหลดเองจากหน้าเว็บ และ repo นี้ไม่เก็บรหัส/cookie อะไรเลย (`.gitignore` กัน `tools/secrets.fish` กับ `tools/.cookies.*.txt` ไว้แล้ว) — commit `a51b7a4` "เลิกดึงโจทย์อัตโนมัติ" คือบทเรียนนี้
+- **Correct Pattern/Solution:** สคริปต์ที่มีอยู่ช่วยได้แค่งานหลังโหลด — `find_missed.py` บอกว่าข้อไหนขาด, `organize.fish` จัดไฟล์ที่โหลดมาแล้วเข้าโฟลเดอร์ · อย่าเสนอ login/scrape ซ้ำอีก
+- **Date Added:** 2026-09-28
+
+### 🛠️ ปุ่ม build/run ใน VSCode — 3 task ใน `.vscode/tasks.json`
+- **Context/Problem:** ต้องมีรอบคอมไพล์/รันที่ตรงกับลิมิตของโจทย์ และไม่ต้องพิมพ์คำสั่งยาวทุกครั้ง
+- **Root Cause:** โจทย์ competitive programming อ่านจาก stdin เขียนไป stdout ทุกข้อ
+- **Correct Pattern/Solution:**
+  - `Ctrl+Shift+B` → `build + run (C++)`: `g++ -std=c++17 -O2 -Wall -Wextra` อ่าน input จาก `${workspaceFolder}/.run/input.in` เขียนผลลง `.run/output.txt` แล้ว `cat` ให้ดูพร้อม exit code
+  - `run with testcases/ (C++)`: วน `testcases/*.in` เทียบกับ `.out` ด้วย `diff -b` (ไม่สนช่องว่าง) แล้วสรุป `N / M passed`
+  - `build only (C++)`: คอมไพล์อย่างเดียว
+  - `.run/` กับ `*.out` ถูก gitignore และซ่อนใน file explorer (`.vscode/settings.json`)
+- **Date Added:** 2026-09-28
+
+### 🛠️ `.gitattributes` กัน PDF พังตอน commit
+- **Context/Problem:** repo เก็บ PDF หลักฐานผลงานเป็นสิบไฟล์ กลัว git ไปยุ่งกับ line ending แล้วไฟล์เสีย
+- **Root Cause:** `* text=auto eol=lf` ถ้าไม่ประกาศข้อยกเว้น git จะถือว่าไฟล์ไบนารีเป็น text
+- **Correct Pattern/Solution:** ประกาศ `*.pdf binary` ไว้ (พร้อม `png/jpg/jpeg/gif/zip/exe/out/o/bmp/docx/pptx`) ใต้ `* text=auto eol=lf` · ไฟล์ `.cpp` ยัง normalize เป็น LF ตามปกติ
+- **Date Added:** 2026-09-28
+
+### 🛠️ เครื่องนี้ควบคุม GUI ไม่ได้เลย — งานที่ต้องกดเว็บต้องให้ผู้ใช้ทำเอง
+- **Context/Problem:** อยากให้ช่วยกดโหลด statement จากหน้าเว็บ grader แทน
+- **Root Cause:** Wayland/GNOME + ไม่มี `xdotool`/`ydotool`/`wtype` และ `/dev/uinput` ไม่ให้ user เขียน → คลิก/พิมพ์แทน/สกรีนช็อต ทำไม่ได้ทั้งหมด · Chrome 150 ก็ใช้ `--remote-debugging-port` กับ profile จริงไม่ได้แล้ว (บล็อกตั้งแต่ 136)
+- **Correct Pattern/Solution:** ออกแบบงานให้เป็น CLI ล้วน — ให้ผู้ใช้โหลดไฟล์เองแล้วค่อยสั่งสคริปต์จัด · ข้อความช่วยเหลือต้องบอกขั้นตอนที่คนทำ ไม่ใช่บอกให้ AI ไปกดให้
+- **Date Added:** 2026-09-28
+
+### 🛠️ เครื่องนี้ไม่มีตัวอ่าน PDF — แต่อย่าลืมว่า Read tool เปิด PDF ได้
+- **Context/Problem:** อยากยืนยันว่าเนื้อใน `C1PC01.pdf` ตรงกับชื่อโจทย์จริง ไม่ใช่แค่เชื่อชื่อไฟล์
+- **Root Cause:** เครื่องนี้ไม่มี `pdftotext` (poppler-utils ไม่ได้ลง) และ Python ก็ไม่มี `pypdf`/`PyPDF2`/`fitz` → เช็คด้วย CLI ไม่ได้ · ลงเพิ่มต้อง `sudo` ซึ่งต้องถามก่อน
+- **Correct Pattern/Solution:** ถ้าต้องดูเนื้อใน PDF ให้ใช้ **Read tool ของ Claude Code เปิด PDF ตรง ๆ** (รับ `pages` ได้ ไม่ต้องพึ่ง CLI อะไรเลย) · ถ้าต้องการ `pdftotext` ไว้ใช้ในสคริปต์จริง ๆ ค่อยขออนุญาตลง poppler-utils · อย่าประกาศว่า "ตรวจเนื้อในให้แล้ว" ถ้ายังไม่ได้เปิดจริง — ยืนยันได้แค่ชื่อไฟล์/โฟลเดอร์
+- **Date Added:** 2026-10-03
+
+### 🛠️ shell เริ่มต้นคือ fish — สคริปต์ใน `tools/` ต้องเป็น syntax fish
+- **Context/Problem:** เขียนสคริปต์ bash ลง `tools/` แล้วรันไม่ผ่าน
+- **Root Cause:** เครื่องนี้ใช้ `/usr/bin/fish` เป็น shell หลัก — fish ไม่รองรับ heredoc และ syntax ต่างจาก bash (ตัวแปรเป็น list, ไม่มี `$(( ))`, ใช้ `set`, `math`, `string`)
+- **Correct Pattern/Solution:** สคริปต์จัดการไฟล์ใช้ fish + `argparse` built-in (`argparse 'cpp' 'dry-run' 'prefix=' 'h/help' -- $argv`) · งานที่ต้อง parse เยอะ ๆ (คะแนน, เอกสาร) ใช้ Python 3 แทน · อย่าเขียน bash แล้วหวังว่าจะรันได้
+- **Date Added:** 2026-09-28
+
+### 🛠️ ภาษาไทยในชื่อไฟล์และในข้อมูล — UTF-8 เสมอ + quote ทุกครั้ง
+- **Context/Problem:** ไฟล์คะแนนมีชื่อโจทย์/คำอธิบายไทย สไลด์ก็ตั้งชื่อไทยได้ และ shell เป็น fish ที่ตัวแปรไม่ตัดคำแบบ bash
+- **Root Cause:** ชื่อไทยมีทั้งในไฟล์คะแนน (`tools/scores/*.txt`) และในชื่อไฟล์/โฟลเดอร์จริง
+- **Correct Pattern/Solution:** เปิดไฟล์ด้วย `encoding="utf-8"` ทุกครั้ง (ใน `scorelib.py` ทำแล้ว) · quote path ทุกครั้งใน shell — `"$file"`, `'...'` · เวลาสร้างสคริปต์ที่วนชื่อไฟล์ อย่าใช้ byte-length ตัดสินอะไร
+- **Date Added:** 2026-09-28
+
+### 🛡️ `sudo` ต้องถามก่อนทุกครั้ง และ group `docker` = เทียบเท่า root
+- **Context/Problem:** คำสั่งอย่างลง package, mount path, แก้ config ระบบ ต้องใช้สิทธิ์สูง
+- **Root Cause:** ผู้ใช้อยู่ใน group `docker` → คำสั่ง docker ที่ mount path ได้เท่ากับเขียนไฟล์ระบบได้
+- **Correct Pattern/Solution:** ห้ามรัน `sudo` อัตโนมัติ ต้องขออนุญาตก่อนทุกครั้ง · ระวังเป็นพิเศษกับคำสั่ง docker ที่ mount path — โดยเฉพาะใน repo นี้ที่ PDF เป็นหลักฐานผลงาน
+- **Date Added:** 2026-09-28
+
+### 🛡️ โฟลเดอร์ความลับอยู่นอก repo นี้ — ห้ามอ่าน ห้าม commit
+- **Context/Problem:** ใต้ `/mnt/storage` มีโฟลเดอร์เก็บ SSH keys/VPS creds/API keys, config เครือข่ายพร้อมรหัสผ่านระบบ และเรื่องส่วนตัว/ครอบครัว/การเงิน ปนอยู่กับโฟลเดอร์งานเรียน
+- **Root Cause:** ดิสก์ลูกเดียวกันเก็บทั้งงานที่แชร์ได้และความลับ — และ repo นี้อยู่บน GitHub (`singto1597/olympicComputer-camp1-2569`)
+- **Correct Pattern/Solution:** ห้าม `cat`/`grep`/ส่งออกเนื้อหาจากโฟลเดอร์เหล่านั้น (ดูชื่อโฟลเดอร์เต็มใน `CLAUDE.md` ระดับเครื่อง) · ดูได้แค่ชื่อไฟล์ถ้าจำเป็น · **ห้าม commit อะไรจากที่นั่นเด็ดขาด** · เอกสารนี้จงใจไม่ระบุ path เต็มของโฟลเดอร์เหล่านั้น เพราะไฟล์นี้ขึ้น GitHub
+- **Date Added:** 2026-10-03
+
+### 🛠️ `docs/`, PDF โจทย์ และไฟล์คะแนน = หลักฐานผลงาน ห้ามลบ/ย้ายโดยไม่ถาม
+- **Context/Problem:** อยากจัดระเบียบใหม่แล้วย้าย/ลบของเก่า
+- **Root Cause:** โฟลเดอร์นี้เป็นแฟ้มสะสมผลงานการเรียน (พอร์ต POSN) — ของเก่าเป็นหลักฐานว่าทำอะไรมาบ้าง
+- **Correct Pattern/Solution:** ถามก่อนทุกครั้งที่จะลบ/ย้าย · การจัดเข้าโฟลเดอร์ด้วย `organize.fish` ถือว่าปลอดภัยเพราะไม่ลบไฟล์ (`mv` เท่านั้น) แต่ก็ยังใช้ `--dry-run` ก่อนเมื่อทำเยอะ ๆ
+- **Date Added:** 2026-09-28
+
+### 🧯 รอบ 2026-10-03: จัดโจทย์พรีแคมป์ 36 ข้อเข้าครบทั้งชุด
+- **Context/Problem:** โหลด PDF พรีแคมป์มา 36 ไฟล์ลอยอยู่ใน `problems/1_precamp/cmu-grader/` ยังไม่มีโฟลเดอร์ และยังไม่มีไฟล์คะแนนให้ `sync_done.py` ใช้
+- **Root Cause:** ขั้นตอนปกติต้องผ่าน `organize.fish` + ก็อปตารางคะแนนจากเว็บ ซึ่งยังไม่ได้ทำ
+- **Correct Pattern/Solution:** ลำดับที่ใช้ได้ผล —
+  1. `fish tools/organize.fish problems/1_precamp/cmu-grader --cpp --dry-run` (ดู 36 รายการก่อน)
+  2. รันจริงโดยตัด `--dry-run` ออก → 36 ไฟล์เข้าโฟลเดอร์ + `.cpp` ครบ 36
+  3. สร้าง `tools/scores/precamp.txt` (TAB-separated, คงลำดับตามเว็บ)
+  4. `python3 tools/sync_done.py` → ตาราง 36 แถวใน README, ย้ายเข้า `_done/` 0 ข้อ (ยังไม่มีข้อไหนได้เต็ม)
+  5. `python3 tools/find_missed.py` → `✨ ครบถ้วนทั้งหมด!`
+- **ขยาย (ตัวเลขจริง):** พรีแคมป์ = 3 ชุดรหัส รวม 36 ข้อ — `C1PC01`–`C1PC14` (14) · `C1PE01`–`C1PE04` (4) · `C1PR01`–`C1PR18` (18) · ทุกข้อ 1.000 second / 8.00 MiB ยกเว้น `C1PC05` Banana Mega-Trading = 1.500 seconds · ชื่อโจทย์ชุด `C1PE*` ขึ้นต้นด้วยรหัสซ้ำ (`C1PE01 - Constructor`)
+- **Date Added:** 2026-10-03
+
+### 🛠️ `notes/`, `docs/`, `3_endcamp/` และโฟลเดอร์โจทย์เว็บอื่นยังว่าง — มีแต่ `.gitkeep`
+- **Context/Problem:** เปิด repo ดูแล้วเข้าใจว่ามีข้อมูลเยอะ ทั้งที่ยังไม่มีอะไร
+- **Root Cause:** `.gitkeep` ทำให้โฟลเดอร์เปล่าติดไปกับ clone ได้ → โฟลเดอร์ที่มีแต่ `.gitkeep` = "จองที่ไว้ ยังไม่มีของ"
+- **Correct Pattern/Solution:** สถานะ ณ 2026-10-03 มีข้อมูลจริงแค่ `problems/1_precamp/cmu-grader/` (36 ข้อพรีแคมป์) กับ `tools/` · `notes/`, `docs/syllabus|sheets|exams/`, `problems/2_incamp/*`, `problems/3_endcamp/`, `codeforces/`, `programming.in.th/` ยังว่าง
+- **Date Added:** 2026-10-03
+
+### 🛠️ `tools-report.html` ที่ราก repo = ฉบับอ่านง่ายของ `tools/README.md`
+- **Context/Problem:** อยากอธิบายโครงสร้างเครื่องมือให้อ่านสบายตากว่า markdown ใน terminal
+- **Root Cause:** `tools/README.md` ยาวและมีตารางเยอะ
+- **Correct Pattern/Solution:** `tools-report.html` (30 KB) เนื้อหาเดียวกับ `tools/README.md` แต่จัดหน้าให้อ่านง่ายกว่า และมีตารางเปรียบเทียบ contest กับแผนผังโฟลเดอร์ · แก้ `tools/README.md` แล้วอย่าลืมอัปเดตตัวนี้ด้วย
+- **Date Added:** 2026-10-03
