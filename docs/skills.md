@@ -9,11 +9,11 @@
 - **Correct Pattern/Solution:** เวลาอ้าง path ในสคริปต์/เอกสารให้ใช้ฝั่ง `/mnt/storage` เป็นหลัก · `tools/organize.fish` แก้ปัญหานี้โดยตั้ง `$root` จาก `realpath` ของตัวสคริปต์เอง → รันจากโฟลเดอร์ไหนก็ได้ และ path ที่ไม่ขึ้นต้น `/` จะถูกต่อกับ `$root` ให้อัตโนมัติ
 - **Date Added:** 2026-09-28
 
-### 🛠️ โฟลเดอร์โจทย์ 1 ข้อ = รหัสโจทย์ตรงกับบน grader (ไม่ใส่เลขนำหน้า)
-- **Context/Problem:** ต้องมีกติกาเดียวทั้ง repo ว่าโจทย์ 1 ข้อเก็บยังไง ไม่งั้นแต่ละช่วงค่ายจะตั้งชื่อไม่เหมือนกัน
-- **Root Cause:** รหัสโจทย์ (`C1PC01`) เรียงลำดับได้เองอยู่แล้ว และ `sync_done.py` หาโฟลเดอร์ด้วยรหัสนี้ (ไม่ต้องรู้ว่าข้อไหนอยู่ contest ไหน) — ใส่เลขนำหน้าจะทำให้รหัสไม่ตรงกับที่อื่น
-- **Correct Pattern/Solution:** `<grader-dir>/C1PC01/C1PC01.cpp` + `C1PC01.pdf` · statement ที่เว็บให้เป็น HTML เก็บเป็น `C1PR01.html` · เทสเคสซ้อนใน `testcases/1.in`, `1.out` · เลขนำหน้ามีแค่ระดับ phase (`1_precamp` → `2_incamp` → `3_endcamp`) เพราะต้องเรียงตามเวลา
-- **Date Added:** 2026-09-28
+### 🛠️ โฟลเดอร์โจทย์ = `<ลำดับ>_<รหัส>_<ชื่อโจทย์>` แต่ไฟล์ข้างในเป็นรหัสเปล่า ๆ
+- **Context/Problem:** เดิมโฟลเดอร์ชื่อรหัสเปล่า ๆ (`C1PC01/`) เปิด `cmu-grader/` แล้วต้องนั่งเปิด PDF ทีละอันกว่าจะรู้ว่าข้อไหนคือข้ออะไร — และโฟลเดอร์เรียงตามรหัส (`C1PC` → `C1PE` → `C1PR`) ไม่ตรงกับลำดับโจทย์บนเว็บ (`C1PC` → `C1PR` → `C1PE`)
+- **Root Cause:** ชื่อโจทย์มีอยู่ในคอลัมน์ Name ของตารางคะแนนอยู่แล้ว (`tools/scores/*.txt`) แต่ไม่ได้ถูกใช้เป็นชื่อโฟลเดอร์ · ส่วน**ไฟล์ต้องคงชื่อรหัสเปล่า ๆ** เพราะ grader บังคับชื่อไฟล์ตอน submit (คอลัมน์ Files = `C1PC01[.cpp|.c]`) ใส่ชื่อโจทย์ไปต้อง rename กลับทุกครั้ง
+- **Correct Pattern/Solution:** `<grader-dir>/01_C1PC01_Alice_and_Bob/C1PC01.cpp` + `C1PC01.pdf` — เลขลำดับมาจากบรรทัดใน `tools/scores/<contest>.txt` (ลำดับเดียวกับตารางใน README) นับ 1 ใหม่ทุก contest · โฟลเดอร์กับไฟล์ชื่อไม่เหมือนกัน**โดยตั้งใจ** · แปลงชื่อด้วย `folder_names.py` / `scorelib.folder_name_for()` เท่านั้น อย่า rename มือ · statement HTML เก็บเป็น `C1PR01.html` · เทสเคสซ้อนใน `testcases/1.in`, `1.out` · เลขนำหน้ามีแค่ระดับ phase (`1_precamp` → `2_incamp` → `3_endcamp`) เพราะต้องเรียงตามเวลา
+- **Date Added:** 2026-10-03 (แก้ทับ entry เดิม 2026-09-28 ที่บอกว่า "ไม่ใส่เลขนำหน้า")
 
 ### 🛠️ `_done/` ให้สคริปต์ย้าย ไม่ย้ายมือ — และต้องมี `.gitkeep` ค้างไว้
 - **Context/Problem:** ข้อที่ได้ 100/100 ต้องย้ายเข้า `_done/` ของ grader นั้น แต่พอ clone repo ใหม่โฟลเดอร์ `_done/` หายไป
@@ -30,7 +30,7 @@
 ### 🛠️ ชื่อไฟล์จาก grader มี suffix ภาษาไทยติดมา `(th)` `(TH)` `(th2)` `(th3)` `(th0)`
 - **Context/Problem:** 36 ไฟล์พรีแคมป์ชื่อ `C1PC01 (th).pdf`, `C1PC08 (th2).pdf`, `C1PR02 (TH).pdf`, `C1PR01 (th3).pdf`, `C1PE01 (th0).pdf` — หน้าตาไม่เหมือนกันเลย ถ้าวางโฟลเดอร์ตามชื่อไฟล์ตรง ๆ จะได้โฟลเดอร์ชื่อมีวงเล็บ
 - **Root Cause:** เว็บให้โหลดหลายฉบับ (ไทย/อังกฤษ/เวอร์ชันแก้) แล้วต่อ suffix ท้ายชื่อไฟล์ — **ไม่ใช่โจทย์คนละข้อ** รหัสโจทย์คือส่วนหน้าเท่านั้น
-- **Correct Pattern/Solution:** `organize.fish` ตัดด้วย `string replace -ra '\s*\([^)]*\)' ''` (ตัดเฉพาะวงเล็บ + ช่องว่างที่นำหน้า) แล้วแทนเว้นวรรคด้วย `_` → `C1PC01 (th).pdf` = `C1PC01/C1PC01.pdf` · ข้อจำกัดที่รู้: regex ตัดวงเล็บ**ทุกชนิด** ถ้าอนาคตมีชื่อโจทย์ที่มีวงเล็บเป็นส่วนของชื่อจริงจะโดนตัดไปด้วย
+- **Correct Pattern/Solution:** `organize.fish` ตัดด้วย `string replace -ra '\s*\([^)]*\)' ''` (ตัดเฉพาะวงเล็บ + ช่องว่างที่นำหน้า) แล้วแทนเว้นวรรคด้วย `_` → รหัสที่เหลือ (`C1PC01`) เอาไปหาชื่อโฟลเดอร์จาก `tools/scores/*.txt` ต่อ → `01_C1PC01_Alice_and_Bob/C1PC01.pdf` · ข้อจำกัดที่รู้: regex ตัดวงเล็บ**ทุกชนิด** ถ้าอนาคตมีชื่อโจทย์ที่มีวงเล็บเป็นส่วนของชื่อจริงจะโดนตัดไปด้วย
 - **Date Added:** 2026-10-03
 
 ### 🛠️ `organize.fish` มี `--dry-run` — ดูก่อนย้ายจริงเสมอ
@@ -148,6 +148,7 @@
   3. สร้าง `tools/scores/precamp.txt` (TAB-separated, คงลำดับตามเว็บ)
   4. `python3 tools/sync_done.py` → ตาราง 36 แถวใน README, ย้ายเข้า `_done/` 0 ข้อ (ยังไม่มีข้อไหนได้เต็ม)
   5. `python3 tools/find_missed.py` → `✨ ครบถ้วนทั้งหมด!`
+  6. (ตามมา later) `python3 tools/folder_names.py --apply` → โฟลเดอร์ 36 อันเปลี่ยนเป็น `01_C1PC01_Alice_and_Bob` … `36_C1PC14_Judgement` ไฟล์ข้างในชื่อเดิมทุกไฟล์
 - **ขยาย (ตัวเลขจริง):** พรีแคมป์ = 3 ชุดรหัส รวม 36 ข้อ — `C1PC01`–`C1PC14` (14) · `C1PE01`–`C1PE04` (4) · `C1PR01`–`C1PR18` (18) · ทุกข้อ 1.000 second / 8.00 MiB ยกเว้น `C1PC05` Banana Mega-Trading = 1.500 seconds · ชื่อโจทย์ชุด `C1PE*` ขึ้นต้นด้วยรหัสซ้ำ (`C1PE01 - Constructor`)
 - **Date Added:** 2026-10-03
 
@@ -179,4 +180,28 @@
 - **Context/Problem:** รัน block เดียวที่ขึ้นต้นด้วย `git show HEAD:template.cpp > /tmp/old.cpp` แล้วตามด้วยลูป fish ที่ syntax ผิด → ผลคือลูปที่เช็คต่อรายงานว่า "`.cpp` ต่างจาก template เก่า **36/36 ไฟล์**" ซึ่งขัดกับ `git status` ที่บอกว่าไม่มีไฟล์ไหนถูกแก้เลย
 - **Root Cause:** สองชั้นซ้อนกัน — (1) **fish parse ทั้ง command line ก่อน execute** เจอ `end` ที่ผิดที่ก็ไม่รันอะไรเลย รวมถึงคำสั่ง `git show` ที่อยู่ต้นบรรทัด → ไฟล์ `/tmp/old.cpp` ไม่ถูกสร้าง (2) `diff -q <ไฟล์ที่ไม่มีอยู่> <ไฟล์จริง>` ล้มเหลวทุกครั้ง และลูปตีความ "ล้มเหลว" เป็น "ต่าง"
 - **Correct Pattern/Solution:** ถ้าผลตรวจ "ผิดทุกตัวพร้อมกัน" ให้ **สงสัยเครื่องมือก่อนข้อมูล** — โดยเฉพาะเมื่อมันขัดกับแหล่งความจริงอื่น (`git status`) · เช็คว่าไฟล์ที่ใช้เทียบมีอยู่จริงก่อน (`ls -la /tmp/old.cpp`) อย่าเพิ่งรายงานผล · ลูปที่ซับซ้อนให้ย้ายไป `bash -c '...'` หรือเขียนเป็นไฟล์สคริปต์ อย่ายัดใน command line เดียวกับคำสั่งตั้งต้นที่ผลของมันจำเป็นต่อลูป · ข้อนี้สำคัญเพราะผลที่ได้ดู "น่าเชื่อ" (มีตัวเลข 36/36 ชัดเจน) ทั้งที่ความจริงคือ 0/36
+- **Date Added:** 2026-10-03
+
+### 🛠️ ชื่อโฟลเดอร์คือ "คีย์" ของสคริปต์ทั้งชุด — เปลี่ยนชื่อโฟลเดอร์ไม่ใช่แค่ rename
+- **Context/Problem:** อยากให้โฟลเดอร์มีชื่อโจทย์ (`C1PC01` → `01_C1PC01_Alice_and_Bob`) คิดว่าเป็นแค่ `mv` ครั้งเดียว แต่ปรากฏว่าสคริปต์ทุกตัวหาข้อมูลด้วย **ชื่อโฟลเดอร์** ไม่ใช่ด้วยรหัสที่เก็บที่อื่น
+- **Root Cause:** `scorelib._task_index()` เดิมใช้ `os.path.basename` เป็นคีย์ตรง ๆ → `find_task("C1PC01")` จะไม่เจอ `01_C1PC01_...` · `sync_done.move_into_done()` ตั้งปลายทางเป็น `done_dir_for(...)/task_id` (รหัสเปล่า) → ย้ายเข้า `_done/` แล้ว**ชื่อโจทย์หายเงียบ ๆ** กลับเป็น `C1PC01` · `find_missed.py` พึ่ง `find_task()` → จะรายงานว่า "ขาดทั้ง 36 ข้อ" ทั้งที่มีอยู่ครบ · `organize.fish` สร้างโฟลเดอร์จากชื่อไฟล์ PDF อย่างเดียว จึงไม่รู้ชื่อโจทย์เลย
+- **Correct Pattern/Solution:** เพิ่ม `scorelib.folder_name_for(task_id, name, order)` + `scorelib.task_id_from_folder(folder)` เป็น**แหล่งความจริงเดียว** ของกฎการตั้งชื่อ แล้วแก้ทุกจุดให้ใช้: `_task_index()` เก็บคีย์ด้วย `task_id_from_folder(name)` · `move_into_done()` ใช้ `os.path.basename(src)` เป็นปลายทาง (ยกชื่อทั้งดุ้นไป `_done/`) · `folder_names.py` เป็นตัว rename (ใช้ `git mv` → git เก็บเป็น `R` rename ไม่ใช่ `D`+`??`) · `organize.fish` เรียก `--print-map` ของตัวนั้น · **ไฟล์ข้างในไม่แตะเลย** เพราะ grader บังคับชื่อไฟล์ตอน submit
+- **บทเรียนทั่วไป:** ก่อน rename สิ่งที่ถูกใช้เป็น "คีย์" ให้ grep หาทุกที่ที่อ่านค่านั้นก่อน — ที่นี่ใช้ subagent เดินหาผู้บริโภคชื่อโฟลเดอร์ทั้ง repo แล้วเจอ 4 สคริปต์ + เอกสาร 5 ไฟล์ที่ต้องแก้ตาม
+- **Date Added:** 2026-10-03
+
+### 🛠️ fish ไม่มี associative array — `$m[คีย์]` ใช้ไม่ได้ ต้องใช้ list คู่กัน
+- **Context/Problem:** เขียน `organize.fish` ให้สร้าง map `รหัสโจทย์ → ชื่อโฟลเดอร์` ด้วย `set task_names[$parts[1]] $parts[2]` แล้วอ่านด้วย `set -q task_names[$clean]` — ได้ error `set: Invalid index starting at "C1PC01]"` ทุกครั้ง ผลคือไฟล์ทดสอบ **ตกลงไปใช้ fallback ชื่อรหัสเปล่าเงียบ ๆ** (`C1PC01/C1PC01.pdf`) แทนที่จะเป็น `01_C1PC01_Alice_and_Bob/` — ดูเหมือนสคริปต์ทำงานได้ แต่ได้ผลผิด
+- **Root Cause:** fish ไม่มี associative array — subscript ของ `set`/ตัวแปร รับ**แต่ตัวเลข** (index ของ list หรือ slice `1..3`) ใส่สตริงเป็นคีย์ไม่ได้ · และเพราะ error นี้ไม่ได้ทำให้สคริปต์หยุด (แค่ตัวแปรนั้นว่าง) ความผิดพลาดจึงเงียบ
+- **Correct Pattern/Solution:** ใช้ **list สองอันคู่กัน** แล้วหาตำแหน่งด้วย `contains -i` (คืน index 1-based ถ้าเจอ, ว่างถ้าไม่เจอ):
+  ```fish
+  set -l task_ids; set -l task_folders
+  for line in (python3 tools/folder_names.py --print-map)
+      set -l parts (string split \t -- $line)
+      set -a task_ids $parts[1]; set -a task_folders $parts[2]
+  end
+  # ตอนใช้
+  set -l idx (contains -i -- $clean $task_ids)
+  if test -n "$idx"; set folder $task_folders[$idx]; end
+  ```
+  · **ทดสอบ branch fallback เสมอ** — เคสที่ "หาไม่เจอ" คือเคสที่บั๊กซ่อนอยู่ (รันกับรหัสปลอม `C1PC99` ด้วย) · ถ้าจำนวน lookup น้อย จะ shell ออกไปถาม Python ทีละครั้งก็ได้ แลกความง่ายกับ process spawn
 - **Date Added:** 2026-10-03

@@ -31,8 +31,12 @@ from scorelib import (  # noqa: E402
 
 
 def move_into_done(task_id: str, src: str, grader_dir: str) -> bool:
-    """ย้ายโฟลเดอร์โจทย์เข้า _done/ — ใช้ git mv ถ้าไฟล์ถูก track อยู่"""
-    dst = os.path.join(done_dir_for(grader_dir), task_id)
+    """ย้ายโฟลเดอร์โจทย์เข้า _done/ — ใช้ git mv ถ้าไฟล์ถูก track อยู่
+
+    ปลายทางใช้ชื่อโฟลเดอร์เดิมทั้งดุ้น (os.path.basename) ไม่ใช่รหัสเปล่า ๆ
+    ไม่งั้นชื่อโจทย์ที่ต่อท้ายไว้จะหายไปตอนย้าย
+    """
+    dst = os.path.join(done_dir_for(grader_dir), os.path.basename(src))
     if os.path.exists(dst):
         print(f"   ⚠️  {task_id}: มีอยู่ใน _done/ แล้ว — ข้ามการย้าย")
         return False

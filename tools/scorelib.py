@@ -34,6 +34,51 @@ _FIELD_SPLIT_RE = re.compile(r"\t+|\s{2,}")
 
 
 # --------------------------------------------------------------------------
+# ชื่อโฟลเดอร์โจทย์
+# --------------------------------------------------------------------------
+# กติกา: โฟลเดอร์โจทย์ = <ลำดับ>_<รหัสโจทย์>_<ชื่อโจทย์>   เช่น 01_C1PC01_Alice_and_Bob
+#        ลำดับมาจากลำดับบรรทัดใน tools/scores/<contest>.txt (ลำดับเดียวกับตารางใน README)
+#        เพื่อให้เปิดโฟลเดอร์แล้วเรียงตามลำดับโจทย์ ไม่ใช่เรียงตามรหัส (C1PC → C1PE → C1PR)
+#        ไฟล์ข้างในยังชื่อ <รหัสโจทย์>.cpp / <รหัสโจทย์>.pdf ตามที่ grader
+#        บังคับชื่อไฟล์ตอน submit (คอลัมน์ Files) — ไม่ต่อชื่อโจทย์
+_UNSAFE_PATH_RE = re.compile(r'[\\/:*?"<>|]')
+_SPACE_RUN_RE = re.compile(r"\s+")
+_UNDERSCORE_RUN_RE = re.compile(r"_{2,}")
+
+
+def folder_name_for(task_id: str, name: str = "", order: int | None = None) -> str:
+    """ชื่อโฟลเดอร์ของโจทย์ 1 ข้อ → "<ลำดับ>_<รหัสโจทย์>_<ชื่อโจทย์>"
+
+    order = ลำดับในไฟล์คะแนน (เริ่มที่ 1) ใส่เพื่อให้เรียงโฟลเดอร์ตามลำดับโจทย์
+    ไม่ใส่ก็ได้ จะได้ชื่อแบบไม่มีเลขนำหน้า
+    เลขรหัสที่ซ้ำอยู่ในชื่อจะถูกตัดทิ้ง ("C1PE01 - Constructor" → "Constructor")
+    ถ้าแปลงแล้วไม่เหลือชื่อ เหลือแค่ <ลำดับ>_<รหัสโจทย์>
+    """
+    clean = (name or "").strip()
+    if clean.upper().startswith(task_id.upper()):
+        clean = clean[len(task_id):].lstrip(" -:–—")
+    clean = _SPACE_RUN_RE.sub("_", clean)
+    clean = _UNSAFE_PATH_RE.sub("", clean)
+    clean = _UNDERSCORE_RUN_RE.sub("_", clean).strip("_")
+
+    prefix = f"{order:02d}_" if order else ""
+    return f"{prefix}{task_id}_{clean}" if clean else f"{prefix}{task_id}"
+
+
+def task_id_from_folder(folder_name: str) -> str:
+    """ถอดรหัสโจทย์จากชื่อโฟลเดอร์
+
+    "01_C1PC01_Alice_and_Bob" → "C1PC01" · "C1PC01_Alice_and_Bob" → "C1PC01"
+    · "C1PC01" → "C1PC01"
+    รหัสโจทย์ในไฟล์คะแนนห้ามมี "_" อยู่แล้ว (ดู _LINE_RE) จึงตัดที่ "_" ได้เสมอ
+    """
+    parts = folder_name.split("_")
+    if len(parts) >= 2 and parts[0].isdigit():
+        return parts[1]
+    return parts[0]
+
+
+# --------------------------------------------------------------------------
 # contest / grader
 # --------------------------------------------------------------------------
 @dataclass
@@ -163,6 +208,8 @@ _index: dict[str, tuple[str, str, bool]] | None = None
 def _task_index() -> dict[str, tuple[str, str, bool]]:
     """เดินทั่ว problems/ ครั้งเดียว → {รหัสโจทย์: (โฟลเดอร์แม่, path, อยู่ใน _done)}
 
+    ชื่อโฟลเดอร์มีชื่อโจทย์ต่อท้ายได้ (C1PC01_Alice_and_Bob) จึงถอดรหัสด้วย
+    task_id_from_folder() ไม่ใช่ใช้ชื่อโฟลเดอร์ตรง ๆ เป็นคีย์
     ไม่ต้องรู้ว่าข้อไหนอยู่รอบไหน — รหัสโจทย์ไม่ซ้ำกันอยู่แล้ว
     ถ้ารหัสเดียวกันโผล่ทั้งที่ยังไม่ย้ายและที่ _done/ แล้ว อันที่ยังไม่ย้ายชนะ
     """
@@ -183,7 +230,9 @@ def _task_index() -> dict[str, tuple[str, str, bool]]:
         for name in dirs:
             if name == DONE_DIRNAME:
                 continue
-            index.setdefault(name, (root, os.path.join(root, name), False))
+            index.setdefault(
+                task_id_from_folder(name), (root, os.path.join(root, name), False)
+            )
 
     # รอบสอง: ของที่ย้ายเข้า _done/ แล้ว — ไม่ทับอันที่เพิ่งเจอ
     for root, dirs, _ in os.walk(PROBLEMS_DIR):
@@ -193,7 +242,9 @@ def _task_index() -> dict[str, tuple[str, str, bool]]:
         for name in sorted(dirs):
             if name.startswith("."):
                 continue
-            index.setdefault(name, (parent, os.path.join(root, name), True))
+            index.setdefault(
+                task_id_from_folder(name), (parent, os.path.join(root, name), True)
+            )
 
     _index = index
     return index

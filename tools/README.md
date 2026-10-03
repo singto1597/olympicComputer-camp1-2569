@@ -13,8 +13,9 @@
 | จัด PDF ที่โหลดมือมาแบบลอย ๆ เข้าโฟลเดอร์ | `fish tools/organize.fish <โฟลเดอร์> --cpp` |
 | ได้คะแนนแล้ว อัปเดตตาราง + ย้ายข้อที่เต็ม | `python3 tools/sync_done.py` |
 | เช็คว่าข้อไหนยังไม่ได้โหลด (ไม่อัปเดตอะไร) | `python3 tools/find_missed.py` |
+| เติมชื่อโจทย์ในชื่อโฟลเดอร์ (ปกติ `organize` ทำให้อยู่แล้ว) | `python3 tools/folder_names.py --apply` |
 
-มีแค่นี้ — 3 ตัว
+มีแค่นี้ — 4 ตัว
 
 ---
 
@@ -31,8 +32,12 @@ fish tools/organize.fish ~/Downloads --cpp          # ย้าย + สร้�
 fish tools/organize.fish docs/sheets --prefix 20261005_AM
 ```
 
-ถ้าโหลด Statement มาแล้วชื่อเป็นรหัสโจทย์อยู่แล้ว (`C1PR01.pdf`) ก็ได้ผลลัพธ์
-`C1PR01/C1PR01.pdf` + `C1PR01/C1PR01.cpp` ตรงตามกติกาพอดี
+ถ้าโหลด Statement มาแล้วชื่อเป็นรหัสโจทย์อยู่แล้ว (`C1PC01.pdf`) จะได้โฟลเดอร์
+`01_C1PC01_Alice_and_Bob/` พร้อม `C1PC01.pdf` + `C1PC01.cpp` ข้างใน — โฟลเดอร์ได้
+ลำดับ+ชื่อโจทย์จาก `tools/scores/*.txt` (ผ่าน `folder_names.py`) ส่วนไฟล์ข้างในคง
+ชื่อรหัสเปล่า ๆ ตามที่ grader บังคับตอน submit
+
+รหัสที่ยังไม่มีในไฟล์คะแนนจะได้โฟลเดอร์ชื่อรหัสตามปกติ (`C1PC99/C1PC99.pdf`)
 
 **ทำทีละโฟลเดอร์** — จัดผิดที่ก็ย้ายกลับได้ ไฟล์ไม่หาย
 
@@ -49,10 +54,25 @@ fish tools/organize.fish docs/sheets --prefix 20261005_AM
 เทียบ `tools/scores/*.txt` กับโฟลเดอร์จริงในเครื่อง บอกว่าข้อไหนยังขาด
 **ไม่แก้อะไรเลย** ต่างจาก `sync_done.py`
 
+### `folder_names.py` — เติมชื่อโจทย์ในชื่อโฟลเดอร์
+
+เปลี่ยน `C1PC01/` → `01_C1PC01_Alice_and_Bob/` โดยดึงชื่อโจทย์และลำดับจาก
+`tools/scores/*.txt` ผ่าน `scorelib` **ไฟล์ข้างในไม่ถูกแตะ**
+
+```fish
+python3 tools/folder_names.py             # ดูเฉย ๆ ว่าอะไรจะถูกเปลี่ยน
+python3 tools/folder_names.py --apply     # เปลี่ยนจริง (ใช้ git mv เก็บประวัติ)
+python3 tools/folder_names.py --print-map # พิมพ์ "รหัส<TAB>ชื่อโฟลเดอร์" ให้ organize.fish ใช้
+```
+
+ปกติ **ไม่ต้องรันเอง** — `organize.fish` ตั้งชื่อโฟลเดอร์ให้ตั้งแต่ตอนจัดอยู่แล้ว
+ตัวนี้มีไว้สำหรับโฟลเดอร์เก่าที่สร้างไว้ก่อนมีชื่อโจทย์ (รันซ้ำได้ ไม่พัง)
+
 ### `scorelib.py` — โมดูลกลาง
 
-ไม่ได้รันเอง ไม่มี CLI — สองตัวข้างบนเรียกใช้ร่วมกัน มีหน้าที่อ่านทะเบียน contest,
-อ่านไฟล์คะแนน, และหารหัสโจทย์เจอโดยเดินทั่ว `problems/`
+ไม่ได้รันเอง ไม่มี CLI — สามตัวข้างบนเรียกใช้ร่วมกัน มีหน้าที่อ่านทะเบียน contest,
+อ่านไฟล์คะแนน, แปลงชื่อโฟลเดอร์ (`folder_name_for` / `task_id_from_folder`),
+และหารหัสโจทย์เจอโดยเดินทั่ว `problems/`
 
 ---
 
@@ -85,7 +105,8 @@ fish tools/organize.fish docs/sheets --prefix 20261005_AM
 ไม่ต้องแก้สคริปต์
 
 `sync_done.py` ไม่ต้องรู้ว่าข้อไหนอยู่ contest ไหน — มันหารหัสโจทย์เจอเองจาก
-ชื่อโฟลเดอร์ รหัสโจทย์ไม่ซ้ำกันอยู่แล้ว
+ชื่อโฟลเดอร์ (ถอด `01_C1PC01_Alice_and_Bob` → `C1PC01` ด้วย `task_id_from_folder`)
+รหัสโจทย์ไม่ซ้ำกันอยู่แล้ว
 
 ---
 
@@ -94,7 +115,7 @@ fish tools/organize.fish docs/sheets --prefix 20261005_AM
 ```
 1. เปิดเว็บ grader → โหลด Statement ที่ยังไม่มี (ดูรายการจาก find_missed.py)
 2. fish tools/organize.fish <โฟลเดอร์ที่โหลดมา> --cpp
-3. เขียนโค้ดที่ problems/.../C1PR01/C1PR01.cpp   (Ctrl+Shift+B = build + run)
+3. เขียนโค้ดที่ problems/.../13_C1PR01_Test/C1PR01.cpp   (Ctrl+Shift+B = build + run)
 4. ก็อปตารางคะแนนจากหน้าเว็บ → tools/scores/precamp.txt
 5. python3 tools/sync_done.py
 ```

@@ -395,6 +395,8 @@
       <span class="sec-num">01</span>
       <h2>อยากทำอะไร ใช้ตัวไหน</h2>
       <p class="sec-sub">สามบรรทัดนี้คือทั้งหมดที่ต้องจำ</p>
+      <!-- ตัวที่ 4 (folder_names.py) ไม่ต้องจำ — organize เรียกให้เองอยู่แล้ว -->
+
     </div>
 
     <ul class="intent">
@@ -440,9 +442,11 @@
         <code class="cmd">fish tools/organize.fish docs/sheets --prefix 20261005_AM</code>
       </div>
       <p class="note">
-        ถ้าโหลด Statement มาแล้วชื่อเป็นรหัสโจทย์อยู่แล้ว (<code class="inline">C1PR01.pdf</code>)
-        จะได้ <code class="inline">C1PR01/C1PR01.pdf</code> กับ <code class="inline">C1PR01/C1PR01.cpp</code>
-        ตรงตามกติกาพอดี
+        ถ้าโหลด Statement มาแล้วชื่อเป็นรหัสโจทย์อยู่แล้ว (<code class="inline">C1PC01.pdf</code>)
+        จะได้โฟลเดอร์ <code class="inline">01_C1PC01_Alice_and_Bob/</code> พร้อม
+        <code class="inline">C1PC01.pdf</code> กับ <code class="inline">C1PC01.cpp</code> ข้างใน
+        — ลำดับ+ชื่อโจทย์ดึงจาก <code class="inline">tools/scores/*.txt</code> ส่วนไฟล์ข้างในคงชื่อรหัสเปล่า ๆ
+        ตามที่ grader บังคับตอน submit · รหัสที่ยังไม่มีในไฟล์คะแนนจะได้โฟลเดอร์ชื่อรหัสตามปกติ
       </p>
     </div>
 
@@ -481,12 +485,30 @@
 
     <div class="tool">
       <div class="tool-head">
+        <h3 class="tool-name">folder_names.py</h3>
+        <span class="tool-role">python · เติมชื่อโจทย์ในชื่อโฟลเดอร์</span>
+      </div>
+      <p>
+        เปลี่ยน <code class="inline">C1PC01/</code> → <code class="inline">01_C1PC01_Alice_and_Bob/</code>
+        โดยดึงชื่อโจทย์และลำดับจาก <code class="inline">tools/scores/*.txt</code>
+        <b>ไฟล์ข้างในไม่ถูกแตะ</b> · ปกติไม่ต้องรันเอง เพราะ organize ตั้งชื่อให้ตั้งแต่ตอนจัด
+      </p>
+      <div>
+        <code class="cmd">python3 tools/folder_names.py           <span class="cmt"># ดูเฉย ๆ</span></code>
+        <code class="cmd">python3 tools/folder_names.py --apply   <span class="cmt"># เปลี่ยนจริง (git mv)</span></code>
+      </div>
+    </div>
+
+    <div class="tool">
+      <div class="tool-head">
         <h3 class="tool-name">scorelib.py</h3>
         <span class="tool-role">python · โมดูลกลาง ไม่มี CLI</span>
       </div>
       <p>
-        ไม่ได้รันเอง — สองตัวข้างบนเรียกใช้ร่วมกัน มีหน้าที่อ่านทะเบียน contest อ่านไฟล์คะแนน
-        และหารหัสโจทย์เจอโดยเดินทั่ว <code class="inline">problems/</code>
+        ไม่ได้รันเอง — สามตัวข้างบนเรียกใช้ร่วมกัน มีหน้าที่อ่านทะเบียน contest อ่านไฟล์คะแนน
+        แปลงชื่อโฟลเดอร์ (<code class="inline">folder_name_for</code> /
+        <code class="inline">task_id_from_folder</code>) และหารหัสโจทย์เจอโดยเดินทั่ว
+        <code class="inline">problems/</code>
         ไม่ต้องบอกว่าข้อไหนอยู่ช่วงไหน เพราะรหัสโจทย์ไม่ซ้ำกันอยู่แล้ว
       </p>
     </div>
@@ -589,7 +611,7 @@
         <div class="step-body">
           <p class="step-title">เขียนโค้ด</p>
           <p>
-            ที่ <code class="inline">problems/1_precamp/cmu-grader/C1PR01/C1PR01.cpp</code>
+            ที่ <code class="inline">problems/1_precamp/cmu-grader/13_C1PR01_Test/C1PR01.cpp</code>
             กด <b>Ctrl+Shift+B</b> ใน VSCode เพื่อ build + run (อ่าน input จาก
             <code class="inline">.run/input.in</code>)
           </p>
@@ -645,9 +667,12 @@
 └── <span class="dir">tools/</span>             <span class="cmt">← สคริปต์ + graders.txt + scores/</span>
 </pre>
     <p class="note">
-      โฟลเดอร์โจทย์ตั้งชื่อตามรหัสบน grader ตรง ๆ (<code class="inline">C1PR01/</code>)
-      ข้างในมี <code class="inline">C1PR01.cpp</code> กับ <code class="inline">C1PR01.pdf</code>
-      — ไม่ใส่เลขนำหน้า เพราะรหัสเรียงอยู่แล้ว
+      โฟลเดอร์โจทย์ตั้งชื่อ <code class="inline">&lt;ลำดับ&gt;_&lt;รหัส&gt;_&lt;ชื่อโจทย์&gt;</code>
+      (<code class="inline">01_C1PC01_Alice_and_Bob/</code>) ข้างในมี
+      <code class="inline">C1PC01.cpp</code> กับ <code class="inline">C1PC01.pdf</code>
+      — <b>ไฟล์เป็นรหัสเปล่า ๆ เพราะ grader บังคับชื่อไฟล์ตอน submit</b>
+      เลขนำหน้ามาจากบรรทัดใน <code class="inline">tools/scores/*.txt</code>
+      เพื่อให้เรียงตามลำดับโจทย์ (C1PC → C1PR → C1PE) ไม่ใช่ตามรหัส
     </p>
   </section>
 
@@ -667,8 +692,9 @@
         <code class="inline">sync_done.py</code> ทำ จะได้ตรงกับตาราง
       </li>
       <li>
-        <b>โฟลเดอร์โจทย์ตั้งชื่อตามรหัสบน grader ตรง ๆ</b> ไม่ใส่เลขนำหน้า
-        เพราะรหัสเรียงลำดับอยู่แล้ว
+        <b>โฟลเดอร์โจทย์เป็น <code class="inline">&lt;ลำดับ&gt;_&lt;รหัส&gt;_&lt;ชื่อโจทย์&gt;</code>
+        แต่ไฟล์ข้างในเป็นรหัสเปล่า ๆ</b> — เปลี่ยนชื่อโฟลเดอร์ด้วย
+        <code class="inline">folder_names.py</code> อย่า rename มือ (สคริปต์ทั้งชุดอ่านชื่อโฟลเดอร์เป็นคีย์)
       </li>
       <li>
         <b>PDF กับสไลด์เป็นหลักฐานผลงาน</b> — อย่าลบหรือย้ายโดยไม่ถาม
