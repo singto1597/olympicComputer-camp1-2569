@@ -100,9 +100,13 @@ for file in $target/*.pdf
     set -l existing
     for cand in $target/*
         test -d "$cand"; or continue
-        set -l cand_id (string replace -r '^([0-9]+_)?([^_]+).*$' '$2' -- (basename $cand))
-        if test "$cand_id" = "$clean"
-            set -a existing (basename $cand)
+        set -l cand_name (basename $cand)
+        set -l cand_id (string replace -r '^([0-9]+_)?([^_]+).*$' '$2' -- $cand_name)
+        # รหัสที่มี "_" ในตัว (C1C0_ADD) ตัดแบบข้างบนแล้วไม่ครบ — เลยเทียบชื่อเต็ม
+        # หลังตัดเลขลำดับด้วย โดยบังคับขอบ "_" กัน C1T1 ไปโดนโฟลเดอร์ของ C1T10
+        set -l cand_full (string replace -r '^[0-9]+_' '' -- $cand_name)
+        if test "$cand_id" = "$clean"; or test "$cand_full" = "$clean"; or string match -q -- "$clean"'_*' $cand_full
+            set -a existing $cand_name
         end
     end
     if test (count $existing) -gt 0

@@ -25,9 +25,15 @@ from scorelib import (  # noqa: E402
     SCORE_START,
     done_dir_for,
     find_task,
+    old100_years,
     parse_all_scores,
+    parse_old100,
     reset_index,
 )
+
+# ป้ายบอกว่า 100 ที่เห็นมาจากการส่งโค้ดปีก่อนหน้าซ้ำ ไม่ได้เขียนใหม่ปีนี้
+# รายชื่อข้อที่ติดป้ายอยู่ใน tools/scores/<ชื่อ contest>.old100*.txt
+OLD100_BADGE = "🕰️ 100 เก่า"
 
 
 def move_into_done(task_id: str, src: str, grader_dir: str) -> bool:
@@ -59,12 +65,19 @@ def move_into_done(task_id: str, src: str, grader_dir: str) -> bool:
 
 
 def render_group(grader, tasks) -> str:
-    """ตารางคะแนนของ grader หนึ่งตัว"""
+    """ตารางคะแนนของ grader หนึ่งตัว
+
+    contest ที่มีไฟล์ <ชื่อ>.old100_68.txt จะได้คอลัมน์ "หมายเหตุ" เพิ่มมา
+    (contest อื่นหน้าตาเหมือนเดิม ไม่มีคอลัมน์เปล่าโผล่)
+    """
+    old100 = parse_old100(grader)
     full = sum(1 for t in tasks if t.is_full)
     lines = [
         f"### {grader.title} — ได้เต็ม **{full} / {len(tasks)}** ข้อ\n",
-        "| สถานะ | คะแนน | Task | ชื่อโจทย์ | ลิมิต | ไฟล์ |",
-        "| :---: | :---: | :--- | :--- | :---: | :---: |",
+        "| สถานะ | คะแนน | Task | ชื่อโจทย์ | ลิมิต | ไฟล์ |"
+        + (" หมายเหตุ |" if old100 else ""),
+        "| :---: | :---: | :--- | :--- | :---: | :---: |"
+        + (" :--- |" if old100 else ""),
     ]
 
     for t in tasks:
@@ -72,8 +85,29 @@ def render_group(grader, tasks) -> str:
         link = f"[📁]({os.path.relpath(found[1], REPO_ROOT)})" if found else "—"
         limit = f"{t.time_limit} / {t.mem_limit}" if t.time_limit else ""
         name = t.name or "—"
+        cells = [
+            t.status,
+            f"{t.score} / {t.max_score}",
+            f"**{t.task_id}**",
+            name,
+            limit,
+            link,
+        ]
+        if old100:
+            cells.append(OLD100_BADGE if t.task_id in old100 else "")
+        lines.append("| " + " | ".join(cells) + " |")
+
+    if old100:
+        # ปีเอาจากท้ายชื่อไฟล์ (old100_68.txt → 68) ไม่ได้ใส่ไว้ก็ไม่ต้องบอกปี
+        years = old100_years(grader)
+        note = (
+            f"โค้ดจากปี {'/'.join(years)} · ไม่ได้เขียนใหม่ปีนี้"
+            if years
+            else "ไม่ได้เขียนใหม่ปีนี้"
+        )
+        lines.append("")
         lines.append(
-            f"| {t.status} | {t.score} / {t.max_score} | **{t.task_id}** | {name} | {limit} | {link} |"
+            f"> {OLD100_BADGE} = ได้เต็มจากการส่งโค้ดเก่าซ้ำ ({note}) — {len(old100)} ข้อ"
         )
 
     return "\n".join(lines)

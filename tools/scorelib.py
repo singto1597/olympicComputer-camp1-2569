@@ -42,6 +42,7 @@ _FIELD_SPLIT_RE = re.compile(r"\t+|\s{2,}")
 #        ไฟล์ข้างในยังชื่อ <รหัสโจทย์>.cpp / <รหัสโจทย์>.pdf ตามที่ grader
 #        บังคับชื่อไฟล์ตอน submit (คอลัมน์ Files) — ไม่ต่อชื่อโจทย์
 _UNSAFE_PATH_RE = re.compile(r'[\\/:*?"<>|]')
+_ORDER_PREFIX_RE = re.compile(r"^\d+_")  # เลขลำดับนำหน้าโฟลเดอร์: "01_C1PC01_x" → "C1PC01_x"
 _SPACE_RUN_RE = re.compile(r"\s+")
 _UNDERSCORE_RUN_RE = re.compile(r"_{2,}")
 
@@ -65,13 +66,42 @@ def folder_name_for(task_id: str, name: str = "", order: int | None = None) -> s
     return f"{prefix}{task_id}_{clean}" if clean else f"{prefix}{task_id}"
 
 
-def task_id_from_folder(folder_name: str) -> str:
+_known_ids_cache: set[str] | None = None
+
+
+def known_task_ids() -> set[str]:
+    """รหัสโจทย์ทั้งหมดที่อยู่ใน tools/scores/*.txt — ใช้เป็นพจนานุกรมตอนถอดรหัส"""
+    global _known_ids_cache
+    if _known_ids_cache is None:
+        _known_ids_cache = {
+            t.task_id for _grader, tasks in parse_all_scores() for t in tasks
+        }
+    return _known_ids_cache
+
+
+def task_id_from_folder(folder_name: str, known_ids=None) -> str:
     """ถอดรหัสโจทย์จากชื่อโฟลเดอร์
 
     "01_C1PC01_Alice_and_Bob" → "C1PC01" · "C1PC01_Alice_and_Bob" → "C1PC01"
     · "C1PC01" → "C1PC01"
-    รหัสโจทย์ในไฟล์คะแนนห้ามมี "_" อยู่แล้ว (ดู _LINE_RE) จึงตัดที่ "_" ได้เสมอ
+
+    รหัสโจทย์ส่วนใหญ่ไม่มี "_" จึงตัดที่ "_" ตัวแรกได้ แต่มีข้อยกเว้นจริงในค่าย
+    (C1C0_ADD) ที่ตัดแบบนั้นแล้วเหลือ "C1C0" — จึงเทียบกับรหัสที่รู้จักก่อน
+    แล้วเลือกรหัสที่ยาวที่สุดที่ชื่อโฟลเดอร์ขึ้นต้นด้วย (ไม่ส่ง known_ids มา
+    ก็ดึงจากไฟล์คะแนนให้เอง) ไม่เข้าข่ายเลยจึงค่อยใช้วิธีตัดแบบเดิม
     """
+    stripped = _ORDER_PREFIX_RE.sub("", folder_name)
+
+    pool = known_task_ids() if known_ids is None else known_ids
+    best = ""
+    for task_id in pool:
+        if stripped == task_id or stripped.startswith(task_id + "_"):
+            if len(task_id) > len(best):
+                best = task_id
+    if best:
+        return best
+
+    # ไม่ตรงกับข้อไหนในไฟล์คะแนน (โฟลเดอร์แปลกปลอม) — ตัดแบบเดิม
     parts = folder_name.split("_")
     if len(parts) >= 2 and parts[0].isdigit():
         return parts[1]
@@ -97,6 +127,26 @@ class Grader:
     @property
     def has_score(self) -> bool:
         return os.path.isfile(self.score_path)
+
+    @property
+    def old100_paths(self) -> list[str]:
+        """ไฟล์รายการ 100 เก่าของ contest นี้ — <ชื่อ>.old100.txt หรือ <ชื่อ>.old100_68.txt
+
+        ต่อท้ายด้วยรหัสปีที่โค้ดต้นทางมาจากได้ (68 = พ.ศ. 2568) ถ้ามีหลายปี
+        ก็มีหลายไฟล์ได้ — อ่านรวมกันหมด
+        """
+        if not os.path.isdir(SCORES_DIR):
+            return []
+        prefix = f"{self.name}.old100"
+        return [
+            os.path.join(SCORES_DIR, n)
+            for n in sorted(os.listdir(SCORES_DIR))
+            if n.startswith(prefix) and n.endswith(".txt")
+        ]
+
+    @property
+    def has_old100(self) -> bool:
+        return bool(self.old100_paths)
 
 
 def iter_graders() -> list[Grader]:
@@ -200,6 +250,44 @@ def parse_all_scores() -> list[tuple[Grader, list[Task]]]:
 
 
 # --------------------------------------------------------------------------
+# ป้าย "100 เก่า"
+# --------------------------------------------------------------------------
+def parse_old100(grader: Grader) -> set[str]:
+    """รหัสโจทย์ที่ได้เต็มจากการส่งโค้ดปีก่อนหน้าซ้ำ (ไม่ได้เขียนใหม่ปีนี้)
+
+    อ่านจาก tools/scores/<ชื่อ contest>.old100*.txt ข้าง ๆ ไฟล์คะแนน
+    (ชื่อต่อท้ายด้วยปีที่โค้ดต้นทางมาจากได้ เช่น camp1_1.old100_68.txt)
+    บรรทัดละ 1 รหัส · บรรทัดขึ้นต้นด้วย # คือคอมเมนต์ · ไม่มีไฟล์ = ไม่มีป้าย
+    """
+    ids: set[str] = set()
+    for path in grader.old100_paths:
+        with open(path, encoding="utf-8") as f:
+            for raw in f:
+                line = raw.strip()
+                if not line or line.startswith("#"):
+                    continue
+                ids.add(line.split()[0])
+    return ids
+
+
+# ท้ายชื่อไฟล์บอกปีที่โค้ดต้นทางมาจาก: camp1_1.old100_68.txt → "68" (พ.ศ. 2568)
+_OLD100_YEAR_RE = re.compile(r"\.old100_(\d+)\.txt$")
+
+
+def old100_years(grader: Grader) -> list[str]:
+    """ปี (พ.ศ. ย่อ) ของโค้ดต้นทางที่ติดป้าย 100 เก่า — เรียงจากน้อยไปมาก
+
+    ไม่ได้ตั้งชื่อไฟล์ต่อท้ายปีไว้ก็ได้ → คืน [] แล้วผู้เรียกใช้คำกลาง ๆ แทน
+    """
+    years: list[str] = []
+    for path in grader.old100_paths:
+        m = _OLD100_YEAR_RE.search(os.path.basename(path))
+        if m and m.group(1) not in years:
+            years.append(m.group(1))
+    return sorted(years, key=int)
+
+
+# --------------------------------------------------------------------------
 # โฟลเดอร์โจทย์
 # --------------------------------------------------------------------------
 _index: dict[str, tuple[str, str, bool]] | None = None
@@ -251,9 +339,10 @@ def _task_index() -> dict[str, tuple[str, str, bool]]:
 
 
 def reset_index() -> None:
-    """ล้างแคช — ต้องเรียกหลังย้ายโฟลเดอร์ ไม่งั้น path ที่คืนมาจะเป็นของเก่า"""
-    global _index
+    """ล้างแคช — ต้องเรียกหลังย้ายโฟลเดอร์/เพิ่มไฟล์คะแนน ไม่งั้นของเก่าจะค้าง"""
+    global _index, _known_ids_cache
     _index = None
+    _known_ids_cache = None
 
 
 def find_task(task_id: str):

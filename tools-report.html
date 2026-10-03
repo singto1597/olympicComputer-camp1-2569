@@ -383,7 +383,7 @@
       หน้านี้รวมว่าตัวไหนทำอะไร รันยังไง และ grader หลายตัวแยกกันยังไง
     </p>
     <ul class="facts">
-      <li><b>3</b> สคริปต์ที่ต้องรัน</li>
+      <li><b>4</b> สคริปต์ที่ต้องรัน</li>
       <li><b>6</b> contest</li>
       <li>โจทย์<b>โหลดมือ</b></li>
       <li>ไม่มีรหัสเก็บใน repo</li>
@@ -394,8 +394,9 @@
     <div class="sec-head">
       <span class="sec-num">01</span>
       <h2>อยากทำอะไร ใช้ตัวไหน</h2>
-      <p class="sec-sub">สามบรรทัดนี้คือทั้งหมดที่ต้องจำ</p>
-      <!-- ตัวที่ 4 (folder_names.py) ไม่ต้องจำ — organize เรียกให้เองอยู่แล้ว -->
+      <p class="sec-sub">สี่บรรทัดนี้คือทั้งหมดที่ต้องจำ</p>
+      <!-- folder_names.py ไม่ต้องจำ — organize เรียกให้เองอยู่แล้ว -->
+      <!-- import_old_camp.py ใช้เฉพาะปีที่โจทย์เป็นชุดเดิมของปีก่อน -->
 
     </div>
 
@@ -403,6 +404,10 @@
       <li>
         <span class="q">โหลด PDF มาแล้ว อยากให้เข้าโฟลเดอร์เป็นระเบียบ<em>สร้าง .cpp จาก template ให้ด้วย</em></span>
         <code class="cmd">fish tools/<span class="flag">organize.fish</span> ~/Downloads --cpp</code>
+      </li>
+      <li>
+        <span class="q">โจทย์ปีนี้เป็นชุดเดิมของปีก่อน อยากยกโค้ดเก่าเข้ามาทั้งชุด<em>โฟลเดอร์รุ่นเก่า <code class="inline">16.C1T1/</code> ทั้งอัน</em></span>
+        <code class="cmd">python3 tools/<span class="flag">import_old_camp.py</span> &lt;ต้นทาง&gt; --contest camp1_1 --dest &lt;ปลายทาง&gt;</code>
       </li>
       <li>
         <span class="q">ได้คะแนนแล้ว อยากอัปเดตตาราง + ย้ายข้อที่เต็ม<em>ย้ายเข้า _done/ แล้วสร้าง README ใหม่</em></span>
@@ -452,6 +457,39 @@
 
     <div class="tool">
       <div class="tool-head">
+        <h3 class="tool-name">import_old_camp.py</h3>
+        <span class="tool-role">python · ใช้ตอนโจทย์เป็นชุดเดิมของปีก่อน</span>
+      </div>
+      <p>
+        ต้นทางรุ่นเก่าแบ่งเป็นโฟลเดอร์ย่อยข้อละอัน
+        (<code class="inline">16.C1T1/{C1T1 (C++).pdf, main.cpp, main.exe}</code>)
+        ซึ่ง <code class="inline">organize.fish</code> ใช้ไม่ได้ — มันดูแค่ PDF ลอย ๆ ชั้นเดียว
+        ไม่แตะ <code class="inline">main.cpp</code> ตัวนี้ยกมาทั้งชุดแล้วตั้งชื่อให้ตามกติกา
+      </p>
+      <div>
+        <code class="cmd">python3 tools/import_old_camp.py &lt;ต้นทาง&gt; --contest camp1_1 \
+        --dest problems/2_incamp/1_first_half/cmu-grader --dry-run</code>
+      </div>
+      <p class="note">
+        ชื่อโฟลเดอร์/ลำดับมาจาก <code class="inline">tools/scores/&lt;contest&gt;.txt</code> →
+        ต้องมีไฟล์คะแนนก่อน · <code class="inline">main.cpp</code> →
+        <code class="inline">&lt;รหัส&gt;.cpp</code> ·
+        <code class="inline">main_optimize.cpp</code> →
+        <code class="inline">&lt;รหัส&gt;_optimize.cpp</code> ·
+        <code class="inline">&lt;รหัส&gt; (...).pdf</code> →
+        <code class="inline">&lt;รหัส&gt;.pdf</code> ·
+        ไฟล์คอมไพล์/รัน (<code class="inline">main</code>, <code class="inline">*.exe</code>,
+        <code class="inline">input.in</code>, <code class="inline">output.txt</code>) ไม่เอามา
+        (repo ใช้ <code class="inline">.run/</code>) · ข้อที่ต้นทางไม่มีโค้ดได้
+        <code class="inline">&lt;รหัส&gt;.cpp</code> จาก <code class="inline">template.cpp</code> ·
+        <b>default = คัดลอก</b> ต้นทางไม่ถูกแตะ (<code class="inline">--move</code> ถ้าอยากย้ายจริง)
+        · ข้อที่ไม่มีต้นทางเลยจะถูกรายงาน — ปกติคือโจทย์ใหม่ของปีนี้ ให้โหลด PDF แล้วใช้
+        <code class="inline">organize.fish</code> ตามปกติ
+      </p>
+    </div>
+
+    <div class="tool">
+      <div class="tool-head">
         <h3 class="tool-name">sync_done.py</h3>
         <span class="tool-role">python · ตัวหลักหลังได้คะแนน</span>
       </div>
@@ -466,6 +504,17 @@
       <p class="note">
         <code class="inline">tools/scores/*.txt</code> คือความจริง — ตารางใน README ห้ามแก้มือ
         รันซ้ำได้เรื่อย ๆ ข้อที่ย้ายแล้วจะข้าม
+      </p>
+      <p class="note">
+        contest ที่มีไฟล์ <code class="inline">tools/scores/&lt;ชื่อ&gt;.old100_68.txt</code>
+        จะได้คอลัมน์ <b>หมายเหตุ</b> เพิ่มในตาราง ขึ้น
+        <code class="inline">🕰️ 100 เก่า</code> เฉพาะข้อในรายการ — ใช้ตอนโจทย์ปีนี้เป็น
+        <b>ชุดเดิมของปีก่อน</b> แล้วส่งโค้ดเก่าได้ 100 เลย คะแนนนั้นไม่ใช่ฝีมือปีนี้
+        ปล่อยไว้ตารางจะดูเหมือนคืบหน้าทั้งหมด (contest อื่นหน้าตาเหมือนเดิม ไม่มีคอลัมน์เปล่า)
+        · <code class="inline">_68</code> = ปี พ.ศ. ย่อของ<b>โค้ดต้นทาง</b> — sync_done
+        อ่านไปต่อท้าย legend ให้เอง (<code class="inline">โค้ดจากปี 68</code>) มีหลายปีก็วางหลายไฟล์ได้
+        · บรรทัดละ 1 รหัส <code class="inline">#</code> = คอมเมนต์ ·
+        ของค่าย 1 ครึ่งแรก 2569 ดู <code class="inline">notes/100เก่า_ค่าย1ครึ่งแรก.md</code>
       </p>
     </div>
 
@@ -505,7 +554,8 @@
         <span class="tool-role">python · โมดูลกลาง ไม่มี CLI</span>
       </div>
       <p>
-        ไม่ได้รันเอง — สามตัวข้างบนเรียกใช้ร่วมกัน มีหน้าที่อ่านทะเบียน contest อ่านไฟล์คะแนน
+        ไม่ได้รันเอง — สคริปต์ข้างบนเรียกใช้ร่วมกัน มีหน้าที่อ่านทะเบียน contest อ่านไฟล์คะแนน
+        อ่านรายการ 100 เก่า (<code class="inline">parse_old100</code>)
         แปลงชื่อโฟลเดอร์ (<code class="inline">folder_name_for</code> /
         <code class="inline">task_id_from_folder</code>) และหารหัสโจทย์เจอโดยเดินทั่ว
         <code class="inline">problems/</code>
@@ -638,6 +688,52 @@
         </div>
       </li>
     </ol>
+
+    <p class="note">
+      <b>ถ้าโจทย์ปีนี้เป็นชุดเดิมของปีก่อน</b> — สลับขั้น 2 เป็นชุดนี้ (ทำครั้งเดียวตอนเปิดค่าย)
+    </p>
+
+    <ol class="steps">
+      <li>
+        <div class="step-body">
+          <p class="step-title">ก็อปตารางคะแนนของ contest นั้นก่อน</p>
+          <p>
+            วางที่ <code class="inline">tools/scores/&lt;ชื่อใน graders.txt&gt;.txt</code>
+            — import เอาชื่อโจทย์กับลำดับจากไฟล์นี้
+          </p>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <p class="step-title">ยกโจทย์ + โค้ดปีเก่าเข้าทั้งชุด</p>
+          <code class="cmd">python3 tools/import_old_camp.py &lt;โฟลเดอร์ค่ายปีเก่า&gt; --contest &lt;contest&gt; --dest &lt;ปลายทาง&gt; --dry-run</code>
+          <p class="note">ตรวจรายการที่มันจะทำก่อน แล้วรันจริงโดยเอา <code class="inline">--dry-run</code> ออก · default = คัดลอก ต้นทางไม่ถูกแตะ</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <p class="step-title">เช็คว่าชื่อโฟลเดอร์ถูกตั้งแต่แรก</p>
+          <code class="cmd">python3 tools/folder_names.py</code>
+          <p class="note">ควรเงียบ — ชื่อออกมาจากสูตรเดียวกับ import อยู่แล้ว</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <p class="step-title">ที่ยังขาดคือโจทย์ใหม่ของปีนี้</p>
+          <code class="cmd">python3 tools/find_missed.py</code>
+          <p class="note">โหลด PDF แล้วจัดด้วย <code class="inline">organize.fish</code> ตามขั้นปกติ</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <p class="step-title">ติดป้าย 🕰️ 100 เก่า ถ้าส่งโค้ดเก่าได้เต็ม</p>
+          <p>
+            สร้าง <code class="inline">tools/scores/&lt;contest&gt;.old100_68.txt</code>
+            แล้วรัน <code class="inline">sync_done.py</code> — ดูหัวข้อ 02
+          </p>
+        </div>
+      </li>
+    </ol>
   </section>
 
   <section>
@@ -692,6 +788,12 @@
         <code class="inline">sync_done.py</code> ทำ จะได้ตรงกับตาราง
       </li>
       <li>
+        <b>ป้าย 🕰️ 100 เก่า ก็มาจากไฟล์เหมือนกัน</b> —
+        <code class="inline">tools/scores/&lt;contest&gt;.old100_68.txt</code>
+        อย่าไปติ๊กใน README มือ ๆ ข้อที่ส่งโค้ดปีก่อนซ้ำแล้วได้เต็มต้องติดป้ายไว้
+        ไม่งั้นตารางจะดูเหมือนคืบหน้าทั้งหมด
+      </li>
+      <li>
         <b>โฟลเดอร์โจทย์เป็น <code class="inline">&lt;ลำดับ&gt;_&lt;รหัส&gt;_&lt;ชื่อโจทย์&gt;</code>
         แต่ไฟล์ข้างในเป็นรหัสเปล่า ๆ</b> — เปลี่ยนชื่อโฟลเดอร์ด้วย
         <code class="inline">folder_names.py</code> อย่า rename มือ (สคริปต์ทั้งชุดอ่านชื่อโฟลเดอร์เป็นคีย์)
@@ -741,13 +843,25 @@
             <td class="mono">ตารางใน README ไม่ตรง</td>
             <td>อย่าแก้ README — แก้ที่ <code class="inline">tools/scores/*.txt</code> แล้วรันใหม่</td>
           </tr>
+          <tr>
+            <td class="mono">ป้าย 🕰️ ไม่ขึ้นสักข้อ</td>
+            <td>ชื่อไฟล์ต้องขึ้นต้นด้วย <code class="inline">&lt;ชื่อใน graders.txt&gt;.old100</code> และลงท้าย <code class="inline">.txt</code> (เช่น <code class="inline">.old100_68.txt</code>) แล้วรัน <code class="inline">sync_done.py</code></td>
+          </tr>
+          <tr>
+            <td class="mono">import: ไม่เจอไฟล์คะแนน</td>
+            <td>ต้องวาง <code class="inline">tools/scores/&lt;contest&gt;.txt</code> ก่อน — import เอาชื่อ/ลำดับจากไฟล์นั้น</td>
+          </tr>
+          <tr>
+            <td class="mono">ข้อที่ได้เต็มไม่ย้ายเข้า <code class="inline">_done/</code></td>
+            <td>เช็คว่ารหัสโจทย์ถอดจากชื่อโฟลเดอร์ออกมาตรง — รหัสที่มี <code class="inline">_</code> ในตัว เช่น <code class="inline">C1C0_ADD</code></td>
+          </tr>
         </tbody>
       </table>
     </div>
   </section>
 
   <footer>
-    อัปเดต 28 ก.ย. 2569 · คู่มือฉบับเต็มอยู่ใน tools/README.md ของ repo
+    อัปเดต 3 ต.ค. 2569 · คู่มือฉบับเต็มอยู่ใน tools/README.md ของ repo
   </footer>
 
 </div>
