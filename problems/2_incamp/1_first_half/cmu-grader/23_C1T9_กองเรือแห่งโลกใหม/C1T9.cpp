@@ -26,7 +26,6 @@ int main(){
             if(c > 'Z') {
                 c = 'A';
             }
-
         }
         else{
             cout << digit << " ";
@@ -47,5 +46,6 @@ int main(){
         cout << endl;
     }
     for (int i = 0; i < size * 2 + 1 + 2; i++) cout << "* ";
+
 
 }
