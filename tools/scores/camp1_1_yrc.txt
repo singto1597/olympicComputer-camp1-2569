@@ -2,13 +2,14 @@
 #
 # ก็อปจากหน้า Task overview ของ YRC grader — หน้านั้นไม่มีคอลัมน์คะแนน
 # จึงใส่ 0 / 100 ไว้ทั้งชุดเป็นที่ตั้ง แล้วแก้ Score ให้ตรงเมื่อดูหน้าคะแนนจริง
-# ลำดับบรรทัด = ลำดับโฟลเดอร์ (01_ … 16_)
+# ลำดับบรรทัด = ลำดับโฟลเดอร์ (01_ … 17_)
 
 Score	Task	Name	Time limit	Memory limit	Type	Files
 0 / 100	BobInverse	BobInverse	1.000 second	8.00 MiB	Batch	Bob_Inverse[.cpp|.c|.pas]
 0 / 100	BobInWonderland	BobInWonderland	1.000 second	8.00 MiB	Batch	BobInWonderland[.cpp|.c|.pas]
 0 / 100	JJFourier	JJFourier	1.000 second	64.0 MiB	Batch	JJFourier[.cpp|.c|.pas]
 0 / 100	Sausage	Sausage	1.000 second	8.00 MiB	Batch	Sausage[.cpp|.c|.pas]
+0 / 100	IF01	If_else ระดับ 1	N/A	N/A	Batch	Y_IF_ELSE_01[.cpp|.c|.pas]
 0 / 100	IF02	If_esle ระดับ 2	N/A	N/A	Batch	Y_IF_ELSE_02[.cpp|.c|.pas]
 0 / 100	IF03	If_else_ระดับ 3	N/A	N/A	Batch	Y_IF_ELSE_03[.cpp|.c|.pas]
 0 / 100	IF04	Y_IF_ELSE_04	N/A	N/A	Batch	Y_IF_ELSE_04[.cpp|.c|.pas]

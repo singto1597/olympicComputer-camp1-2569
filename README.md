@@ -206,7 +206,7 @@ python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 →
 
 > 🕰️ 100 เก่า = ได้เต็มจากการส่งโค้ดเก่าซ้ำ (โค้ดจากปี 68 · ไม่ได้เขียนใหม่ปีนี้) — 38 ข้อ
 
-### ค่าย 1 ครึ่งแรก (YRC) — ได้เต็ม **0 / 16** ข้อ
+### ค่าย 1 ครึ่งแรก (YRC) — ได้เต็ม **0 / 17** ข้อ
 
 | สถานะ | คะแนน | Task | ชื่อโจทย์ | ลิมิต | ไฟล์ |
 | :---: | :---: | :--- | :--- | :---: | :---: |
@@ -214,18 +214,19 @@ python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 →
 | 🔴 | 0 / 100 | **BobInWonderland** | BobInWonderland | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/02_BobInWonderland) |
 | 🔴 | 0 / 100 | **JJFourier** | JJFourier | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/03_JJFourier) |
 | 🔴 | 0 / 100 | **Sausage** | Sausage | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/04_Sausage) |
-| 🔴 | 0 / 100 | **IF02** | If_esle ระดับ 2 | N/A / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/05_IF02_If_esle_ระดับ_2) |
-| 🔴 | 0 / 100 | **IF03** | If_else_ระดับ 3 | N/A / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/06_IF03_If_else_ระดับ_3) |
-| 🔴 | 0 / 100 | **IF04** | Y_IF_ELSE_04 | N/A / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/07_IF04_Y_IF_ELSE_04) |
-| 🔴 | 0 / 100 | **IF05** | Y_IF_ELSE_05 | N/A / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/08_IF05_Y_IF_ELSE_05) |
-| 🔴 | 0 / 100 | **IF06** | Y_IF_ELSE_06 | N/A / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/09_IF06_Y_IF_ELSE_06) |
+| 🔴 | 0 / 100 | **IF01** | If_else ระดับ 1 | N/A / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/05_IF01_If_else_ระดับ_1) |
+| 🔴 | 0 / 100 | **IF02** | If_esle ระดับ 2 | N/A / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/06_IF02_If_esle_ระดับ_2) |
+| 🔴 | 0 / 100 | **IF03** | If_else_ระดับ 3 | N/A / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/07_IF03_If_else_ระดับ_3) |
+| 🔴 | 0 / 100 | **IF04** | Y_IF_ELSE_04 | N/A / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/08_IF04_Y_IF_ELSE_04) |
+| 🔴 | 0 / 100 | **IF05** | Y_IF_ELSE_05 | N/A / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/09_IF05_Y_IF_ELSE_05) |
+| 🔴 | 0 / 100 | **IF06** | Y_IF_ELSE_06 | N/A / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/10_IF06_Y_IF_ELSE_06) |
 | 🔴 | 0 / 100 | **L01** | Loop ระดับ 1 | 1.000 second / 64.0 MiB | — |
 | 🔴 | 0 / 100 | **L02** | Loop ระดับ 2 | 1.000 second / 64.0 MiB | — |
 | 🔴 | 0 / 100 | **L03** | Loop ระดับ 3 | 1.000 second / 64.0 MiB | — |
 | 🔴 | 0 / 100 | **L04** | Loop ระดับ 4 | 1.000 second / 64.0 MiB | — |
-| 🔴 | 0 / 100 | **L05** | Loop ระดับ 5 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/14_L05_Loop_ระดับ_5) |
-| 🔴 | 0 / 100 | **CanYouDeliverInTime** | CanYouDeliverInTime | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/15_CanYouDeliverInTime) |
-| 🔴 | 0 / 100 | **DecodingImage** | DecodingImage | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/16_DecodingImage) |
+| 🔴 | 0 / 100 | **L05** | Loop ระดับ 5 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/15_L05_Loop_ระดับ_5) |
+| 🔴 | 0 / 100 | **CanYouDeliverInTime** | CanYouDeliverInTime | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/16_CanYouDeliverInTime) |
+| 🔴 | 0 / 100 | **DecodingImage** | DecodingImage | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/17_DecodingImage) |
 <!-- SCORE:END -->
 
 ---
