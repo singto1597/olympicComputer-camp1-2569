@@ -35,3 +35,7 @@ Score	Task	Name	Time limit	Memory limit	Type	Files
 0 / 100	C1PE04	C1PE04 - Egypt	1.000 second	8.00 MiB	Batch	C1PE04[.cpp|.c]
 0 / 100	C1PC13	Guess the song	1.000 second	8.00 MiB	Batch	C1PC13[.cpp|.c]
 0 / 100	C1PC14	Judgement	1.000 second	8.00 MiB	Batch	C1PC14[.cpp|.c]
+0 / 100	C1PE05	การอยู่รอดของแท็กกับฟิสิกส์ (Physics survival)	N/A	N/A	Batch	C1PE05[.cpp|.c]
+0 / 100	C1PE06	Sakiko Question	1.000 second	256 MiB	Batch	C1PE06[.cpp|.c]
+0 / 100	C1PE07	01 Game	N/A	N/A	Batch	C1PE07[.cpp|.c]
+0 / 100	C1PE08	Game Of Life	3.000 seconds	64.0 MiB	Batch	C1PE08[.cpp|.c]

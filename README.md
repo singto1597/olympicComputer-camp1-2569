@@ -28,6 +28,7 @@ olympicComputer-camp1-2569/
 ├── problems/            ← โจทย์ทั้งหมด
 │   ├── 1_precamp/         พรีแคมป์ (ก่อนเข้าค่าย)
 │   │   ├── cmu-grader/      + _done/  ← 01_C1PC01_Alice_and_Bob/ ฯลฯ
+│   │   ├── pretest/         Pretest ก่อนแคมป์ — 37..40_C1PE05..08/
 │   │   ├── codeforces/
 │   │   └── programming.in.th/
 │   ├── 2_incamp/          ระหว่างค่าย — แยกตามช่วงเหมือนที่เว็บแบ่ง
@@ -59,6 +60,9 @@ olympicComputer-camp1-2569/
 - **ไฟล์ข้างในยังเป็นรหัสเปล่า ๆ** เพราะ grader บังคับชื่อไฟล์ตอน submit (คอลัมน์
   Files = `C1PC01[.cpp|.c]`) ถ้าใส่ชื่อโจทย์ไว้ต้อง rename กลับก่อนส่งทุกครั้ง
   โฟลเดอร์กับไฟล์จึงชื่อไม่เหมือนกันโดยตั้งใจ
+- **ยึดคอลัมน์ Files ไม่ใช่รหัส Task** — บาง grader สองอย่างนี้ไม่ตรงกัน โฟลเดอร์ใช้
+  รหัส Task ส่วนไฟล์ข้างในใช้ชื่อที่ grader บังคับ เช่น YRC `BobInverse` → `Bob_Inverse.cpp`
+  · `IF02` → `Y_IF_ELSE_02.pdf`
 - เลขนำหน้ามีแค่ระดับ phase (`1_precamp` → `2_incamp` → `3_endcamp`) เพราะต้องเรียงตามเวลา
 - ไฟล์ที่คอมไพล์ออกมา (`.out`, `.exe`) ไม่ขึ้น git — ดู `.gitignore`
 
@@ -96,7 +100,7 @@ python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 →
 > สร้างอัตโนมัติโดย `python3 tools/sync_done.py` จาก `tools/scores/*.txt` — อย่าแก้มือ
 
 <!-- SCORE:START -->
-### พรีแคมป์ — ได้เต็ม **18 / 36** ข้อ
+### พรีแคมป์ — ได้เต็ม **18 / 40** ข้อ
 
 | สถานะ | คะแนน | Task | ชื่อโจทย์ | ลิมิต | ไฟล์ |
 | :---: | :---: | :--- | :--- | :---: | :---: |
@@ -136,8 +140,12 @@ python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 →
 | 🔴 | 0 / 100 | **C1PE04** | C1PE04 - Egypt | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/34_C1PE04_Egypt) |
 | 🔴 | 0 / 100 | **C1PC13** | Guess the song | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/35_C1PC13_Guess_the_song) |
 | 🔴 | 0 / 100 | **C1PC14** | Judgement | 1.000 second / 8.00 MiB | [📁](problems/1_precamp/cmu-grader/36_C1PC14_Judgement) |
+| 🔴 | 0 / 100 | **C1PE05** | การอยู่รอดของแท็กกับฟิสิกส์ (Physics survival) | N/A / N/A | [📁](problems/1_precamp/pretest/37_C1PE05_การอยู่รอดของแท็กกับฟิสิกส์_(Physics_survival)) |
+| 🔴 | 0 / 100 | **C1PE06** | Sakiko Question | 1.000 second / 256 MiB | [📁](problems/1_precamp/pretest/38_C1PE06_Sakiko_Question) |
+| 🔴 | 0 / 100 | **C1PE07** | 01 Game | N/A / N/A | [📁](problems/1_precamp/pretest/39_C1PE07_01_Game) |
+| 🔴 | 0 / 100 | **C1PE08** | Game Of Life | 3.000 seconds / 64.0 MiB | [📁](problems/1_precamp/pretest/40_C1PE08_Game_Of_Life) |
 
-### ค่าย 1 ครึ่งแรก — ได้เต็ม **38 / 54** ข้อ
+### ค่าย 1 ครึ่งแรก — ได้เต็ม **43 / 54** ข้อ
 
 | สถานะ | คะแนน | Task | ชื่อโจทย์ | ลิมิต | ไฟล์ | หมายเหตุ |
 | :---: | :---: | :--- | :--- | :---: | :---: | :--- |
@@ -162,14 +170,14 @@ python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 →
 | 🟢 | 100 / 100 | **C1T5** | โรงแรมใจกลางเมืองน่านแห่งหนึ่ง | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/19_C1T5_โรงแรมใจกลางเมืองน่านแห่งหนึ่ง) | 🕰️ 100 เก่า |
 | 🔴 | 0 / 100 | **C1T6** | TCS | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/20_C1T6_TCS) |  |
 | 🟢 | 100 / 100 | **C1T7** | เทค่าย | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/21_C1T7_เทค่าย) | 🕰️ 100 เก่า |
-| 🔴 | 0 / 100 | **C1T8** | ปริศนาแห่งโลกใหม่ | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/22_C1T8_ปริศนาแห่งโลกใหม่) |  |
-| 🔴 | 0 / 100 | **C1T9** | กองเรือแห่งโลกใหม | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/23_C1T9_กองเรือแห่งโลกใหม) |  |
+| 🟢 | 100 / 100 | **C1T8** | ปริศนาแห่งโลกใหม่ | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/22_C1T8_ปริศนาแห่งโลกใหม่) |  |
+| 🟢 | 100 / 100 | **C1T9** | กองเรือแห่งโลกใหม | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/23_C1T9_กองเรือแห่งโลกใหม) |  |
 | 🟢 | 100 / 100 | **C1T10** | ธงแห่งโลกใหม | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/24_C1T10_ธงแห่งโลกใหม) | 🕰️ 100 เก่า |
-| 🔴 | 0 / 100 | **C1T11** | ประตูมิติ | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/25_C1T11_ประตูมิติ) |  |
-| 🔴 | 0 / 100 | **C1T12** | ขโมยต้นไม้ | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/26_C1T12_ขโมยต้นไม้) |  |
+| 🟢 | 100 / 100 | **C1T11** | ประตูมิติ | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/25_C1T11_ประตูมิติ) |  |
+| 🟢 | 100 / 100 | **C1T12** | ขโมยต้นไม้ | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/26_C1T12_ขโมยต้นไม้) |  |
 | 🔴 | 0 / 100 | **C1T13** | รหัสลับแห่งแกรนด์ไลน์ | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/27_C1T13_รหัสลับแห่งแกรนด์ไลน์) |  |
 | 🔴 | 0 / 100 | **C1T14** | เส้นทางที่ล้ำค่าที่สุด | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/28_C1T14_เส้นทางที่ล้ำค่าที่สุด) |  |
-| 🔴 | 0 / 100 | **C1T15** | ค้นหาห้องในโรงแรมใจกลางเมืองน่าน | 1.000 second / 16.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/29_C1T15_ค้นหาห้องในโรงแรมใจกลางเมืองน่าน) |  |
+| 🟢 | 100 / 100 | **C1T15** | ค้นหาห้องในโรงแรมใจกลางเมืองน่าน | 1.000 second / 16.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/29_C1T15_ค้นหาห้องในโรงแรมใจกลางเมืองน่าน) |  |
 | 🟢 | 100 / 100 | **C1Y10** | ตำแหน่งของเลขที่น่าสนใจ | 1.000 second / 16.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/30_C1Y10_ตำแหน่งของเลขที่น่าสนใจ) | 🕰️ 100 เก่า |
 | 🟢 | 100 / 100 | **C1Y11** | เกมทศกัณฐ์ | 1.000 second / 16.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/31_C1Y11_เกมทศกัณฐ์) | 🕰️ 100 เก่า |
 | 🟢 | 100 / 100 | **C1Y12** | พิมพ์ตัวเลขย้อนกลับ | 1.000 second / 16.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/32_C1Y12_พิมพ์ตัวเลขย้อนกลับ) | 🕰️ 100 เก่า |
@@ -197,6 +205,27 @@ python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 →
 | 🔴 | 0 / 100 | **C1T42** | Banana 3-factor | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/54_C1T42_Banana_3-factor) |  |
 
 > 🕰️ 100 เก่า = ได้เต็มจากการส่งโค้ดเก่าซ้ำ (โค้ดจากปี 68 · ไม่ได้เขียนใหม่ปีนี้) — 38 ข้อ
+
+### ค่าย 1 ครึ่งแรก (YRC) — ได้เต็ม **0 / 16** ข้อ
+
+| สถานะ | คะแนน | Task | ชื่อโจทย์ | ลิมิต | ไฟล์ |
+| :---: | :---: | :--- | :--- | :---: | :---: |
+| 🔴 | 0 / 100 | **BobInverse** | BobInverse | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/01_BobInverse) |
+| 🔴 | 0 / 100 | **BobInWonderland** | BobInWonderland | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/02_BobInWonderland) |
+| 🔴 | 0 / 100 | **JJFourier** | JJFourier | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/03_JJFourier) |
+| 🔴 | 0 / 100 | **Sausage** | Sausage | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/04_Sausage) |
+| 🔴 | 0 / 100 | **IF02** | If_esle ระดับ 2 | N/A / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/05_IF02_If_esle_ระดับ_2) |
+| 🔴 | 0 / 100 | **IF03** | If_else_ระดับ 3 | N/A / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/06_IF03_If_else_ระดับ_3) |
+| 🔴 | 0 / 100 | **IF04** | Y_IF_ELSE_04 | N/A / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/07_IF04_Y_IF_ELSE_04) |
+| 🔴 | 0 / 100 | **IF05** | Y_IF_ELSE_05 | N/A / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/08_IF05_Y_IF_ELSE_05) |
+| 🔴 | 0 / 100 | **IF06** | Y_IF_ELSE_06 | N/A / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/09_IF06_Y_IF_ELSE_06) |
+| 🔴 | 0 / 100 | **L01** | Loop ระดับ 1 | 1.000 second / 64.0 MiB | — |
+| 🔴 | 0 / 100 | **L02** | Loop ระดับ 2 | 1.000 second / 64.0 MiB | — |
+| 🔴 | 0 / 100 | **L03** | Loop ระดับ 3 | 1.000 second / 64.0 MiB | — |
+| 🔴 | 0 / 100 | **L04** | Loop ระดับ 4 | 1.000 second / 64.0 MiB | — |
+| 🔴 | 0 / 100 | **L05** | Loop ระดับ 5 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/14_L05_Loop_ระดับ_5) |
+| 🔴 | 0 / 100 | **CanYouDeliverInTime** | CanYouDeliverInTime | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/15_CanYouDeliverInTime) |
+| 🔴 | 0 / 100 | **DecodingImage** | DecodingImage | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/16_DecodingImage) |
 <!-- SCORE:END -->
 
 ---

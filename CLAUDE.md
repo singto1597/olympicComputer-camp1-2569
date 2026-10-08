@@ -8,7 +8,7 @@
 | โฟลเดอร์ | เก็บอะไร |
 |---|---|
 | `docs/` | เอกสารค่าย: `syllabus/` กำหนดการ · `sheets/` สไลด์เรียน · `exams/` ตัวข้อสอบ |
-| `problems/1_precamp/` | พรีแคมป์ — `cmu-grader/` (ชุด C1PC / C1PE / C1PR), `codeforces/`, `programming.in.th/` |
+| `problems/1_precamp/` | พรีแคมป์ — `cmu-grader/` (ชุด C1PC / C1PE / C1PR), `pretest/` (C1PE05–08 · นับเป็น contest `precamp` เดียวกัน), `codeforces/`, `programming.in.th/` |
 | `problems/2_incamp/` | โจทย์ระหว่างค่าย — แยกตามช่วงที่เว็บแบ่ง: `1_first_half/` กับ `2_second_half/` (ในแต่ละอันมี `cmu-grader/` + `yrc-grader/`), `exam/ex1/`, `exam/ex2/`, `pretest/`, `sheets/` |
 | `problems/3_endcamp/` | งานหลังค่าย |
 | `notes/` | สรุป/cheatsheet ที่ผู้ใช้เขียนเอง |
@@ -21,6 +21,8 @@
   เรียงตามลำดับโจทย์ ไม่ใช่ตามรหัส (C1PC → C1PE → C1PR)
   **ไฟล์ข้างในยังชื่อ `<ID>.cpp` + `<ID>.pdf`** ไม่ต่อชื่อโจทย์ เพราะ grader
   บังคับชื่อไฟล์ตอน submit (คอลัมน์ Files) — โฟลเดอร์กับไฟล์ชื่อไม่เหมือนกันโดยตั้งใจ
+  ถ้า Files กับรหัส Task ไม่ตรงกัน (เกิดกับ YRC) **ให้ยึด Files** เช่น
+  `01_BobInverse/Bob_Inverse.cpp` · `05_IF02_If_esle_ระดับ_2/Y_IF_ELSE_02.pdf`
   เปลี่ยนชื่อโฟลเดอร์ด้วย `python3 tools/folder_names.py --apply` อย่า rename มือ
 - ข้อที่ได้ 100/100 เต็ม จะถูก **ย้ายเข้า `_done/`** ของ grader นั้นด้วย
   `sync_done.py` — อย่าย้ายมือ

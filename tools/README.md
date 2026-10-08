@@ -138,7 +138,9 @@ python3 tools/folder_names.py --print-map # พิมพ์ "รหัส<TAB>�
 | ชื่อในสคริปต์ | ปลายทาง |
 |---|---|
 | `precamp` | `problems/1_precamp/cmu-grader/` |
+| `precamp` (ข้อ C1PE05–08) | `problems/1_precamp/pretest/` |
 | `camp1_1` | `problems/2_incamp/1_first_half/cmu-grader/` |
+| `camp1_1_yrc` | `problems/2_incamp/1_first_half/yrc-grader/` |
 | `camp1_2` | `problems/2_incamp/2_second_half/cmu-grader/` |
 | `pretest` | `problems/2_incamp/pretest/` |
 | `camp1_ex1` | `problems/2_incamp/exam/ex1/` |
