@@ -4,6 +4,8 @@ using namespace std;
 
 int main(){
 
+    // ข้อนี้ใช้ Ai ช่วยคิด ไม่ได้คิดเอง 100%
+
     int n;
     cin >> n;
 
