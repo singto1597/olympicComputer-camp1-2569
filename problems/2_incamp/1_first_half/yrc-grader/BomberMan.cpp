@@ -70,10 +70,12 @@ int main(){
 
         cin >> command;
 
+        if (!isAlive) continue;
+
         switch (command){
             //-------------------------------------
             case 'U':
-                if (table[current_n - 1][current_m] == '.') {
+                if (table[current_n - 1][current_m] == '.' && table_bomb[current_n - 1][current_m] != 'B') {
                     table[current_n][current_m] = '.';
                     current_n -= 1;
                     table[current_n][current_m] = 'P';
@@ -83,7 +85,7 @@ int main(){
 
             //-------------------------------------
             case 'D':
-                if (table[current_n + 1][current_m] == '.') {
+                if (table[current_n + 1][current_m] == '.' && table_bomb[current_n + 1][current_m] != 'B') {
                     table[current_n][current_m] = '.';
                     current_n += 1;
                     table[current_n][current_m] = 'P';
@@ -93,7 +95,7 @@ int main(){
 
             //-------------------------------------
             case 'L':
-                if (table[current_n][current_m - 1] == '.') {
+                if (table[current_n][current_m - 1] == '.' && table_bomb[current_n][current_m - 1] != 'B') {
                     table[current_n][current_m] = '.';
                     current_m -= 1;
                     table[current_n][current_m] = 'P';
@@ -103,7 +105,7 @@ int main(){
 
             //-------------------------------------
             case 'R':
-                if (table[current_n][current_m + 1] == '.') {
+                if (table[current_n][current_m + 1] == '.' && table_bomb[current_n][current_m + 1] != 'B') {
                     table[current_n][current_m] = '.';
                     current_m += 1;
                     table[current_n][current_m] = 'P';
@@ -113,7 +115,7 @@ int main(){
 
             //-------------------------------------
             case 'B':
-                if (bombs_amount < maxBombs){
+                if (bombs_amount < maxBombs && table_bomb[current_n][current_m] != 'B'){
                     table_bomb[current_n][current_m] = 'B';
                     bombs_amount++;
                 }
@@ -136,14 +138,17 @@ int main(){
                                 next_m = j;
                                 while (next_n >= 1 && next_n <= n && next_m >= 1 && next_m <= m && table[next_n][next_m] != '#'){
 
-                                    if (table[next_n][next_m] == '+'){
-                                        bridge_broke++;
-                                        table_next[next_n][next_m] = '.';
+                                    if (table[next_n][next_m] == '+') {
+                                        if (table_next[next_n][next_m] != '.') {
+                                            bridge_broke++;
+                                            table_next[next_n][next_m] = '.';
+                                        }
                                         break;
                                     }
                                     else if (table[next_n][next_m] == 'P'){
+                                        table_next[next_n][next_m] = '.';
                                         isAlive = false;
-                                        break;
+                                        // break;
                                     }
 
                                     next_n = dn[k] + next_n;
@@ -160,7 +165,11 @@ int main(){
                     }
                 }
                 bombs_amount = 0;
-
+                for (int i = 1; i <= n; i++){
+                    for (int j = 1; j <= m; j++){
+                        table_bomb[i][j] = '#';
+                    }
+                }
                 break;
             //-------------------------------------
 
@@ -178,7 +187,15 @@ int main(){
 
     for (int i = 1; i <= n; i++){
         for (int j = 1; j <= m; j++){
-            cout << table[i][j];
+            if (isAlive && i == current_n && j == current_m) {
+                cout << 'P';
+            } else if (table_bomb[i][j] == 'B') {
+                cout << 'o';
+            } else {
+
+                if(table[i][j] == 'P') cout << '.';
+                else cout << table[i][j];
+            }
         }
         cout << endl;
     }
