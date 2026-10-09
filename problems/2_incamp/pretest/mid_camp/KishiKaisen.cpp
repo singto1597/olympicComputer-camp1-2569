@@ -37,7 +37,7 @@ int main(){
                 break;
 
             case 4:
-                
+
                 for (long long i = l; i < r; i++){
                     for (long long j = i + 1; j <= r; j++)
                     if (a[i] == a[j]) count_op4 ++;
@@ -50,8 +50,8 @@ int main(){
         }
 
     }
-    
-    
+
+
 
 
 }
