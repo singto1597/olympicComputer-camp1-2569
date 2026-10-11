@@ -145,7 +145,7 @@ python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 →
 | 🔴 | 0 / 100 | **C1PE07** | 01 Game | N/A / N/A | [📁](problems/1_precamp/pretest/39_C1PE07_01_Game) |
 | 🔴 | 0 / 100 | **C1PE08** | Game Of Life | 3.000 seconds / 64.0 MiB | [📁](problems/1_precamp/pretest/40_C1PE08_Game_Of_Life) |
 
-### ค่าย 1 ครึ่งแรก — ได้เต็ม **43 / 54** ข้อ
+### ค่าย 1 ครึ่งแรก — ได้เต็ม **48 / 54** ข้อ
 
 | สถานะ | คะแนน | Task | ชื่อโจทย์ | ลิมิต | ไฟล์ | หมายเหตุ |
 | :---: | :---: | :--- | :--- | :---: | :---: | :--- |
@@ -164,7 +164,7 @@ python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 →
 | 🟢 | 100 / 100 | **C1N8** | เล่นกับอักขระ | 1.000 second / 4.00 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/13_C1N8_เล่นกับอักขระ) | 🕰️ 100 เก่า |
 | 🟢 | 100 / 100 | **C1N9** | ตัดเกรด | 1.000 second / 4.00 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/14_C1N9_ตัดเกรด) | 🕰️ 100 เก่า |
 | 🟢 | 100 / 100 | **C1T1** | Banana Shop | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/15_C1T1_Banana_Shop) | 🕰️ 100 เก่า |
-| 🔴 | 0 / 100 | **C1T2** | หงุดหงิดเพราะติดโจทย์ | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/16_C1T2_หงุดหงิดเพราะติดโจทย์) |  |
+| 🟢 | 100 / 100 | **C1T2** | หงุดหงิดเพราะติดโจทย์ | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/16_C1T2_หงุดหงิดเพราะติดโจทย์) |  |
 | 🟢 | 100 / 100 | **C1T3** | เครื่องคอมเจ้าปัญหา | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/17_C1T3_เครื่องคอมเจ้าปัญหา) | 🕰️ 100 เก่า |
 | 🟢 | 100 / 100 | **C1T4** | สูตรน้ำอร่อย | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/18_C1T4_สูตรน้ำอร่อย) | 🕰️ 100 เก่า |
 | 🟢 | 100 / 100 | **C1T5** | โรงแรมใจกลางเมืองน่านแห่งหนึ่ง | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/19_C1T5_โรงแรมใจกลางเมืองน่านแห่งหนึ่ง) | 🕰️ 100 เก่า |
@@ -176,7 +176,7 @@ python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 →
 | 🟢 | 100 / 100 | **C1T11** | ประตูมิติ | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/25_C1T11_ประตูมิติ) |  |
 | 🟢 | 100 / 100 | **C1T12** | ขโมยต้นไม้ | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/26_C1T12_ขโมยต้นไม้) |  |
 | 🔴 | 0 / 100 | **C1T13** | รหัสลับแห่งแกรนด์ไลน์ | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/27_C1T13_รหัสลับแห่งแกรนด์ไลน์) |  |
-| 🔴 | 0 / 100 | **C1T14** | เส้นทางที่ล้ำค่าที่สุด | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/28_C1T14_เส้นทางที่ล้ำค่าที่สุด) |  |
+| 🟢 | 100 / 100 | **C1T14** | เส้นทางที่ล้ำค่าที่สุด | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/28_C1T14_เส้นทางที่ล้ำค่าที่สุด) |  |
 | 🟢 | 100 / 100 | **C1T15** | ค้นหาห้องในโรงแรมใจกลางเมืองน่าน | 1.000 second / 16.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/29_C1T15_ค้นหาห้องในโรงแรมใจกลางเมืองน่าน) |  |
 | 🟢 | 100 / 100 | **C1Y10** | ตำแหน่งของเลขที่น่าสนใจ | 1.000 second / 16.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/30_C1Y10_ตำแหน่งของเลขที่น่าสนใจ) | 🕰️ 100 เก่า |
 | 🟢 | 100 / 100 | **C1Y11** | เกมทศกัณฐ์ | 1.000 second / 16.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/31_C1Y11_เกมทศกัณฐ์) | 🕰️ 100 เก่า |
@@ -191,15 +191,15 @@ python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 →
 | 🟢 | 100 / 100 | **C1N11** | Max Min Average | 1.000 second / 16.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/40_C1N11_Max_Min_Average) | 🕰️ 100 เก่า |
 | 🟢 | 100 / 100 | **C1N13** | นับอักขระ | 1.000 second / 16.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/41_C1N13_นับอักขระ) | 🕰️ 100 เก่า |
 | 🟢 | 100 / 100 | **C1T16** | verticalSpiral | 1.000 second / 512 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/42_C1T16_verticalSpiral) | 🕰️ 100 เก่า |
-| 🔴 | 0 / 100 | **C1T17** | HolyWaterForDaWays | 1.000 second / 256 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/43_C1T17_HolyWaterForDaWays) |  |
+| 🟢 | 100 / 100 | **C1T17** | HolyWaterForDaWays | 1.000 second / 256 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/43_C1T17_HolyWaterForDaWays) |  |
 | 🔴 | 0 / 100 | **C1T18** | Dash-separated Numbers | 1.000 second / 256 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/44_C1T18_Dash-separated_Numbers) |  |
 | 🟢 | 100 / 100 | **C1T36** | tiktok | 1.000 second / 16.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/45_C1T36_tiktok) | 🕰️ 100 เก่า |
 | 🟢 | 100 / 100 | **C1C00** | Determinant | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/46_C1C00_Determinant) | 🕰️ 100 เก่า |
 | 🟢 | 100 / 100 | **C1C01** | Last K Digits | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/47_C1C01_Last_K_Digits) | 🕰️ 100 เก่า |
-| 🔴 | 0 / 100 | **O24C1P1** | Hipporchestra | 0.040 seconds / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/48_O24C1P1_Hipporchestra) |  |
+| 🟢 | 100 / 100 | **O24C1P1** | Hipporchestra | 0.040 seconds / 64.0 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/48_O24C1P1_Hipporchestra) |  |
 | 🟢 | 100 / 100 | **O24C1P2** | Heros of tn square | 1.000 second / 256 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/49_O24C1P2_Heros_of_tn_square) | 🕰️ 100 เก่า |
 | 🟢 | 100 / 100 | **O24C1P3** | Prize | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/50_O24C1P3_Prize) | 🕰️ 100 เก่า |
-| 🔴 | 0 / 100 | **O24C1P4** | The Winner | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/51_O24C1P4_The_Winner) |  |
+| 🟢 | 100 / 100 | **O24C1P4** | The Winner | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/_done/51_O24C1P4_The_Winner) |  |
 | 🔴 | 0 / 100 | **C1T40** | Kuromi’s Bad Mood | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/52_C1T40_Kuromi’s_Bad_Mood) |  |
 | 🔴 | 0 / 100 | **C1T41** | Banana Syndicate | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/53_C1T41_Banana_Syndicate) |  |
 | 🔴 | 0 / 100 | **C1T42** | Banana 3-factor | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/1_first_half/cmu-grader/54_C1T42_Banana_3-factor) |  |
@@ -227,6 +227,70 @@ python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 →
 | 🔴 | 0 / 100 | **L05** | Loop ระดับ 5 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/15_L05_Loop_ระดับ_5) |
 | 🔴 | 0 / 100 | **CanYouDeliverInTime** | CanYouDeliverInTime | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/16_CanYouDeliverInTime) |
 | 🔴 | 0 / 100 | **DecodingImage** | DecodingImage | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/17_DecodingImage) |
+
+### ค่าย 1 ครึ่งหลัง — ได้เต็ม **23 / 57** ข้อ
+
+| สถานะ | คะแนน | Task | ชื่อโจทย์ | ลิมิต | ไฟล์ | หมายเหตุ |
+| :---: | :---: | :--- | :--- | :---: | :---: | :--- |
+| 🟢 | 100 / 100 | **C1N14** | Pointer : StRiNg | 1.000 second / 16.0 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/01_C1N14_Pointer_StRiNg) | 🕰️ 100 เก่า |
+| 🟢 | 100 / 100 | **C1N15** | Pointer : Sum_Even_Number | 1.000 second / 16.0 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/02_C1N15_Pointer_Sum_Even_Number) | 🕰️ 100 เก่า |
+| 🟢 | 100 / 100 | **C1N17** | MAX MIN | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/03_C1N17_MAX_MIN) | 🕰️ 100 เก่า |
+| 🟢 | 100 / 100 | **C1N18** | Number to Text | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/04_C1N18_Number_to_Text) | 🕰️ 100 เก่า |
+| 🟢 | 100 / 100 | **C1N19** | Digit count | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/05_C1N19_Digit_count) | 🕰️ 100 เก่า |
+| 🟢 | 100 / 100 | **C1N20** | Square | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/06_C1N20_Square) | 🕰️ 100 เก่า |
+| 🟢 | 100 / 100 | **C1N21** | X number pattern | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/07_C1N21_X_number_pattern) | 🕰️ 100 เก่า |
+| 🟢 | 100 / 100 | **C1N22** | Parking | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/08_C1N22_Parking) | 🕰️ 100 เก่า |
+| 🟡 | 50 / 100 | **C1N25** | Selection Sort | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/09_C1N25_Selection_Sort) |  |
+| 🟢 | 100 / 100 | **C1N26** | Bubble Sort | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/10_C1N26_Bubble_Sort) | 🕰️ 100 เก่า |
+| 🟢 | 100 / 100 | **C1N27** | BOX STACK | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/11_C1N27_BOX_STACK) | 🕰️ 100 เก่า |
+| 🟢 | 100 / 100 | **C1N28** | findMaxAndMin | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/12_C1N28_findMaxAndMin) | 🕰️ 100 เก่า |
+| 🟢 | 100 / 100 | **C1Y20** | SUM(Pointer) | 1.000 second / 16.0 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/13_C1Y20_SUM(Pointer)) | 🕰️ 100 เก่า |
+| 🟢 | 100 / 100 | **C1Y21** | SWAP(pointer) | 1.000 second / 16.0 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/14_C1Y21_SWAP(pointer)) | 🕰️ 100 เก่า |
+| 🟢 | 100 / 100 | **C1Y22** | Search me(Pointer) | 1.000 second / 16.0 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/15_C1Y22_Search_me(Pointer)) | 🕰️ 100 เก่า |
+| 🟢 | 100 / 100 | **C1Y23** | แบบฝึกหัด แบบมีทางเลือก | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/16_C1Y23_แบบฝึกหัด_แบบมีทางเลือก) | 🕰️ 100 เก่า |
+| 🟢 | 100 / 100 | **C1Y24** | GCD | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/17_C1Y24_GCD) | 🕰️ 100 เก่า |
+| 🟢 | 100 / 100 | **C1Y25** | ค้นหา | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/18_C1Y25_ค้นหา) | 🕰️ 100 เก่า |
+| 🟢 | 100 / 100 | **C1Y26** | Peak Elements | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/19_C1Y26_Peak_Elements) | 🕰️ 100 เก่า |
+| 🟢 | 100 / 100 | **C1T19** | มูลช้าง | 2.000 seconds / 256 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/20_C1T19_มูลช้าง) | 🕰️ 100 เก่า |
+| 🔴 | 0 / 100 | **C1T20** | ตาเดินเกมเศรษฐี | 2.000 seconds / 256 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/21_C1T20_ตาเดินเกมเศรษฐี) |  |
+| 🔴 | 0 / 100 | **C1T21** | กล่องของเล่นของ TA | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/22_C1T21_กล่องของเล่นของ_TA) |  |
+| 🔴 | 0 / 100 | **C1T22** | Distributed Computing | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/23_C1T22_Distributed_Computing) |  |
+| 🔴 | 0 / 100 | **C1T23** | Matrix | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/24_C1T23_Matrix) |  |
+| 🔴 | 0 / 100 | **C1T24** | ผลไม้อลเวง | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/25_C1T24_ผลไม้อลเวง) |  |
+| 🔴 | 0 / 100 | **C1T25** | วาดรูปอลเวง | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/26_C1T25_วาดรูปอลเวง) |  |
+| 🔴 | 0 / 100 | **C1T26** | Homework | 1.000 second / 128 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/27_C1T26_Homework) |  |
+| 🔴 | 0 / 100 | **C1T27** | Into Dungeons | 2.000 seconds / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/28_C1T27_Into_Dungeons) |  |
+| 🟢 | 100 / 100 | **C1T28** | No Moon | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/29_C1T28_No_Moon) | 🕰️ 100 เก่า |
+| 🔴 | 0 / 100 | **C1T29** | Rainy Season | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/30_C1T29_Rainy_Season) |  |
+| 🔴 | 0 / 100 | **C1T30** | Banana Shiping | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/31_C1T30_Banana_Shiping) |  |
+| 🔴 | 0 / 100 | **C1T31** | Tired | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/32_C1T31_Tired) |  |
+| 🔴 | 0 / 100 | **C1T32** | Banana Prime | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/33_C1T32_Banana_Prime) |  |
+| 🔴 | 0 / 100 | **C1T33** | Stealing Banana | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/34_C1T33_Stealing_Banana) |  |
+| 🔴 | 0 / 100 | **C1T34** | House of card | 5.000 seconds / 256 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/35_C1T34_House_of_card) |  |
+| 🔴 | 0 / 100 | **C1T35** | ป้อMอลเวง | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/36_C1T35_ป้อMอลเวง) |  |
+| 🔴 | 0 / 100 | **C1T37** | whatisrsa | 4.000 seconds / 16.0 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/37_C1T37_whatisrsa) |  |
+| 🟢 | 100 / 100 | **C1T38** | เก็บข้อมูลผจญภัย | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/38_C1T38_เก็บข้อมูลผจญภัย) | 🕰️ 100 เก่า |
+| 🔴 | 0 / 100 | **C1T39** | ตลาดของนายเก้า | 1.000 second / 16.0 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/39_C1T39_ตลาดของนายเก้า) |  |
+| 🔴 | 0 / 100 | **O23C1P1** | สะสมเหรียญ | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/40_O23C1P1_สะสมเหรียญ) |  |
+| 🔴 | 0 / 100 | **O23C1P2** | All Blue | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/41_O23C1P2_All_Blue) |  |
+| 🔴 | 0 / 100 | **O23C1P3** | แข่งขันชิงรางวัล | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/42_O23C1P3_แข่งขันชิงรางวัล) |  |
+| 🟢 | 100 / 100 | **O23C1P4** | Word Transformation | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/43_O23C1P4_Word_Transformation) | 🕰️ 100 เก่า |
+| 🟢 | 100 / 100 | **O23C1P5** | สลับตู้โดยสาร | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/44_O23C1P5_สลับตู้โดยสาร) | 🕰️ 100 เก่า |
+| 🔴 | 0 / 100 | **O23C1P6** | ETS | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/45_O23C1P6_ETS) |  |
+| 🔴 | 0 / 100 | **O24C1P5** | Moo Deng Kidnapped! | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/46_O24C1P5_Moo_Deng_Kidnapped!) |  |
+| 🔴 | 0 / 100 | **O24C1P6** | Phakwan Power Plant | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/47_O24C1P6_Phakwan_Power_Plant) |  |
+| 🔴 | 0 / 100 | **O24C1P7** | Zoo Tour | 1.000 second / 16.0 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/48_O24C1P7_Zoo_Tour) |  |
+| 🔴 | 0 / 100 | **O24C1P8** | Jelly In A Bottle | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/49_O24C1P8_Jelly_In_A_Bottle) |  |
+| 🔴 | 0 / 100 | **C1T43** | Kuromi_s Energy | 1.000 second / 8.00 MiB | — |  |
+| 🔴 | 0 / 100 | **C1T44** | Upside-down Hachiware-2 | 1.000 second / 8.00 MiB | — |  |
+| 🔴 | 0 / 100 | **C1T45** | Linked List Operations | 1.000 second / 8.00 MiB | — |  |
+| 🔴 | 0 / 100 | **C1C02** | Exchange | 1.000 second / 256 MiB | — |  |
+| 🔴 | 0 / 100 | **C1C03** | findMaxAndMin | 1.000 second / 256 MiB | — |  |
+| 🔴 | 0 / 100 | **C1C04** | N Pens | 1.000 second / 256 MiB | — |  |
+| 🔴 | 0 / 100 | **C1T46** | Stack using array | 1.000 second / 8.00 MiB | — |  |
+| 🔴 | 0 / 100 | **C1T47** | Queue using array | 1.000 second / 8.00 MiB | — |  |
+
+> 🕰️ 100 เก่า = ได้เต็มจากการส่งโค้ดเก่าซ้ำ (โค้ดจากปี 68 · ไม่ได้เขียนใหม่ปีนี้) — 23 ข้อ
 <!-- SCORE:END -->
 
 ---
