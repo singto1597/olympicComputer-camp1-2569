@@ -281,14 +281,14 @@ python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 →
 | 🔴 | 0 / 100 | **O24C1P6** | Phakwan Power Plant | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/47_O24C1P6_Phakwan_Power_Plant) |  |
 | 🔴 | 0 / 100 | **O24C1P7** | Zoo Tour | 1.000 second / 16.0 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/48_O24C1P7_Zoo_Tour) |  |
 | 🔴 | 0 / 100 | **O24C1P8** | Jelly In A Bottle | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/49_O24C1P8_Jelly_In_A_Bottle) |  |
-| 🔴 | 0 / 100 | **C1T43** | Kuromi_s Energy | 1.000 second / 8.00 MiB | — |  |
-| 🔴 | 0 / 100 | **C1T44** | Upside-down Hachiware-2 | 1.000 second / 8.00 MiB | — |  |
-| 🔴 | 0 / 100 | **C1T45** | Linked List Operations | 1.000 second / 8.00 MiB | — |  |
-| 🔴 | 0 / 100 | **C1C02** | Exchange | 1.000 second / 256 MiB | — |  |
-| 🔴 | 0 / 100 | **C1C03** | findMaxAndMin | 1.000 second / 256 MiB | — |  |
-| 🔴 | 0 / 100 | **C1C04** | N Pens | 1.000 second / 256 MiB | — |  |
-| 🔴 | 0 / 100 | **C1T46** | Stack using array | 1.000 second / 8.00 MiB | — |  |
-| 🔴 | 0 / 100 | **C1T47** | Queue using array | 1.000 second / 8.00 MiB | — |  |
+| 🔴 | 0 / 100 | **C1T43** | Kuromi_s Energy | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/50_C1T43_Kuromi_s_Energy) |  |
+| 🔴 | 0 / 100 | **C1T44** | Upside-down Hachiware-2 | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/51_C1T44_Upside-down_Hachiware-2) |  |
+| 🔴 | 0 / 100 | **C1T45** | Linked List Operations | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/52_C1T45_Linked_List_Operations) |  |
+| 🔴 | 0 / 100 | **C1C02** | Exchange | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/53_C1C02_Exchange) |  |
+| 🔴 | 0 / 100 | **C1C03** | findMaxAndMin | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/54_C1C03_findMaxAndMin) |  |
+| 🔴 | 0 / 100 | **C1C04** | N Pens | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/55_C1C04_N_Pens) |  |
+| 🔴 | 0 / 100 | **C1T46** | Stack using array | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/56_C1T46_Stack_using_array) |  |
+| 🔴 | 0 / 100 | **C1T47** | Queue using array | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/57_C1T47_Queue_using_array) |  |
 
 > 🕰️ 100 เก่า = ได้เต็มจากการส่งโค้ดเก่าซ้ำ (โค้ดจากปี 68 · ไม่ได้เขียนใหม่ปีนี้) — 23 ข้อ
 <!-- SCORE:END -->
