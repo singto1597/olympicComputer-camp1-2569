@@ -383,7 +383,7 @@
       หน้านี้รวมว่าตัวไหนทำอะไร รันยังไง และ grader หลายตัวแยกกันยังไง
     </p>
     <ul class="facts">
-      <li><b>4</b> สคริปต์ที่ต้องรัน</li>
+      <li><b>5</b> สคริปต์ที่ต้องรัน</li>
       <li><b>6</b> contest</li>
       <li>โจทย์<b>โหลดมือ</b></li>
       <li>ไม่มีรหัสเก็บใน repo</li>
@@ -394,13 +394,17 @@
     <div class="sec-head">
       <span class="sec-num">01</span>
       <h2>อยากทำอะไร ใช้ตัวไหน</h2>
-      <p class="sec-sub">สี่บรรทัดนี้คือทั้งหมดที่ต้องจำ</p>
+      <p class="sec-sub">ห้าบรรทัดนี้คือทั้งหมดที่ต้องจำ</p>
       <!-- folder_names.py ไม่ต้องจำ — organize เรียกให้เองอยู่แล้ว -->
       <!-- import_old_camp.py ใช้เฉพาะปีที่โจทย์เป็นชุดเดิมของปีก่อน -->
 
     </div>
 
     <ul class="intent">
+      <li>
+        <span class="q">เขียนโค้ดเสร็จ อยากคอมไพล์ + รัน<em>ไม่ต้อง cd ไป path ลึก ๆ · โจทย์ฟังก์ชันก็ใช้คำสั่งเดียวกัน</em></span>
+        <code class="cmd">python3 tools/<span class="flag">run.py</span> C1T43</code>
+      </li>
       <li>
         <span class="q">โหลด PDF มาแล้ว อยากให้เข้าโฟลเดอร์เป็นระเบียบ<em>สร้าง .cpp จาก template ให้ด้วย</em></span>
         <code class="cmd">fish tools/<span class="flag">organize.fish</span> ~/Downloads --cpp</code>
@@ -433,8 +437,47 @@
 
     <div class="tool">
       <div class="tool-head">
+        <h3 class="tool-name">run.py</h3>
+        <span class="tool-role">python · ตัวที่ใช้บ่อยที่สุด</span>
+      </div>
+      <p>
+        คอมไพล์ + รันโจทย์ C++ <b>สคริปต์กลางตัวเดียว</b> — ทั้งจาก terminal และจากปุ่ม
+        <b>Ctrl+Shift+B</b> ใน VS Code (เรียกตัวเดียวกัน) มันรู้จักโจทย์สองทรงเอง จึงใช้
+        คำสั่งเดียวได้หมด ไม่ต้อง cd ไป path ลึก ๆ อีก
+      </p>
+      <div>
+        <code class="cmd">python3 tools/run.py C1T43                  <span class="cmt"># หาโฟลเดอร์จากรหัส แล้วคอมไพล์ + รัน</span></code>
+        <code class="cmd">python3 tools/run.py C1T43 --sample 1       <span class="cmt"># รันด้วย sample ที่ 1 (+เทียบ .out ถ้ามี)</span></code>
+        <code class="cmd">python3 tools/run.py C1T43 --all-samples    <span class="cmt"># วนทุก sample สรุป "เทียบได้ N · ผ่าน M"</span></code>
+        <code class="cmd">python3 tools/run.py C1T43 -b               <span class="cmt"># คอมไพล์อย่างเดียว</span></code>
+        <code class="cmd">python3 tools/run.py C1T43 --asan           <span class="cmt"># AddressSanitizer + UBSan (ล่าล้น/oob)</span></code>
+        <code class="cmd">python3 tools/run.py C1T43 --list           <span class="cmt"># โชว์ layout/ไฟล์/sample แล้วจบ</span></code>
+      </div>
+      <p class="note">
+        ของที่ออกมาอยู่ใต้ <code class="inline">.run/</code> ของ<b>โฟลเดอร์โจทย์</b> (ไม่ใช่ราก repo)
+        — <code class="inline">bin</code> · <code class="inline">output.txt</code> ·
+        <code class="inline">input.in</code> · <code class="inline">&lt;sample&gt;.got</code>
+        ตอนเทียบไม่ผ่าน · ลำดับการหา input: <code class="inline">--stdin</code> →
+        <code class="inline">--sample</code> → <code class="inline">.run/input.in</code> →
+        sample แรก (พิมพ์บอกให้รู้) → ว่าง + คำใบ้
+      </p>
+      <p class="note">
+        <b>โจทย์สองทรงที่มันแยกเอง:</b> ทรง <i>ไฟล์เดียว</i> คอมไพล์ไฟล์นั้นไฟล์เดียว ·
+        ทรง <i>โจทย์ฟังก์ชัน</i> (มี <code class="inline">provided/grader.cpp</code>)
+        คอมไพล์ <code class="inline">-I provided provided/grader.cpp &lt;ไฟล์เรา&gt;.cpp</code>
+        ให้ด้วย · <code class="inline">-std=</code> อ่านจาก
+        <code class="inline">provided/compile*.sh</code> ของข้อนั้นเอง
+        (<code class="inline">C1T43</code> ได้ <code class="inline">c++17</code> ·
+        <code class="inline">AplusB</code>/<code class="inline">Georgette</code> ได้
+        <code class="inline">gnu++20</code>) · timeout 10 วิ กัน infinite loop ·
+        error เป็นภาษาไทยที่บอกทางออก ไม่ปล่อย traceback
+      </p>
+    </div>
+
+    <div class="tool">
+      <div class="tool-head">
         <h3 class="tool-name">organize.fish</h3>
-        <span class="tool-role">fish · ตัวที่ใช้บ่อยที่สุด</span>
+        <span class="tool-role">fish · ใช้ตอนโหลดโจทย์ใหม่</span>
       </div>
       <p>
         ไฟล์ที่โหลดมาชื่อมักรก — <code class="inline">โจทย์ สอวน (th).pdf</code> —
@@ -659,11 +702,14 @@
       </li>
       <li>
         <div class="step-body">
-          <p class="step-title">เขียนโค้ด</p>
+          <p class="step-title">เขียนโค้ด แล้ว build + run ด้วยคำสั่งเดียว</p>
+          <code class="cmd">python3 tools/run.py C1PR01              <span class="cmt"># ใช้ .run/input.in ถ้ามี</span></code>
+          <code class="cmd">python3 tools/run.py C1T43 --sample 1     <span class="cmt"># โจทย์ฟังก์ชันก็คำสั่งเดียวกัน</span></code>
           <p>
-            ที่ <code class="inline">problems/1_precamp/cmu-grader/13_C1PR01_Test/C1PR01.cpp</code>
-            กด <b>Ctrl+Shift+B</b> ใน VSCode เพื่อ build + run (อ่าน input จาก
-            <code class="inline">.run/input.in</code>)
+            หรือเปิด <code class="inline">problems/.../13_C1PR01_Test/C1PR01.cpp</code>
+            แล้วกด <b>Ctrl+Shift+B</b> ใน VS Code — เรียก <code class="inline">run.py</code>
+            ตัวเดียวกัน · ไฟล์ที่คอมไพล์/รันออกมาอยู่ที่
+            <code class="inline">&lt;โฟลเดอร์โจทย์&gt;/.run/</code> ไม่ใช่ราก repo
           </p>
         </div>
       </li>
@@ -759,6 +805,7 @@
 │   │   ├── <span class="dir">exam/ex1/</span>  <span class="dir">exam/ex2/</span>        + <span class="dir">_done/</span>
 │   │   └── <span class="dir">pretest/</span>                   + <span class="dir">_done/</span>
 │   └── <span class="dir">3_endcamp/</span>
+├── <span class="dir">.vscode/</span>           <span class="cmt">← tasks.json (ปุ่ม build/run) + launch.json (F5 debug)</span>
 ├── <span class="dir">notes/</span>             <span class="cmt">← สรุปที่เขียนเอง</span>
 └── <span class="dir">tools/</span>             <span class="cmt">← สคริปต์ + graders.txt + scores/</span>
 </pre>
@@ -769,6 +816,27 @@
       — <b>ไฟล์เป็นรหัสเปล่า ๆ เพราะ grader บังคับชื่อไฟล์ตอน submit</b>
       เลขนำหน้ามาจากบรรทัดใน <code class="inline">tools/scores/*.txt</code>
       เพื่อให้เรียงตามลำดับโจทย์ (C1PC → C1PR → C1PE) ไม่ใช่ตามรหัส
+    </p>
+
+    <p class="note"><b>โจทย์แบบฟังก์ชัน</b> (เว็บให้ <code class="inline">grader.cpp</code>
+      + <code class="inline">.h</code> มา เราเขียนแค่ตัวฟังก์ชัน) ข้างในโฟลเดอร์จะแยก 3 ชั้น:</p>
+<pre class="tree"><span class="dir">50_C1T43_Kuromi_s_Energy/</span>
+├── C1T43.cpp      <span class="cmt">← ไฟล์ที่เราแก้+ส่ง ชั้นบนสุดเสมอ (ชื่อตามคอลัมน์ Files)</span>
+├── C1T43.pdf
+├── <span class="dir">provided/</span>      <span class="cmt">← ของที่ grader ให้มา ห้ามแก้</span>
+│   ├── C1T43.h · grader.cpp          <span class="cmt">← .h = ประกาศฟังก์ชัน · grader.cpp = main</span>
+│   ├── compile_cpp.sh · run_cpp.sh   <span class="cmt">← run.py อ่าน -std= จากไฟล์นี้</span>
+│   └── sample/                       <span class="cmt">← ถ้าโจทย์ให้มา</span>
+├── <span class="dir">local/</span>         <span class="cmt">← ไฟล์ซ้อม/เวอร์ชันลองของเรา (ไม่ได้ส่ง · commit ไว้ด้วย)</span>
+└── <span class="dir">.run/</span>          <span class="cmt">← ของที่คอมไพล์/รันออกมา (gitignore)</span>
+</pre>
+    <p class="note">
+      <code class="inline">provided/</code> ถูกตั้งเป็น read-only ใน VS Code
+      (<code class="inline">files.readonlyInclude</code>) — กันเผลอแก้ <code class="inline">.h</code>
+      ของ grader · เคสที่คอลัมน์ Files ไม่ตรงกับรหัส Task (เช่น
+      <code class="inline">C1C02</code> → <code class="inline">exchange.cpp</code>)
+      ให้ดึงไฟล์นั้นขึ้นมาชั้นบนสุด <b>อย่าปล่อยไว้ใน <code class="inline">provided/</code></b>
+      ไม่งั้นจะชนสัญลักษณ์กับไฟล์ของเรา
     </p>
   </section>
 
@@ -804,6 +872,38 @@
       <li>
         <b>ไฟล์ที่คอมไพล์แล้วไม่ขึ้น git</b> (<code class="inline">.out</code>,
         <code class="inline">.exe</code>) ส่วนไฟล์รันชั่วคราวอยู่ใน <code class="inline">.run/</code>
+      </li>
+      <li>
+        <b>โจทย์ฟังก์ชัน: ของ grader อยู่ใน <code class="inline">provided/</code> ห้ามแก้</b> —
+        ตั้ง read-only ไว้แล้วใน <code class="inline">.vscode/settings.json</code>
+        ไฟล์ที่เราแก้+ส่งอยู่ <b>ชั้นบนสุด</b> และชื่อตามคอลัมน์ Files
+        (บางข้อไม่ตรงกับรหัส Task เช่น <code class="inline">C1T43</code> →
+        <code class="inline">C1T43.cpp</code> แต่ <code class="inline">C1C02</code> →
+        <code class="inline">exchange.cpp</code>)
+      </li>
+      <li>
+        <b>คอมไพล์ + รันใช้ <code class="inline">tools/run.py</code> ตัวเดียว</b> —
+        ทั้งจาก terminal และจาก <kbd>Ctrl+Shift+B</kbd> ใน VS Code
+        ของที่ออกมาอยู่ที่ <code class="inline">&lt;โฟลเดอร์โจทย์&gt;/.run/</code>
+        ไม่ใช่ราก repo · <code class="inline">-std=</code> อ่านจาก
+        <code class="inline">provided/compile*.sh</code> ของข้อนั้นเอง ไม่ต้องจำ
+      </li>
+      <li>
+        <b>ห้ามใส่ <code class="inline">&amp;&amp;</code> หรือ <code class="inline">&lt;</code>
+        <code class="inline">&gt;</code> ลงใน <code class="inline">args</code> ของ
+        <code class="inline">tasks.json</code></b> — มันผูกกับ shell ตัวใดตัวหนึ่ง
+        (fish กับ cmd ใช้ไม่เหมือนกัน) ใช้ <code class="inline">"type": "process"</code>
+        กับ <code class="inline">--file ${file}</code> แทน แล้วให้ <code class="inline">run.py</code>
+        จัดการ redirect เอง · <code class="inline">isDefault: true</code> มีได้ตัวเดียว
+      </li>
+      <li>
+        <b>กฎกลับด้านใน <code class="inline">.gitignore</code> ต้องอยู่ล่างสุดเสมอ</b> —
+        git ใช้กฎตัวท้ายสุดที่ match บรรทัด <code class="inline">*.out</code> ด้านบน
+        จะกลืน <code class="inline">sample/*.out</code> ที่ต้องขึ้น git
+        ต้องมี <code class="inline">!**/sample/*.out</code> ต่อท้าย ·
+        <b>เช็คด้วย <code class="inline">git add -A -n</code> อย่าใช้
+        <code class="inline">git check-ignore -v</code></b> — ตัวหลังพิมพ์บรรทัด
+        negation ออกมาแล้ว exit 0 หลอกว่าไฟล์ถูก ignore
       </li>
     </ul>
   </section>
@@ -855,13 +955,37 @@
             <td class="mono">ข้อที่ได้เต็มไม่ย้ายเข้า <code class="inline">_done/</code></td>
             <td>เช็คว่ารหัสโจทย์ถอดจากชื่อโฟลเดอร์ออกมาตรง — รหัสที่มี <code class="inline">_</code> ในตัว เช่น <code class="inline">C1C0_ADD</code></td>
           </tr>
+          <tr>
+            <td class="mono">run.py: ไม่เจอโจทย์รหัส …</td>
+            <td>รหัสต้องตรงกับคอลัมน์ Task ใน <code class="inline">tools/scores/*.txt</code> — หรือส่ง <code class="inline">--file &lt;path&gt;.cpp</code> แทน</td>
+          </tr>
+          <tr>
+            <td class="mono">run.py: ไม่มี main และไม่มี grader</td>
+            <td>ของ grader ยังไม่ถูกย้ายเข้า <code class="inline">provided/</code> — ย้ายก่อนแล้ว run.py จะรู้จักเอง · หรือถ้าโจทย์นั้นให้เขียน <code class="inline">main</code> เอง ก็ใส่ลงไฟล์เรา</td>
+          </tr>
+          <tr>
+            <td class="mono">run.py คอมไพล์ผ่านแต่รันแล้วเจอ EOF</td>
+            <td>ยังไม่มี input — วางที่ <code class="inline">.run/input.in</code> หรือใช้ <code class="inline">--sample N</code> / <code class="inline">--stdin</code> / <code class="inline">-i</code></td>
+          </tr>
+          <tr>
+            <td class="mono">run.py รันค้างไม่จบ</td>
+            <td>ตัดจบเองที่ 10 วิ แล้วรายงาน <code class="inline">⏱ เกิน …</code> — ปรับด้วย <code class="inline">--timeout</code> (เจอบ่อยตอนทำ linked list/queue ที่ลิงก์วน)</td>
+          </tr>
+          <tr>
+            <td class="mono">แก้ <code class="inline">provided/</code> ไม่ได้ (พิมพ์ไม่ติด)</td>
+            <td>ตั้งใจ — เป็นของที่ grader ให้มา ตั้ง read-only ไว้ใน <code class="inline">.vscode/settings.json</code></td>
+          </tr>
+          <tr>
+            <td class="mono">กด <kbd>F5</kbd> แล้ว debug ไม่ขึ้น</td>
+            <td>เครื่องนี้ยังไม่มี <code class="inline">gdb</code> (ต้อง <code class="inline">sudo apt install gdb</code>) — ระหว่างนี้ใช้ task <code class="inline">--asan --build-only</code> แทนได้</td>
+          </tr>
         </tbody>
       </table>
     </div>
   </section>
 
   <footer>
-    อัปเดต 3 ต.ค. 2569 · คู่มือฉบับเต็มอยู่ใน tools/README.md ของ repo
+    อัปเดต 12 ต.ค. 2569 · คู่มือฉบับเต็มอยู่ใน tools/README.md ของ repo
   </footer>
 
 </div>

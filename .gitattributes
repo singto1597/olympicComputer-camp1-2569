@@ -13,8 +13,12 @@
 *.gif  binary
 *.zip  binary
 *.exe  binary
-*.out  binary
 *.o    binary
 *.bmp  binary
 *.docx binary
 *.pptx binary
+
+# ⚠️ ตั้งใจ "ไม่" ใส่ *.out binary — นามสกุล .out ในนี้มีสองความหมาย
+#   · binary ที่คอมไพล์ออกมา → ถูก .gitignore อยู่แล้ว ไม่มีทางเข้า git
+#   · sample/*.out ที่ grader ให้มาใช้ "เทียบคำตอบ" → ต้องเป็น text ถึงจะ diff ออก
+# ถ้าใส่ *.out binary จะไปโดนตัวหลัง ทำให้ diff ไม่ได้ (binary: set → diff: unset)

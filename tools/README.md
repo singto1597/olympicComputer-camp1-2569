@@ -10,17 +10,63 @@
 
 | อยาก... | รัน |
 |---|---|
+| **คอมไพล์ + รันโจทย์** (ตัวที่ใช้บ่อยสุด) | `python3 tools/run.py <รหัสโจทย์>` |
 | จัด PDF ที่โหลดมือมาแบบลอย ๆ เข้าโฟลเดอร์ | `fish tools/organize.fish <โฟลเดอร์> --cpp` |
 | ยกโจทย์+โค้ดจากโฟลเดอร์ค่ายปีเก่าเข้ามาทั้งชุด | `python3 tools/import_old_camp.py <ต้นทาง> --contest <ชื่อ> --dest <ปลายทาง>` |
 | ได้คะแนนแล้ว อัปเดตตาราง + ย้ายข้อที่เต็ม | `python3 tools/sync_done.py` |
 | เช็คว่าข้อไหนยังไม่ได้โหลด (ไม่อัปเดตอะไร) | `python3 tools/find_missed.py` |
 | เติมชื่อโจทย์ในชื่อโฟลเดอร์ (ปกติ `organize` ทำให้อยู่แล้ว) | `python3 tools/folder_names.py --apply` |
 
-มีแค่นี้ — 5 ตัว
+มีแค่นี้ — 6 ตัว (`run.py` · `organize.fish` · `import_old_camp.py` · `sync_done.py` ·
+`find_missed.py` · `folder_names.py`) บวกโมดูลกลาง `scorelib.py` ที่ไม่มี CLI
 
 ---
 
 ## แต่ละตัวทำอะไร
+
+### `run.py` — คอมไพล์ + รันโจทย์ (สคริปต์กลางตัวเดียว)
+
+ตัวที่เรียกใช้บ่อยที่สุด ทั้งจาก terminal และจากปุ่ม `Ctrl+Shift+B` ใน VS Code
+**รู้จักโจทย์สองทรงเอง** จึงใช้คำสั่งเดียวกันได้หมด
+
+| ทรง | หน้าตา | คอมไพล์ยังไง |
+|---|---|---|
+| ไฟล์เดียว | `<ID>.cpp` มี `main()` ในตัว | คอมไพล์ไฟล์นั้นไฟล์เดียว |
+| **โจทย์ฟังก์ชัน** | `provided/grader.cpp` (มี `main`) + `provided/<ID>.h` เราเขียนแค่ตัวฟังก์ชัน | คอมไพล์ `-I provided provided/grader.cpp <ไฟล์เรา>.cpp` |
+
+```fish
+python3 tools/run.py C1T43                  # หาโฟลเดอร์จากรหัส แล้วคอมไพล์ + รัน
+python3 tools/run.py --file <path>.cpp      # วิธีที่ tasks.json ใช้ (${file})
+python3 tools/run.py --here                 # ใช้โฟลเดอร์โจทย์ที่ครอบ cwd อยู่
+python3 tools/run.py C1T43 -b               # คอมไพล์อย่างเดียว
+python3 tools/run.py C1T43 --sample 1       # รันด้วย sample ที่ 1 (+เทียบ .out ถ้ามี)
+python3 tools/run.py C1T43 --all-samples    # วนทุก sample สรุป "เทียบได้ N · ผ่าน M"
+python3 tools/run.py C1T43 --stdin in.txt --out res.txt
+python3 tools/run.py C1T43 -i               # พิมพ์ input เองจาก terminal
+python3 tools/run.py C1T43 --asan           # AddressSanitizer + UBSan (ล่าล้น/oob)
+python3 tools/run.py C1T38 --with local/C1T38_main.cpp   # คอมไพล์ไฟล์เพิ่ม
+python3 tools/run.py C1T43 -- 2 3           # ส่ง argument ที่เหลือให้โปรแกรม
+python3 tools/run.py C1T43 --list           # โชว์ layout/ไฟล์/sample แล้วจบ
+python3 tools/run.py C1T43 --clean          # ลบ .run/ ของข้อนี้
+```
+
+ของที่ออกมาอยู่ใต้ **`.run/` ของโฟลเดอร์โจทย์** (ไม่ใช่ราก repo) — `bin` · `output.txt` ·
+`input.in` · `<sample>.got` ตอนเทียบไม่ผ่าน
+
+**ลำดับการหา input:** `--stdin` → `--sample` → `.run/input.in` → sample แรก (พิมพ์บอกให้รู้)
+→ ว่างเปล่า + คำใบ้ · ไม่ต้องมี input เลยก็รันได้ (จะเจอ EOF)
+
+**รายละเอียดที่ช่วยชีวิต:**
+- `-std=` **อ่านจาก `provided/compile*.sh` ของโจทย์ข้อนั้นเอง** — `C1T43` ได้ `c++17`,
+  `AplusB`/`Georgette` ได้ `gnu++20` ไม่ต้องจำ ใช้ `--std` ทับได้
+- **timeout 10 วิ** กัน infinite loop ตอนทำ linked list/queue (`--timeout` ปรับได้)
+- error เป็น**ภาษาไทยที่บอกทางออก** ไม่ปล่อย traceback — เคส "ไม่มี `main`" จะบอก 3 ทางเลือก
+- เปิดไฟล์ของ grader (`provided/*.h`) อยู่แล้วกด `Ctrl+Shift+B` → **ถอยไปเลือกไฟล์ที่เราส่งให้เอง**
+  ไม่ error · เปิดไฟล์ใน `local/` → คอมไพล์ไฟล์นั้นตรง ๆ (เป็นของเรา)
+- ใช้ได้ทั้ง Linux (`bin`) และ Windows (`bin.exe`) — `.vscode/tasks.json` สลับ `python3`/`python` ให้
+
+โจทย์โหลดมาใหม่ที่ยังวางมั่ว (ของ grader ปนกับของเรา) จะยังใช้ไม่ได้ — ย้ายของ grader
+เข้า `provided/` ก่อน แล้ว `run.py` จะรู้จักทันที
 
 ### `organize.fish` — จัด PDF ที่โหลดมือ
 
@@ -160,9 +206,23 @@ python3 tools/folder_names.py --print-map # พิมพ์ "รหัส<TAB>�
 ```
 1. เปิดเว็บ grader → โหลด Statement ที่ยังไม่มี (ดูรายการจาก find_missed.py)
 2. fish tools/organize.fish <โฟลเดอร์ที่โหลดมา> --cpp
-3. เขียนโค้ดที่ problems/.../13_C1PR01_Test/C1PR01.cpp   (Ctrl+Shift+B = build + run)
+3. เขียนโค้ดที่ problems/.../13_C1PR01_Test/C1PR01.cpp
+   แล้ว python3 tools/run.py C1PR01   (หรือ Ctrl+Shift+B ใน VS Code = ตัวเดียวกัน)
 4. ก็อปตารางคะแนนจากหน้าเว็บ → tools/scores/precamp.txt
 5. python3 tools/sync_done.py
+```
+
+ถ้าโจทย์ที่โหลดมาเป็น**โจทย์ฟังก์ชัน** (ได้ `grader.cpp` + `.h` มาเป็น zip) ให้แทรกขั้น 2.5:
+
+```
+2.5 แตก zip แล้วแยกของ: ของ grader → provided/ · ไฟล์ที่เราส่ง → ชั้นบนสุด
+    <โฟลเดอร์โจทย์>/
+      <ID>.cpp      ← ไฟล์ที่เราแก้+ส่ง (ชื่อตามคอลัมน์ Files)
+      <ID>.pdf
+      provided/     ← ของ grader ทั้งก้อน (grader.cpp · <ID>.h · compile*.sh)
+      local/        ← ไฟล์ซ้อมของเรา (ไม่ส่ง)
+      .run/         ← ของที่คอมไพล์/รันออกมา (gitignore)
+    แล้ว python3 tools/run.py <รหัส> จะรู้เองว่าต้องเชื่อม grader.cpp ให้
 ```
 
 ถ้าโจทย์ปีนี้เป็น**ชุดเดิมของปีก่อน** ให้สลับขั้น 2 เป็น:
@@ -189,6 +249,11 @@ python3 tools/folder_names.py --print-map # พิมพ์ "รหัส<TAB>�
 | ป้าย 🕰️ ไม่ขึ้นสักข้อ | ชื่อไฟล์ต้องขึ้นต้นด้วย `<ชื่อใน graders.txt>.old100` และลงท้าย `.txt` (เช่น `.old100_68.txt`) แล้วรัน `sync_done.py` |
 | `import` บอก "ไม่เจอไฟล์คะแนน" | ต้องวาง `tools/scores/<contest>.txt` ก่อน — import เอาชื่อ/ลำดับจากไฟล์นั้น |
 | ข้อที่ได้เต็มไม่ย้ายเข้า `_done/` | เช็คว่ารหัสโจทย์ถอดจากชื่อโฟลเดอร์ออกมาตรง (รหัสที่มี `_` เช่น `C1C0_ADD`) |
+| `run.py` บอก "ไม่เจอโจทย์รหัส …" | รหัสต้องตรงกับคอลัมน์ Task ใน `tools/scores/*.txt` — หรือส่ง `--file <path>.cpp` แทน |
+| `run.py` บอก "ไม่มี main และไม่มี grader" | ของ grader ยังไม่ถูกย้ายเข้า `provided/` — ดูขั้น 2.5 ข้างบน · หรือถ้าโจทย์นั้นให้เขียน `main` เอง ก็ใส่ `main` ในไฟล์เรา |
+| `run.py` คอมไพล์ผ่านแต่รันแล้ว EOF | ยังไม่มี input — วางที่ `.run/input.in` หรือใช้ `--sample N` / `--stdin` / `-i` |
+| `run.py` รันค้างไม่จบ | ตัดจบเองที่ 10 วิ แล้วรายงาน `⏱ เกิน …` — ปรับด้วย `--timeout` |
+| แก้ `provided/` ไม่ได้ (พิมพ์ไม่ได้) | ตั้งใจ — เป็นของที่ grader ให้มา ตั้ง read-only ไว้ใน `.vscode/settings.json` |
 
 ---
 

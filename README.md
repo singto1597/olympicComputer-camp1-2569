@@ -18,7 +18,7 @@ olympicComputer-camp1-2569/
 ├── README.md            ← ไฟล์นี้ (สารบัญ + ตารางคะแนน)
 ├── CLAUDE.md            ← บริบทให้ AI ช่วยงาน
 ├── template.cpp         ← โค้ดตั้งต้นสำหรับโจทย์ใหม่
-├── .vscode/tasks.json   ← ปุ่ม build + run
+├── .vscode/             ← tasks.json (ปุ่ม build/run) + launch.json (F5 debug)
 │
 ├── docs/                ← เอกสารค่าย (ที่ไม่ใช่โจทย์)
 │   ├── syllabus/          กำหนดการ, syllabus, เอกสารสมัคร
@@ -53,6 +53,9 @@ olympicComputer-camp1-2569/
 | statement ที่เว็บให้มาเป็น HTML | เก็บเป็น `.html` | `C1PC01.html` |
 | สไลด์/ชีทเรียน | `YYYYMMDD_AM\|PM_หัวข้อ` | `20261005_AM_BasicC/` |
 | เทสเคส | `testcases/1.in`, `1.out` | ซ้อนในโฟลเดอร์โจทย์ |
+| ของที่ grader ให้มา (โจทย์ฟังก์ชัน) | ซ้อนใน **`provided/`** — ห้ามแก้ | `provided/grader.cpp`, `provided/C1T43.h` |
+| ไฟล์ซ้อม/เวอร์ชันลองของเรา (ไม่ได้ส่ง) | ซ้อนใน **`local/`** | `local/C1T38_localtestnew.cpp` |
+| ของที่คอมไพล์/รันออกมา | **`.run/`** (gitignore) | `.run/bin`, `.run/input.in`, `.run/output.txt` |
 
 - **โฟลเดอร์มีเลขนำหน้า** เพราะลำดับโจทย์บนเว็บไม่เหมือนลำดับรหัส (เว็บเรียง C1PC → C1PR →
   C1PE แต่เรียงตามตัวอักษรได้ C1PC → C1PE → C1PR) เลขลำดับมาจากบรรทัดใน
@@ -64,7 +67,12 @@ olympicComputer-camp1-2569/
   รหัส Task ส่วนไฟล์ข้างในใช้ชื่อที่ grader บังคับ เช่น YRC `BobInverse` → `Bob_Inverse.cpp`
   · `IF02` → `Y_IF_ELSE_02.pdf`
 - เลขนำหน้ามีแค่ระดับ phase (`1_precamp` → `2_incamp` → `3_endcamp`) เพราะต้องเรียงตามเวลา
-- ไฟล์ที่คอมไพล์ออกมา (`.out`, `.exe`) ไม่ขึ้น git — ดู `.gitignore`
+- **โจทย์แบบฟังก์ชัน** (เว็บให้ `grader.cpp` + `.h` มา เราเขียนแค่ตัวฟังก์ชัน) — ของที่ grader
+  ให้มาอยู่ใน `provided/` ทั้งก้อน ส่วนไฟล์ที่เราแก้+ส่งอยู่ **ชั้นบนสุด** ของโฟลเดอร์โจทย์
+  ชื่อตามคอลัมน์ Files เหมือนเดิม (`C1T43.cpp` · `exchange.cpp` · `find_max_and_min.cpp` ·
+  `n_pens.cpp`) · `provided/` ถูกตั้งเป็น read-only ใน VS Code (`.vscode/settings.json`)
+- ไฟล์ที่คอมไพล์/รันออกมาไปที่ **`.run/`** ของโฟลเดอร์โจทย์ (ไม่ใช่ราก repo) ไม่ขึ้น git
+  — ดู `.gitignore` · `sample/*.out` กับ `testcases/*.out` **ขึ้น git** (เป็นคำตอบที่ grader ให้มา)
 
 ---
 
@@ -83,8 +91,11 @@ fish tools/organize.fish ~/Downloads --cpp
 #    สไลด์/ชีทเรียนก็ใช้ตัวเดียวกัน แต่มักต้องเติมวันที่นำหน้า
 fish tools/organize.fish docs/sheets --prefix 20261005_AM --dry-run
 
-# 3. เขียนโค้ดที่  problems/1_precamp/cmu-grader/13_C1PR01_Test/C1PR01.cpp
-#    กด Ctrl+Shift+B ใน VSCode เพื่อ build + run (อ่าน input จาก .run/input.in)
+# 3. เขียนโค้ด — แล้ว build + run ด้วยคำสั่งเดียว (จำรหัสโจทย์ ไม่ต้อง cd)
+python3 tools/run.py C1PR01           # คอมไพล์ + รัน (ใช้ .run/input.in ถ้ามี)
+python3 tools/run.py C1T43 --sample 1 # โจทย์ฟังก์ชันก็ใช้คำสั่งเดียวกัน
+python3 tools/run.py C1T43 --all-samples
+#    หรือเปิดไฟล์แล้วกด Ctrl+Shift+B ใน VS Code (เรียกตัวเดียวกันนี้)
 
 # 4. ก็อปตารางคะแนนจากหน้าเว็บ → tools/scores/precamp.txt แล้วรัน
 python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 → _done/ และอัปเดตตารางข้างล่าง
@@ -92,6 +103,9 @@ python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 →
 
 รหัสโจทย์ไม่ซ้ำกันระหว่างค่าย — `sync_done.py` หาโฟลเดอร์เจอเองโดยไม่ต้องบอกว่า
 ข้อไหนอยู่ช่วงไหน ส่วนรายชื่อ contest ทั้งหมดดูที่ `tools/graders.txt`
+
+รายละเอียดของ `run.py` (โหมดทั้งหมด · โครง `provided/` · วิธี debug) อยู่ที่
+[`tools/README.md`](tools/README.md)
 
 ---
 

@@ -29,6 +29,21 @@
 - ตารางคะแนนใน `README.md` อยู่ระหว่าง `<!-- SCORE:START -->` / `<!-- SCORE:END -->`
   **สร้างอัตโนมัติจาก `tools/scores/*.txt` — ห้ามแก้มือ** ของจริงคือไฟล์ในนั้น
   หนึ่งไฟล์ต่อหนึ่ง contest (ชื่อไฟล์ต้องตรงกับ `tools/graders.txt`)
+- **โจทย์แบบฟังก์ชัน** (เว็บให้ `grader.cpp` + `.h` มา เราเขียนแค่ตัวฟังก์ชัน) แยกของสองฝั่งให้ชัด
+  ```
+  <โฟลเดอร์โจทย์>/
+  ├── <Files>.cpp    ← ไฟล์ที่เราแก้+ส่ง — อยู่ชั้นบนสุดเสมอ ชื่อตามคอลัมน์ Files
+  ├── <ID>.pdf
+  ├── provided/      ← ของที่ grader ให้มา ทั้งก้อน (grader.cpp · <ID>.h · compile*.sh|bat · sample/)
+  ├── local/         ← ไฟล์ซ้อม/เวอร์ชันลองของเรา (ไม่ได้ส่ง · commit ไว้ด้วย)
+  └── .run/          ← ของที่คอมไพล์/รันออกมา (gitignore)
+  ```
+  `provided/` = **ห้ามแก้** (ตั้ง read-only ใน `.vscode/settings.json` แล้ว) · PDF ตัด suffix
+  ไทยทิ้ง (`C1T43 (th2).pdf` → `C1T43.pdf`) · zip ของ grader ที่แตกแล้วให้ `git rm` ทิ้ง
+- **รันโจทย์ด้วย `python3 tools/run.py <รหัส>`** — สคริปต์กลางตัวเดียว รู้จักทั้งสองทรง
+  (`--file` · `--sample N` · `--all-samples` · `-b` · `--asan` · `--list` · `--clean`)
+  **ห้ามใส่ `&&` / `<` / `>` ลงใน `args` ของ `.vscode/tasks.json`** — task ใช้ `type: process`
+  ไม่ผ่าน shell เพื่อให้ใช้ได้ทั้ง fish/bash/cmd/PowerShell · `isDefault: true` มีได้ตัวเดียว
 - สไลด์ตั้งชื่อ `YYYYMMDD_AM_Topic` / `YYYYMMDD_PM_Topic`
 - `template.cpp` คือโค้ดตั้งต้นของทุกข้อ — แก้ได้ตามใจ ผู้ใช้เป็นเจ้าของสไตล์นี้
 
@@ -44,6 +59,16 @@
 - ชื่อไฟล์/โฟลเดอร์ภาษาไทยมีอยู่จริงในไฟล์คะแนนและ PDF — quote ใน shell เสมอ
 - ของใน `docs/` กับ PDF โจทย์เป็น**หลักฐานผลงาน** — ห้ามลบ/ย้ายโดยไม่ถาม
 - ไฟล์ที่คอมไพล์ (`.out`, `.exe`) ไม่ขึ้น git · ไฟล์รันชั่วคราวอยู่ `.run/` (gitignored)
+  ⚠️ `.gitignore` มี `*.out` ซึ่งกลืน `sample/*.out` / `testcases/*.out` ที่**ต้องขึ้น git**
+  (เป็นคำตอบที่ grader ให้มา) — กฎกลับด้าน (`!...`) จึงต้องวาง**ท้ายไฟล์** เพราะ git
+  ใช้กฎตัวท้ายสุดที่ match · เช็คด้วย `git add -n <path>` ไม่ใช่ `git check-ignore -v`
+  (ตัวหลังพิมพ์กฎที่ match รวม negation ทำให้นึกว่าถูก ignore)
+  ⚠️ และ `.gitattributes` **ต้องไม่มี `*.out binary`** — ตัว binary ที่คอมไพล์ออกมาถูก
+  `.gitignore` กันอยู่แล้ว แต่ `sample/*.out` ที่ต้อง diff ได้จะโดนหางเลขไปด้วย
+  (`binary` = `-diff -merge -text` → git มองเป็น binary แล้ว diff ไม่ออก)
+- **เครื่องนี้ยังไม่มี `gdb`** — F5 ใน `.vscode/launch.json` ใช้ไม่ได้จนกว่าจะ `sudo apt install gdb`
+  ระหว่างนี้ใช้ task `C++: compile with AddressSanitizer` หรือ `run.py --asan` แทน
+  · F5 ต้องเปิดไฟล์ `.cpp` **ชั้นบนสุดของโฟลเดอร์โจทย์** (program ใช้ `${fileDirname}`)
 
 ## โค้ดจริงอยู่ที่อื่น
 

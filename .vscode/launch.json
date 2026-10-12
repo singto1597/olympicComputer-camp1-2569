@@ -2,6 +2,11 @@
     // F5 = debug — ใช้ได้เพราะ tools/run.py วาง binary ไว้ที่ path คงที่
     // (<โฟลเดอร์โจทย์>/.run/bin) ไม่ผูกกับชื่อไฟล์ จึงไม่ต้องแก้ launch.json ต่อข้อ
     //
+    // ⚠️ กด F5 ได้เฉพาะตอนเปิดไฟล์ .cpp ที่อยู่ "ชั้นบนสุดของโฟลเดอร์โจทย์" เท่านั้น
+    //    เพราะ program/cwd ใช้ ${fileDirname} — ถ้าเปิดไฟล์ใน provided/ หรือ local/
+    //    อยู่ preLaunchTask จะ build ถูกข้อ (run.py ถอยกลับไปหาไฟล์ที่เราส่งให้เอง)
+    //    แต่ตัว debugger จะไปหา .run/bin ในโฟลเดอร์นั้น · เปิดไฟล์ชั้นบนสุดก่อนกด F5
+    //
     // ⚠️ เครื่อง Linux นี้ยังไม่ได้ลง gdb → เลือก "C++: debug (Linux)" แล้วจะฟ้อง
     //    ว่าไม่เจอ /usr/bin/gdb · ระหว่างนี้ใช้ task "C++: compile with
     //    AddressSanitizer" แทนไปก่อนได้ (sudo apt install gdb เมื่อไหร่ก็ใช้ได้เลย)

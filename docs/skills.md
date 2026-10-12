@@ -81,15 +81,17 @@
 - **Correct Pattern/Solution:** สคริปต์ที่มีอยู่ช่วยได้แค่งานหลังโหลด — `find_missed.py` บอกว่าข้อไหนขาด, `organize.fish` จัดไฟล์ที่โหลดมาแล้วเข้าโฟลเดอร์ · อย่าเสนอ login/scrape ซ้ำอีก
 - **Date Added:** 2026-09-28
 
-### 🛠️ ปุ่ม build/run ใน VSCode — 3 task ใน `.vscode/tasks.json`
-- **Context/Problem:** ต้องมีรอบคอมไพล์/รันที่ตรงกับลิมิตของโจทย์ และไม่ต้องพิมพ์คำสั่งยาวทุกครั้ง
-- **Root Cause:** โจทย์ competitive programming อ่านจาก stdin เขียนไป stdout ทุกข้อ
-- **Correct Pattern/Solution:**
-  - `Ctrl+Shift+B` → `build + run (C++)`: `g++ -std=c++17 -O2 -Wall -Wextra` อ่าน input จาก `${workspaceFolder}/.run/input.in` เขียนผลลง `.run/output.txt` แล้ว `cat` ให้ดูพร้อม exit code
-  - `run with testcases/ (C++)`: วน `testcases/*.in` เทียบกับ `.out` ด้วย `diff -b` (ไม่สนช่องว่าง) แล้วสรุป `N / M passed`
-  - `build only (C++)`: คอมไพล์อย่างเดียว
-  - `.run/` กับ `*.out` ถูก gitignore และซ่อนใน file explorer (`.vscode/settings.json`)
-- **Date Added:** 2026-09-28
+### 🛠️ ปุ่ม build/run ใน VSCode — 4 task ใน `.vscode/tasks.json` เรียก `tools/run.py` ตัวเดียว
+- **Context/Problem:** ต้องมีรอบคอมไพล์/รันที่ตรงกับลิมิตของโจทย์ และไม่ต้องพิมพ์คำสั่งยาวทุกครั้ง · แต่ task เดิมคอมไพล์แค่ `${file}` เดียว ซึ่ง**พังทันทีกับโจทย์แบบฟังก์ชัน** (ต้องเชื่อม `grader.cpp` ด้วย)
+- **Root Cause:** โจทย์ competitive programming อ่านจาก stdin เขียนไป stdout ทุกข้อ และโจทย์ในค่ายมี **2 ทรง** (ไฟล์เดียว / โจทย์ฟังก์ชันที่ grader ให้ `main` มา) — คำสั่ง `g++` ของสองทรงไม่เหมือนกัน จึงไม่มี task แบบ "คอมไพล์ `${file}`" อันเดียวที่ครอบได้
+- **Correct Pattern/Solution (แก้ทับ 2026-10-12):** ทุก task เรียก `python3 tools/run.py --file ${file} …` ตัวเดียว — สคริปต์เป็นคนตัดสินใจว่าจะเชื่อม `provided/grader.cpp` ไหม และอ่าน `-std=` จาก `provided/compile*.sh` ของโจทย์ข้อนั้นเอง
+  - `Ctrl+Shift+B` → `C++: build + run` (**`isDefault: true` ตัวเดียวเท่านั้น** — ของเดิมตั้ง `true` สองตัวชนกัน)
+  - `C++: build only` (คู่กับ `preLaunchTask` ของ `launch.json`) · `C++: run all samples` · `C++: compile with AddressSanitizer`
+  - **`"type": "process"` + `"windows": {"command": "python"}`** — เลิกฝัง `&&` / `<` / `>` ลงใน `args` ของเดิม (แบบนั้นใช้ได้ข้างเดียว: task 1 = Linux, task 2 = Windows) ของใหม่ใช้ได้ทั้ง fish/bash/cmd/PowerShell จากไฟล์เดียว
+  - `-std=c++17 -O2 -Wall -Wextra` อยู่ใน `run.py` ไม่ใช่ใน task · input อยู่ที่ `<โฟลเดอร์โจทย์>/.run/input.in` (**ไม่ใช่ราก repo** อย่างที่ entry นี้เคยเขียนไว้ — และ `run.py` ยัง fallback ไปใช้ sample แรกให้พร้อมพิมพ์บอก)
+  - `.run/` ถูก gitignore + ซ่อนใน explorer · `provided/**` ตั้ง read-only (`files.readonlyInclude`)
+  - ⚠️ `launch.json` (F5) เตรียมไว้แล้ว 2 config (Linux/Windows) แต่**เครื่องนี้ยังไม่มี `gdb`** → inert จนกว่าจะ `sudo apt install gdb`
+- **Date Added:** 2026-09-28 (แก้ทับ 2026-10-12 — ของเดิมบรรยาย 3 task ที่ไม่มีอยู่จริง)
 
 ### 🛠️ `.gitattributes` กัน PDF พังตอน commit
 - **Context/Problem:** repo เก็บ PDF หลักฐานผลงานเป็นสิบไฟล์ กลัว git ไปยุ่งกับ line ending แล้วไฟล์เสีย
@@ -247,3 +249,30 @@
   อ่านทุกไฟล์ที่เจอแล้ว union รหัสเข้าด้วยกัน → อยู่ร่วมกันได้หลายปี (`_67`, `_69`) โดยไม่ต้องแก้โค้ด · เพิ่ม `old100_years()` ถอดปีจากท้ายชื่อไปต่อท้าย legend ใน README ให้เอง (`โค้ดจากปี 68`) · ไฟล์ marker ในโฟลเดอร์โจทย์ใช้ชื่อเดียวกัน (`.old100_68`) เพื่อให้ทั้งสองที่อ่านตรงกัน · ทดสอบแล้ว: วาง `_69` เพิ่มชั่วคราว → ได้ 40 รหัส (union จริง ไม่ใช่ทับ) และ `years=['68','69']` · ไฟล์ `.bak` ไม่ถูกนับเพราะบังคับ suffix `.txt` · contest ที่ไม่มีป้ายยังไม่มีคอลัมน์โผล่
 - **บทเรียนทั่วไป:** ข้อมูลเมตา (ปี/ที่มา/เวอร์ชัน) ที่อยู่ในหัวคน ให้ย้ายไปอยู่ใน**ชื่อไฟล์** แล้วให้โค้ดอ่านจากชื่อ — และหลีกเลี่ยงการผูกชื่อไฟล์แบบตายตัวเมื่ออนาคตมีของแบบเดียวกันเพิ่มได้อีก
 - **Date Added:** 2026-10-03
+
+### 🛠️ โจทย์แบบฟังก์ชัน — ของ grader อยู่ `provided/` ไฟล์ที่ส่งอยู่ชั้นบนสุด
+- **Context/Problem:** โหลดโจทย์ชุดใหม่ 8 ข้อมาแล้ววางมั่ว — `grader.cpp` (มี `main`) · `.h` (ประกาศฟังก์ชัน ห้ามแก้) · สคริปต์คอมไพล์ · zip ต้นฉบับ · `__MACOSX/` ปนกันหมดในโฟลเดอร์เดียวกับไฟล์ที่ต้องส่ง ทำให้แยกไม่ออกว่าอะไรห้ามแตะ · `C1C03`/`C1C04` ยังไม่แตก zip ด้วยซ้ำ
+- **Root Cause:** เว็บ grader ของโจทย์ทรงนี้แจก **zip ที่มีทั้งของเขาและ stub ของเรา** ปนกัน — ต่างจากโจทย์ไฟล์เดียวที่โหลดมาแค่ PDF · และ `folder_names.py` เดินทุกโฟลเดอร์โดยนับ `.cpp` เป็นไฟล์โจทย์ ⇒ `provided/grader.cpp` ถูกเข้าใจผิดว่าเป็นโฟลเดอร์โจทย์ที่หารหัสไม่เจอ แล้วพ่น `⚠️ รหัสไม่ตรงกับข้อไหน` ออกมาทุกอัน
+- **Correct Pattern/Solution:** แยก 3 ชั้นตายตัว —
+  - `provided/` = ของที่ grader ให้มา **ทั้งก้อน ห้ามแก้** (`.h` · `grader.cpp` · `compile*`/`run*.{sh,bat}` · `sample/` · README ของ grader) — ตั้ง `files.readonlyInclude: {"**/problems/**/provided/**": true}` ใน `.vscode/settings.json` กันเผลอแก้โดยไม่ต้องพึ่งวินัย
+  - ชั้นบนสุด = ไฟล์ที่เราแก้+ส่ง **ชื่อตามคอลัมน์ Files** (`C1T43.cpp` · `exchange.cpp` · `find_max_and_min.cpp` · `n_pens.cpp`) — เคสที่ Files ≠ รหัส Task ให้ดึงขึ้นมาจาก `provided/` เช่น `attachment/exchange.cpp` → `./exchange.cpp` **ไม่งั้น `provided/exchange.cpp` จะชนสัญลักษณ์กับไฟล์ของเรา**
+  - `local/` = ไฟล์ซ้อม/เวอร์ชันลอง (`C1T38_localtestnew.cpp` · `C1Y26_af.cpp` · `O24C1P5_singlefile.cpp`) — ไม่ได้ส่ง แต่ commit ไว้
+  - `run.py` อ่าน `-std=` จาก `provided/compile*.sh` ของข้อนั้น (AplusB/Georgette = `gnu++20` ที่เหลือ `c++17`) และกันสัญลักษณ์ชนด้วยการ**ข้าม** `provided/*.cpp` ที่ stem ตรงกับไฟล์ของเรา
+- **กับดักที่เจอจริง:** (1) `git mv` ไป `local/` ที่ยังไม่มีโฟลเดอร์ **ล้มเหลว** ต้อง `mkdir` ก่อน (2) zip ของ grader ต่างจากโฟลเดอร์ที่แตกแล้ว**แค่ CRLF** — อย่าดู `cmp` แล้วคิดว่าไม่ซ้ำ ให้เทียบ `diff <(unzip -p … | tr -d '\r') <(tr -d '\r' < …)` (3) `C1T38_localtestnew.cpp` **ไม่ควร**ตัดให้เหลือแต่ `main` ตามที่คิดไว้ตอนแรก — มันเป็นโจทย์ซ้อมคนละข้อ (`insertByIndex`/`printList`) ไม่ใช่ harness ของ `C1T38.cpp` (`createNode`/`insertFirst`) ตัดแล้วพังทั้งไฟล์
+- **Date Added:** 2026-10-12
+
+### 🧯 รอบ 2026-10-12: จัดโจทย์ฟังก์ชัน 12 ข้อ + ทำปุ่ม build/run ให้ใช้จริง
+- **Context/Problem:** โจทย์ค่าย 1 ครึ่งหลังชุดใหม่ 8 ข้อ (C1T43–C1T47 · C1C02–C1C04) เป็นโจทย์แบบฟังก์ชัน วางไฟล์มั่ว ไม่มีเลขลำดับนำหน้าโฟลเดอร์ · `.vscode/tasks.json` คอมไพล์แค่ `${file}` เดียวจึงพังกับโจทย์หลายไฟล์ และมีบั๊กอีก 4 อย่าง (สอง task ตั้ง `isDefault: true` ชนกัน · ไม่มี `-std=`/`-O2`/`-Wall` เลย · ฝัง `&& < >` ใน `args` จึงใช้ได้ข้างเดียว · อ่าน `input.in` จากราก repo ทั้งที่เอกสารสัญญาว่า `.run/input.in`) · path ลึกมากจนพิมพ์คำสั่งเองทุกครั้งไม่ไหว
+- **Root Cause:** ไม่มีสคริปต์กลางที่รู้จักโจทย์ทั้งสองทรง — เอกสาร (`README.md` · `docs/skills.md` · `tools/README.md`) บรรยาย task 3 ตัวพร้อม flags ที่**ไม่มีอยู่จริง** มาก่อน ความรู้จริงกับเอกสารจึงแยกจากกัน
+- **Correct Pattern/Solution:** ลำดับที่ใช้ได้ผล —
+  1. เขียน `tools/run.py` (สคริปต์กลาง รู้จัก 2 ทรง · `--sample`/`--all-samples`/`--asan`/`--with`/`--list`/`--clean` · timeout 10 วิ · error ไทยไม่ปล่อย traceback) แล้ว commit **ก่อนแตะโจทย์** — เป็นหน่วยที่รีวิวแยกได้
+  2. แตก zip (`C1C03`/`C1C04`) → `mv` + `git add` (**ไม่ใช่ `git mv`** เพราะยังไม่ tracked)
+  3. `git mv` ของ grader เข้า `provided/` ทีละข้อ **ตอนชื่อโฟลเดอร์ยังสั้น** แล้วค่อย rename ทีหลัง
+  4. ย้ายไฟล์ซ้อมเข้า `local/` · สร้างโฟลเดอร์ `S06/` จากไฟล์ลอย · ลบ `__MACOSX/` กับ zip
+  5. patch `folder_names.py` (`SUPPORT_DIRNAMES` ตัด `provided/`/`local/` ฯลฯ ออกจาก `iter_folders`) → `--apply` → `50_C1T43_…` ถึง `57_C1T47_…`
+  6. `sync_done.py` (เติม link 📁 ให้ 8 ข้อ) → `find_missed.py` (ต้องเท่าเดิม) → ทดสอบด้วย `run.py <รหัส> -b` **ทั้ง 12 ข้อ**
+  7. แก้เอกสาร 4 ที่ + `tools-report.html` ให้ตรงกับของจริง
+- **ตรวจแล้ว:** `run.py -b` ผ่านทั้ง 12 ข้อ (C1T43–C1T47 · C1C02–C1C04 · AplusB · Georgette · F05 · S06) · `folder_names.py` dry run ไม่มีบรรทัด `⚠️ … provided` อีก · `find_missed` เท่าเดิม (168 ข้อ · YRC ครึ่งแรกขาด L01–L04) · `sync_done` ย้ายเข้า `_done/` 0 ข้อ
+- **กับดักสำคัญ 2 ข้อ:** (1) **`.gitignore` บรรทัด `*.out` กลืน `sample/*.out` กับ `testcases/*.out`** ที่ `README.md` ประกาศเป็น convention ไว้ — แก้ด้วยกฎกลับด้านที่ต้องวาง**ท้ายไฟล์** (git ใช้กฎตัวท้ายสุดที่ match) (2) **`git check-ignore -v <path>` ใช้ตรวจ negation ไม่ได้** — มันพิมพ์กฎที่ match รวม `!` ออกมาด้วย ทำให้นึกว่าไฟล์ถูก ignore · ที่ถูกคือสร้างไฟล์จริงแล้วดู `git add -A -n` หรือ `git status --short --ignored`
+- **`a_b.cpp` — แผนกับความจริงไม่ตรง:** แผนจัดไฟล์ลอยตัวนี้เป็น "ขยะ ⇒ `git rm`" แต่เปิดดูแล้วเป็น**โค้ดที่ผู้ใช้เขียนเอง** (A+B + ฟังก์ชันบวก/ลบเลขยาวที่คอมเมนต์ไว้ 2.4 KB) ⇒ ย้ายเข้า `AplusB/local/` แทนการลบ · **บทเรียน: ไฟล์ที่ "ลอย" ไม่ได้แปลว่าเป็นขยะ — เปิดดูก่อนลบเสมอ แม้แผนจะบอกให้ลบ**
+- **Date Added:** 2026-10-12
