@@ -1,0 +1,53 @@
+{
+    // F5 = debug — ใช้ได้เพราะ tools/run.py วาง binary ไว้ที่ path คงที่
+    // (<โฟลเดอร์โจทย์>/.run/bin) ไม่ผูกกับชื่อไฟล์ จึงไม่ต้องแก้ launch.json ต่อข้อ
+    //
+    // ⚠️ เครื่อง Linux นี้ยังไม่ได้ลง gdb → เลือก "C++: debug (Linux)" แล้วจะฟ้อง
+    //    ว่าไม่เจอ /usr/bin/gdb · ระหว่างนี้ใช้ task "C++: compile with
+    //    AddressSanitizer" แทนไปก่อนได้ (sudo apt install gdb เมื่อไหร่ก็ใช้ได้เลย)
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "C++: debug (Linux)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/.run/bin",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "เปิด pretty-printing ของ STL (ดู vector/string อ่านง่ายขึ้น)",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "C++: build only"
+        },
+        {
+            "name": "C++: debug (Windows / MinGW)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}\\.run\\bin.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "เปิด pretty-printing ของ STL",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "C++: build only"
+        }
+    ]
+}

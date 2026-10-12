@@ -1,4 +1,7 @@
 # ---- ไฟล์ที่คอมไพล์ออกมา ----
+# ระวัง: *.out ไม่ได้มีแต่ไบนารี — โจทย์หลายข้อให้ sample/sample1.out มาเป็น
+# คำตอบที่ถูกต้อง และ README.md ประกาศ sample/*.out / testcases/*.out เป็น convention
+# ⇒ ต้องมีกฎยกเว้น (บรรทัดขึ้นต้นด้วย !) **หลัง** บรรทัดนี้ เพราะ git ใช้กฎตัวท้ายสุดที่ match
 *.out
 *.exe
 *.o
@@ -6,10 +9,14 @@
 *.gch
 a.out
 
-# ---- ไฟล์รันชั่วคราว (VSCode task ใช้โฟลเดอร์นี้) ----
+# ---- ไฟล์รันชั่วคราว (tools/run.py + VSCode task ใช้โฟลเดอร์นี้) ----
 .run/
 input.in
 output.txt
+
+# ---- ขยะจาก zip ของ grader (macOS สร้างมาด้วย) ----
+__MACOSX/
+._*
 
 # ---- ความลับ: cookie / session ของ grader ----
 tools/secrets.fish
@@ -25,3 +32,26 @@ Thumbs.db
 # ---- Python ----
 __pycache__/
 *.pyc
+
+# ================================================================
+# กฎกลับด้าน — ต้องอยู่ล่างสุดของไฟล์เสมอ (git ใช้กฎท้ายสุดที่ match)
+# ================================================================
+
+# ของที่ grader ให้มา (โจทย์ฟังก์ชัน) — ต้องขึ้น git ทั้งก้อน
+!**/provided/**
+!**/attachment/**
+
+# sample / testcase — ทั้ง input และ expected output
+!**/sample/**
+!**/testcases/**
+!*.in
+!*.ans
+!**/sample/*.out
+!**/testcases/*.out
+!**/provided/**/*.out
+
+# header ของ grader (โจทย์ฟังก์ชัน)
+!*.h
+
+# ไฟล์ซ้อม/เวอร์ชันลองของเรา
+!**/local/**

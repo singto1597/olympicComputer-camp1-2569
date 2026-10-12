@@ -36,6 +36,10 @@ from scorelib import (  # noqa: E402
 
 PROBLEM_FILE_EXTS = (".cpp", ".c", ".pdf", ".html")
 
+# โฟลเดอร์เสริม **ข้างใน** โฟลเดอร์โจทย์ — ไม่ใช่โฟลเดอร์โจทย์เอง อย่ารายงาน
+# provided/ = ของ grader ให้มา (มี grader.cpp) · local/ = ไฟล์ซ้อมของเรา
+SUPPORT_DIRNAMES = {"provided", "attachment", "sample", "testcases", "local"}
+
 
 def build_map() -> dict[str, str]:
     """{รหัสโจทย์: ชื่อโฟลเดอร์ที่ควรเป็น} จากไฟล์คะแนนทุก contest
@@ -51,9 +55,14 @@ def build_map() -> dict[str, str]:
 
 
 def iter_folders():
-    """เดิน problems/ ทุกโฟลเดอร์ — รวมของใน _done/ แต่ไม่รวมตัว _done เอง"""
+    """เดิน problems/ ทุกโฟลเดอร์ — รวมของใน _done/ แต่ไม่รวมตัว _done เอง
+
+    ตัดโฟลเดอร์เสริม (provided/ local/ …) ออกตั้งแต่ตอนเดิน เพราะของข้างใน
+    (grader.cpp, ไฟล์ซ้อม) ถูก looks_like_problem_dir() นับเป็นไฟล์โจทย์
+    แล้วจะพ่น "รหัสไม่ตรงกับข้อไหน" ออกมาทุกอัน
+    """
     for root, dirs, _ in os.walk(PROBLEMS_DIR):
-        dirs[:] = sorted(d for d in dirs if not d.startswith("."))
+        dirs[:] = sorted(d for d in dirs if not d.startswith(".") and d not in SUPPORT_DIRNAMES)
         for name in dirs:
             if name == DONE_DIRNAME:
                 continue

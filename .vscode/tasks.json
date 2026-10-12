@@ -1,14 +1,26 @@
 {
+    // ทุก task เรียก tools/run.py ตัวเดียว — ตัวสคริปต์รู้จักทั้งโจทย์ไฟล์เดียว
+    // และโจทย์ฟังก์ชัน (ที่มี provided/grader.cpp) จึงไม่ต้องมี task แยกตามทรง
+    //
+    // "type": "process" = ไม่ผ่าน shell เลย → ใช้ได้เหมือนกันบน fish/bash/cmd/PowerShell
+    // และไม่ต้องฝัง && < > ลงใน args (ของเดิมทำแบบนั้นแล้วใช้ได้ข้างเดียว)
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Run C++ with IO redirect (Linux)",
-            "type": "shell",
-            "command": "bash",
+            "label": "C++: build + run",
+            "type": "process",
+            "command": "python3",
             "args": [
-                "-c",
-                "g++ '${file}' -o '${fileDirname}/${fileBasenameNoExtension}' && '${fileDirname}/${fileBasenameNoExtension}' < '${workspaceFolder}/input.in' > '${workspaceFolder}/output.txt'"
+                "tools/run.py",
+                "--file",
+                "${file}"
             ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "windows": {
+                "command": "python"
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -25,24 +37,84 @@
         },
 
         {
-            "label": "Run C++ with IO redirect",
-            "type": "shell",
-            "command": "g++",
+            // ใช้คู่กับ F5 (launch.json เรียก task นี้ผ่าน preLaunchTask)
+            "label": "C++: build only",
+            "type": "process",
+            "command": "python3",
             "args": [
+                "tools/run.py",
+                "--file",
                 "${file}",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}.exe",
-                "&&",
-                "${fileDirname}/${fileBasenameNoExtension}.exe",
-                "<",
-                "${workspaceFolder}/input.in",
-                ">",
-                "${workspaceFolder}/output.txt"
+                "--build-only"
             ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
+            "options": {
+                "cwd": "${workspaceFolder}"
             },
+            "windows": {
+                "command": "python"
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": "$gcc"
+        },
+
+        {
+            // วนทุก sample แล้วเทียบ .out ให้ — ใช้เมื่อโจทย์มี sample/ หรือ testcases/
+            "label": "C++: run all samples",
+            "type": "process",
+            "command": "python3",
+            "args": [
+                "tools/run.py",
+                "--file",
+                "${file}",
+                "--all-samples"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "windows": {
+                "command": "python"
+            },
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+
+        {
+            // AddressSanitizer + UBSan — ช่วยหาล้น array / ใช้หน่วยความจำคืน / อ่านนอกขอบ
+            // จำเป็นมากตอนทำ linked list · stack · queue (C1T45–C1T47)
+            // เครื่องนี้ยังไม่มี gdb → ระหว่างนี้ใช้ task นี้แทน F5 ได้
+            "label": "C++: compile with AddressSanitizer",
+            "type": "process",
+            "command": "python3",
+            "args": [
+                "tools/run.py",
+                "--file",
+                "${file}",
+                "--asan",
+                "--build-only"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "windows": {
+                "command": "python"
+            },
+            "group": "build",
             "presentation": {
                 "echo": true,
                 "reveal": "always",

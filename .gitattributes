@@ -1,6 +1,10 @@
 # normalize line endings
 * text=auto eol=lf
 
+# สคริปต์ที่ grader ให้มา — ต้องรันได้ทั้งสองเครื่อง
+*.sh  text eol=lf
+*.bat text eol=crlf
+
 # binary — อย่าแตะ
 *.pdf  binary
 *.png  binary

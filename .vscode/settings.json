@@ -3,16 +3,26 @@
     "*.tcc": "cpp",
     "bits/stdc++.h": "cpp"
   },
+  // ไม่ตั้ง C_Cpp.default.compilerPath / intelliSenseMode —
+  // ค่าเดิม (/usr/bin/g++, linux-gcc-x64) ผิดบน Windows และ workspace settings
+  // ชนะ user settings ⇒ เครื่อง Windows จะพัง · ปล่อยว่าง = extension หาเองทั้งคู่
   "C_Cpp.default.cppStandard": "c++17",
   "C_Cpp.default.cStandard": "c17",
-  "C_Cpp.default.compilerPath": "/usr/bin/g++",
-  "C_Cpp.default.intelliSenseMode": "linux-gcc-x64",
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
   "editor.tabSize": 4,
+  // task ส่ง ${file} เป็น path บนดิสก์ — ถ้าไฟล์ยังไม่ save จะคอมไพล์โค้ดเก่าเงียบ ๆ
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 800,
   "files.exclude": {
-    "**/*.out": true,
-    "**/.run": true
+    "**/.run": true,
+    "**/*.exe": true,
+    "**/a.out": true
+  },
+  // เผลอแก้ไฟล์ของ grader ไม่ได้ — ไฟล์ชุดนี้เป็นของที่โจทย์ให้มา ห้ามแก้
+  // (ยังเปิดอ่าน/ diff ได้ปกติ แค่พิมพ์แก้ไม่ได้)
+  "files.readonlyInclude": {
+    "**/problems/**/provided/**": true
   },
   "C_Cpp.errorSquiggles": "disabled"
 }
