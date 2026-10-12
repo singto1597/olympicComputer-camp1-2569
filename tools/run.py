@@ -53,6 +53,9 @@ BIN_NAME = "bin"
 
 # ของที่ grader ให้มา — เราไม่แก้ ("attachment" = ชื่อเดิมก่อน migrate ยังรองรับ)
 PROVIDED_NAMES = ("provided", "attachment")
+# โฟลเดอร์ของ grader — ไฟล์ในนี้ไม่ใช่ไฟล์ที่เราแก้ (ต่างจาก local/ ที่เป็นของเรา)
+# ส่ง --file เข้ามาเป็นไฟล์ในนี้ = เปิดไฟล์ของ grader อยู่ → ถอยไปหาไฟล์ของเราที่ชั้นบนสุด
+GRADER_DIRNAMES = set(PROVIDED_NAMES)
 # ที่ที่ sample/testcase อาจอยู่ — เจอที่แรกชนะ
 SAMPLE_DIRS = ("testcases", "provided/sample", "sample")
 EXPECTED_EXTS = (".out", ".ans")
@@ -94,10 +97,15 @@ def has_main(path: str) -> bool:
     return bool(MAIN_RE.search(read_text(path)))
 
 
-def in_support_dir(path: str) -> bool:
-    """ไฟล์นี้อยู่ในโฟลเดอร์เสริม (provided/ attachment/ ...) หรือเปล่า"""
+def in_dir_named(path: str, names: set[str]) -> bool:
+    """path นี้มีโฟลเดอร์ชื่อใน names อยู่ข้างในหรือเปล่า"""
     parts = os.path.abspath(path).replace("\\", "/").split("/")
-    return any(p in SUPPORT_DIRNAMES for p in parts)
+    return any(p in names for p in parts)
+
+
+def in_support_dir(path: str) -> bool:
+    """อยู่ในโฟลเดอร์เสริม (provided/ attachment/ local/ ...) หรือเปล่า"""
+    return in_dir_named(path, SUPPORT_DIRNAMES)
 
 
 def listdir_files(d: str) -> list[str]:
@@ -279,7 +287,8 @@ def make_plan(args: argparse.Namespace) -> Plan:
             )
 
     # 2) เลือกไฟล์ที่เราแก้ (ไฟล์ใน provided/ = เบาะแสหาโฟลเดอร์เท่านั้น)
-    explicit = hint if (hint.lower().endswith(".cpp") and not in_support_dir(hint)) else ""
+    #    ส่วนไฟล์ใน local/ ใช้ได้เลย — เป็นไฟล์ซ้อมของเราเอง ไม่ใช่ของ grader
+    explicit = hint if (hint.lower().endswith(".cpp") and not in_dir_named(hint, GRADER_DIRNAMES)) else ""
     user_src = pick_user_source(pdir, explicit)
 
     # 3) ประกอบคำสั่งคอมไพล์
