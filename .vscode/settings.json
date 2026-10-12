@@ -15,7 +15,8 @@
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 800,
   "files.exclude": {
-    "**/.run": true,
+    // ห้ามซ่อน **/.run — ข้างในมี output.txt / input.in / <sample>.got
+    // ที่ต้องเปิดอ่านและแก้มือ (files.exclude ซ่อนจาก Ctrl+P ด้วย ไม่ใช่แค่ Explorer)
     "**/*.exe": true,
     "**/a.out": true
   },
