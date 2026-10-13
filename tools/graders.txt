@@ -10,6 +10,7 @@ precamp	พรีแคมป์
 camp1_1	ค่าย 1 ครึ่งแรก
 camp1_1_yrc	ค่าย 1 ครึ่งแรก (YRC)
 camp1_2	ค่าย 1 ครึ่งหลัง
+camp1_2_yrc	ค่าย 1 ครึ่งหลัง (YRC)
 pretest	Pretest
 camp1_ex1	สอบครั้งที่ 1 ค่าย 1
 camp1_ex2	สอบครั้งที่ 2 ค่าย 1

@@ -1,24 +1,55 @@
 # ค่าย 1 ครึ่งแรก — YRC grader
 #
-# ก็อปจากหน้า Task overview ของ YRC grader — หน้านั้นไม่มีคอลัมน์คะแนน
-# จึงใส่ 0 / 100 ไว้ทั้งชุดเป็นที่ตั้ง แล้วแก้ Score ให้ตรงเมื่อดูหน้าคะแนนจริง
-# ลำดับบรรทัด = ลำดับโฟลเดอร์ (01_ … 17_)
+# ก็อปจากหน้า Task overview ของ https://grader.yupparaj.ac.th/YRC2026 (มี.ค. 2570)
+# ลำดับบรรทัด = ลำดับโฟลเดอร์ (01_ … 42_) และลำดับในตาราง README
+#
+# ⚠️ ต่างจากเวอร์ชันก่อน (17 ข้อ) — ของจริงมี 42 ข้อ และโจทย์ชุด IF/L/A ให้คะแนน
+# เต็ม 10 ไม่ใช่ 100 ⇒ ตารางมี "/10" ผสมกับ "/100" (scorelib เทียบ score >= max_score)
+#
+# ⚠️ IF01 ("If_else ระดับ 1") ไม่มีอยู่ในตารางของเว็บแล้ว — โฟลเดอร์
+# 05_IF01_If_else_ระดับ_1 ยังอยู่ที่เดิมแต่หลุดจากตาราง ไม่ถูกนับคะแนน
+# ⇒ เลขลำดับของ IF02 เป็นต้นไปจึงเลื่อนขึ้น 1 จากเดิม
 
 Score	Task	Name	Time limit	Memory limit	Type	Files
 0 / 100	BobInverse	BobInverse	1.000 second	8.00 MiB	Batch	Bob_Inverse[.cpp|.c|.pas]
-0 / 100	BobInWonderland	BobInWonderland	1.000 second	8.00 MiB	Batch	BobInWonderland[.cpp|.c|.pas]
+100 / 100	BobInWonderland	BobInWonderland	1.000 second	8.00 MiB	Batch	BobInWonderland[.cpp|.c|.pas]
 0 / 100	JJFourier	JJFourier	1.000 second	64.0 MiB	Batch	JJFourier[.cpp|.c|.pas]
 0 / 100	Sausage	Sausage	1.000 second	8.00 MiB	Batch	Sausage[.cpp|.c|.pas]
-0 / 100	IF01	If_else ระดับ 1	N/A	N/A	Batch	Y_IF_ELSE_01[.cpp|.c|.pas]
-0 / 100	IF02	If_esle ระดับ 2	N/A	N/A	Batch	Y_IF_ELSE_02[.cpp|.c|.pas]
-0 / 100	IF03	If_else_ระดับ 3	N/A	N/A	Batch	Y_IF_ELSE_03[.cpp|.c|.pas]
-0 / 100	IF04	Y_IF_ELSE_04	N/A	N/A	Batch	Y_IF_ELSE_04[.cpp|.c|.pas]
-0 / 100	IF05	Y_IF_ELSE_05	N/A	N/A	Batch	Y_IF_ELSE_05[.cpp|.c|.pas]
-0 / 100	IF06	Y_IF_ELSE_06	N/A	N/A	Batch	Y_IF_ELSE_06[.cpp|.c|.pas]
-0 / 100	L01	Loop ระดับ 1	1.000 second	64.0 MiB	Batch	L01[.cpp|.c|.pas]
-0 / 100	L02	Loop ระดับ 2	1.000 second	64.0 MiB	Batch	L02[.cpp|.c|.pas]
-0 / 100	L03	Loop ระดับ 3	1.000 second	64.0 MiB	Batch	L03[.cpp|.c|.pas]
-0 / 100	L04	Loop ระดับ 4	1.000 second	64.0 MiB	Batch	L04[.cpp|.c|.pas]
-0 / 100	L05	Loop ระดับ 5	1.000 second	64.0 MiB	Batch	L05[.cpp|.c|.pas]
-0 / 100	CanYouDeliverInTime	CanYouDeliverInTime	1.000 second	64.0 MiB	Batch	CanYouDeliverInTime[.cpp|.c|.pas]
+0 / 10	IF02	If_esle ระดับ 2	1.000 second	N/A	Batch	Y_IF_ELSE_02[.cpp|.c|.pas]
+0 / 10	IF03	If_else_ระดับ 3	1.000 second	64.0 MiB	Batch	Y_IF_ELSE_03[.cpp|.c|.pas]
+0 / 10	IF04	Y_IF_ELSE_04	1.000 second	64.0 MiB	Batch	Y_IF_ELSE_04[.cpp|.c|.pas]
+0 / 10	IF05	Y_IF_ELSE_05	1.000 second	64.0 MiB	Batch	Y_IF_ELSE_05[.cpp|.c|.pas]
+10 / 10	IF06	Y_IF_ELSE_06	1.000 second	N/A	Batch	Y_IF_ELSE_06[.cpp|.c|.pas]
+0 / 10	L01	Loop ระดับ 1	1.000 second	64.0 MiB	Batch	L01[.cpp|.c|.pas]
+0 / 10	L02	Loop ระดับ 2	1.000 second	64.0 MiB	Batch	L02[.cpp|.c|.pas]
+0 / 10	L03	Loop ระดับ 3	1.000 second	64.0 MiB	Batch	L03[.cpp|.c|.pas]
+0 / 10	L04	Loop ระดับ 4	1.000 second	64.0 MiB	Batch	L04[.cpp|.c|.pas]
+10 / 10	L05	Loop ระดับ 5	1.000 second	64.0 MiB	Batch	L05[.cpp|.c|.pas]
+0 / 10	L06	Loop ระดับ 6	1.000 second	64.0 MiB	Batch	L06[.cpp|.c|.pas]
+5 / 100	CanYouDeliverInTime	CanYouDeliverInTime	1.000 second	64.0 MiB	Batch	CanYouDeliverInTime[.cpp|.c|.pas]
 0 / 100	DecodingImage	DecodingImage	1.000 second	64.0 MiB	Batch	DecodingImage[.cpp|.c|.pas]
+0 / 10	A01	Array 1D ระดับ 1	1.000 second	64.0 MiB	Batch	A01[.cpp|.c|.pas]
+0 / 10	A02	Array 1D ระดับ 2	1.000 second	64.0 MiB	Batch	A02[.cpp|.c|.pas]
+0 / 10	A03	Array 1D ระดับ 3	1.000 second	64.0 MiB	Batch	A03[.cpp|.c|.pas]
+0 / 10	A04	Array 1D ระดับ 4	1.000 second	64.0 MiB	Batch	A04[.cpp|.c|.pas]
+0 / 10	A05	Array 1D ระดับ 5	1.000 second	64.0 MiB	Batch	A05[.cpp|.c|.pas]
+10 / 10	A06	Array 1D ระดับ 6	1.000 second	64.0 MiB	Batch	A06[.cpp|.c|.pas]
+100 / 100	GoboSwap	Gobo Swap	1.000 second	64.0 MiB	Batch	GoboSwap[.cpp|.c|.pas]
+0 / 10	A07	Array 2D ระดับ 1	1.000 second	64.0 MiB	Batch	A07[.cpp|.c|.pas]
+0 / 10	A08	Array 2D ระดับ 2	1.000 second	64.0 MiB	Batch	A08[.cpp|.c|.pas]
+0 / 10	A09	Array 2D ระดับ 3	1.000 second	64.0 MiB	Batch	A09[.cpp|.c|.pas]
+0 / 10	A10	Array 2D ระดับ 4	1.000 second	64.0 MiB	Batch	A10[.cpp|.c|.pas]
+0 / 10	A11	Array 2D ระดับ 5	1.000 second	64.0 MiB	Batch	A11[.cpp|.c|.pas]
+10 / 10	A12	Array 2D ระดับ 6	1.000 second	64.0 MiB	Batch	A12[.cpp|.c|.pas]
+0 / 100	Nightmare	ฝันร้าย	1.000 second	256 MiB	Batch	Nightmare[.cpp|.c|.pas]
+0 / 100	TheStabilizer	TheStabilizer	1.000 second	64.0 MiB	Batch	TheStabilizer[.cpp|.c|.pas]
+0 / 100	WaterInACubeWorld	WaterInACubeWorld	1.000 second	64.0 MiB	Batch	WaterInACubeWorld[.cpp|.c|.pas]
+100 / 100	BomberMan	BomberMan	1.000 second	256 MiB	Batch	BomberMan[.cpp|.c|.pas]
+0 / 100	MO25C1P1	Mock-O25C1P1	1.000 second	64.0 MiB	Batch	MO25C1P1[.cpp|.c|.pas]
+0 / 100	MO25C1P2	Mock-O25C1P2	1.000 second	64.0 MiB	Batch	MO25C1P2[.cpp|.c|.pas]
+0 / 100	MO25C1P3	Mock-O25C1P3	1.000 second	64.0 MiB	Batch	MO25C1P3[.cpp|.c|.pas]
+0 / 100	MO25C1P4	Mock-O25C1P4	1.000 second	256 MiB	Batch	MO25C1P4[.cpp|.c|.pas]
+0 / 100	MO26C1P1	Mock-O26C1P1	1.000 second	256 MiB	Batch	MO26C1P1[.cpp|.c|.pas]
+0 / 100	MO26C1P2	Mock-O26C1P2	1.000 second	256 MiB	Batch	MO26C1P2[.cpp|.c|.pas]
+0 / 100	MO26C1P3	Mock-O26C1P3	1.000 second	256 MiB	Batch	MO26C1P3[.cpp|.c|.pas]
+0 / 100	MO26C1P4	Mock-O26C1P4	1.000 second	256 MiB	Batch	MO26C1P4[.cpp|.c|.pas]

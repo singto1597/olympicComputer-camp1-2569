@@ -2,7 +2,10 @@
 #
 # ก็อปจากหน้า Task overview ของเว็บ https://www.cs.science.cmu.ac.th/compo/
 # คั่นด้วย TAB · บรรทัดขึ้นต้นด้วย # คือคอมเมนต์
-# ลำดับบรรทัด = ลำดับโฟลเดอร์ (01_ … 57_) และลำดับในตาราง README
+# ลำดับบรรทัด = ลำดับโฟลเดอร์ (01_ … 58_) และลำดับในตาราง README
+#
+# ⚠️ C1T20 เปลี่ยน 0 → 100 (ก็อปตารางใหม่ มี.ค. 2570) — โฟลเดอร์ถูกย้ายเข้า _done/
+# ⚠️ C1T49 ("Georgette Me, Georgette You") ต่อท้ายตารางเดิมที่จบที่ C1T47
 #
 # หมายเหตุ: O23C1P1 — คอลัมน์ Files ของเว็บเขียน E23C1P1 (คนละตัวอักษรกับรหัส Task)
 # ตามกติกาใน CLAUDE.md ให้ยึด Files ⇒ ไฟล์ข้างในชื่อ E23C1P1.cpp / E23C1P1.pdf
@@ -28,7 +31,7 @@ Score	Task	Name	Time limit	Memory limit	Type	Files
 100 / 100	C1Y25	ค้นหา	1.000 second	8.00 MiB	Batch	C1Y25[.cpp|.c]
 100 / 100	C1Y26	Peak Elements	1.000 second	8.00 MiB	Batch	C1Y26[.cpp|.c]
 100 / 100	C1T19	มูลช้าง	2.000 seconds	256 MiB	Batch	C1T19[.cpp|.c]
-0 / 100	C1T20	ตาเดินเกมเศรษฐี	2.000 seconds	256 MiB	Batch	C1T20[.cpp|.c]
+100 / 100	C1T20	ตาเดินเกมเศรษฐี	2.000 seconds	256 MiB	Batch	C1T20[.cpp|.c]
 0 / 100	C1T21	กล่องของเล่นของ TA	1.000 second	256 MiB	Batch	C1T21[.cpp|.c]
 0 / 100	C1T22	Distributed Computing	1.000 second	256 MiB	Batch	C1T22[.cpp|.c]
 0 / 100	C1T23	Matrix	1.000 second	8.00 MiB	Batch	C1T23[.cpp|.c]
@@ -65,3 +68,4 @@ Score	Task	Name	Time limit	Memory limit	Type	Files
 0 / 100	C1C04	N Pens	1.000 second	256 MiB	Batch	n_pens[.cpp|.c]
 0 / 100	C1T46	Stack using array	1.000 second	8.00 MiB	Batch	C1T46[.cpp|.c]
 0 / 100	C1T47	Queue using array	1.000 second	8.00 MiB	Batch	C1T47[.cpp|.c]
+0 / 100	C1T49	Georgette Me, Georgette You	1.000 second	8.00 MiB	Batch	C1T49[.cpp|.c]

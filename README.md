@@ -220,29 +220,54 @@ python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 →
 
 > 🕰️ 100 เก่า = ได้เต็มจากการส่งโค้ดเก่าซ้ำ (โค้ดจากปี 68 · ไม่ได้เขียนใหม่ปีนี้) — 43 ข้อ
 
-### ค่าย 1 ครึ่งแรก (YRC) — ได้เต็ม **0 / 17** ข้อ
+### ค่าย 1 ครึ่งแรก (YRC) — ได้เต็ม **7 / 42** ข้อ
 
 | สถานะ | คะแนน | Task | ชื่อโจทย์ | ลิมิต | ไฟล์ |
 | :---: | :---: | :--- | :--- | :---: | :---: |
 | 🔴 | 0 / 100 | **BobInverse** | BobInverse | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/01_BobInverse) |
-| 🔴 | 0 / 100 | **BobInWonderland** | BobInWonderland | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/02_BobInWonderland) |
+| 🟢 | 100 / 100 | **BobInWonderland** | BobInWonderland | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/_done/02_BobInWonderland) |
 | 🔴 | 0 / 100 | **JJFourier** | JJFourier | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/03_JJFourier) |
 | 🔴 | 0 / 100 | **Sausage** | Sausage | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/04_Sausage) |
-| 🔴 | 0 / 100 | **IF01** | If_else ระดับ 1 | N/A / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/05_IF01_If_else_ระดับ_1) |
-| 🔴 | 0 / 100 | **IF02** | If_esle ระดับ 2 | N/A / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/06_IF02_If_esle_ระดับ_2) |
-| 🔴 | 0 / 100 | **IF03** | If_else_ระดับ 3 | N/A / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/07_IF03_If_else_ระดับ_3) |
-| 🔴 | 0 / 100 | **IF04** | Y_IF_ELSE_04 | N/A / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/08_IF04_Y_IF_ELSE_04) |
-| 🔴 | 0 / 100 | **IF05** | Y_IF_ELSE_05 | N/A / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/09_IF05_Y_IF_ELSE_05) |
-| 🔴 | 0 / 100 | **IF06** | Y_IF_ELSE_06 | N/A / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/10_IF06_Y_IF_ELSE_06) |
-| 🔴 | 0 / 100 | **L01** | Loop ระดับ 1 | 1.000 second / 64.0 MiB | — |
-| 🔴 | 0 / 100 | **L02** | Loop ระดับ 2 | 1.000 second / 64.0 MiB | — |
-| 🔴 | 0 / 100 | **L03** | Loop ระดับ 3 | 1.000 second / 64.0 MiB | — |
-| 🔴 | 0 / 100 | **L04** | Loop ระดับ 4 | 1.000 second / 64.0 MiB | — |
-| 🔴 | 0 / 100 | **L05** | Loop ระดับ 5 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/15_L05_Loop_ระดับ_5) |
-| 🔴 | 0 / 100 | **CanYouDeliverInTime** | CanYouDeliverInTime | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/16_CanYouDeliverInTime) |
+| 🔴 | 0 / 10 | **IF02** | If_esle ระดับ 2 | 1.000 second / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/05_IF02_If_esle_ระดับ_2) |
+| 🔴 | 0 / 10 | **IF03** | If_else_ระดับ 3 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/06_IF03_If_else_ระดับ_3) |
+| 🔴 | 0 / 10 | **IF04** | Y_IF_ELSE_04 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/07_IF04_Y_IF_ELSE_04) |
+| 🔴 | 0 / 10 | **IF05** | Y_IF_ELSE_05 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/08_IF05_Y_IF_ELSE_05) |
+| 🟢 | 10 / 10 | **IF06** | Y_IF_ELSE_06 | 1.000 second / N/A | [📁](problems/2_incamp/1_first_half/yrc-grader/_done/09_IF06_Y_IF_ELSE_06) |
+| 🔴 | 0 / 10 | **L01** | Loop ระดับ 1 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/10_L01_Loop_ระดับ_1) |
+| 🔴 | 0 / 10 | **L02** | Loop ระดับ 2 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/11_L02_Loop_ระดับ_2) |
+| 🔴 | 0 / 10 | **L03** | Loop ระดับ 3 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/12_L03_Loop_ระดับ_3) |
+| 🔴 | 0 / 10 | **L04** | Loop ระดับ 4 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/13_L04_Loop_ระดับ_4) |
+| 🟢 | 10 / 10 | **L05** | Loop ระดับ 5 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/_done/14_L05_Loop_ระดับ_5) |
+| 🔴 | 0 / 10 | **L06** | Loop ระดับ 6 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/15_L06_Loop_ระดับ_6) |
+| 🟡 | 5 / 100 | **CanYouDeliverInTime** | CanYouDeliverInTime | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/16_CanYouDeliverInTime) |
 | 🔴 | 0 / 100 | **DecodingImage** | DecodingImage | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/17_DecodingImage) |
+| 🔴 | 0 / 10 | **A01** | Array 1D ระดับ 1 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/18_A01_Array_1D_ระดับ_1) |
+| 🔴 | 0 / 10 | **A02** | Array 1D ระดับ 2 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/19_A02_Array_1D_ระดับ_2) |
+| 🔴 | 0 / 10 | **A03** | Array 1D ระดับ 3 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/20_A03_Array_1D_ระดับ_3) |
+| 🔴 | 0 / 10 | **A04** | Array 1D ระดับ 4 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/21_A04_Array_1D_ระดับ_4) |
+| 🔴 | 0 / 10 | **A05** | Array 1D ระดับ 5 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/22_A05_Array_1D_ระดับ_5) |
+| 🟢 | 10 / 10 | **A06** | Array 1D ระดับ 6 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/_done/23_A06_Array_1D_ระดับ_6) |
+| 🟢 | 100 / 100 | **GoboSwap** | Gobo Swap | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/_done/24_GoboSwap_Gobo_Swap) |
+| 🔴 | 0 / 10 | **A07** | Array 2D ระดับ 1 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/25_A07_Array_2D_ระดับ_1) |
+| 🔴 | 0 / 10 | **A08** | Array 2D ระดับ 2 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/26_A08_Array_2D_ระดับ_2) |
+| 🔴 | 0 / 10 | **A09** | Array 2D ระดับ 3 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/27_A09_Array_2D_ระดับ_3) |
+| 🔴 | 0 / 10 | **A10** | Array 2D ระดับ 4 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/28_A10_Array_2D_ระดับ_4) |
+| 🔴 | 0 / 10 | **A11** | Array 2D ระดับ 5 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/29_A11_Array_2D_ระดับ_5) |
+| 🟢 | 10 / 10 | **A12** | Array 2D ระดับ 6 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/_done/30_A12_Array_2D_ระดับ_6) |
+| 🔴 | 0 / 100 | **Nightmare** | ฝันร้าย | 1.000 second / 256 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/31_Nightmare_ฝันร้าย) |
+| 🔴 | 0 / 100 | **TheStabilizer** | TheStabilizer | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/32_TheStabilizer) |
+| 🔴 | 0 / 100 | **WaterInACubeWorld** | WaterInACubeWorld | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/33_WaterInACubeWorld) |
+| 🟢 | 100 / 100 | **BomberMan** | BomberMan | 1.000 second / 256 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/_done/34_BomberMan) |
+| 🔴 | 0 / 100 | **MO25C1P1** | Mock-O25C1P1 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/35_MO25C1P1_Mock-O25C1P1) |
+| 🔴 | 0 / 100 | **MO25C1P2** | Mock-O25C1P2 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/36_MO25C1P2_Mock-O25C1P2) |
+| 🔴 | 0 / 100 | **MO25C1P3** | Mock-O25C1P3 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/37_MO25C1P3_Mock-O25C1P3) |
+| 🔴 | 0 / 100 | **MO25C1P4** | Mock-O25C1P4 | 1.000 second / 256 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/38_MO25C1P4_Mock-O25C1P4) |
+| 🔴 | 0 / 100 | **MO26C1P1** | Mock-O26C1P1 | 1.000 second / 256 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/39_MO26C1P1_Mock-O26C1P1) |
+| 🔴 | 0 / 100 | **MO26C1P2** | Mock-O26C1P2 | 1.000 second / 256 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/40_MO26C1P2_Mock-O26C1P2) |
+| 🔴 | 0 / 100 | **MO26C1P3** | Mock-O26C1P3 | 1.000 second / 256 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/41_MO26C1P3_Mock-O26C1P3) |
+| 🔴 | 0 / 100 | **MO26C1P4** | Mock-O26C1P4 | 1.000 second / 256 MiB | [📁](problems/2_incamp/1_first_half/yrc-grader/42_MO26C1P4_Mock-O26C1P4) |
 
-### ค่าย 1 ครึ่งหลัง — ได้เต็ม **23 / 57** ข้อ
+### ค่าย 1 ครึ่งหลัง — ได้เต็ม **24 / 58** ข้อ
 
 | สถานะ | คะแนน | Task | ชื่อโจทย์ | ลิมิต | ไฟล์ | หมายเหตุ |
 | :---: | :---: | :--- | :--- | :---: | :---: | :--- |
@@ -266,7 +291,7 @@ python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 →
 | 🟢 | 100 / 100 | **C1Y25** | ค้นหา | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/18_C1Y25_ค้นหา) | 🕰️ 100 เก่า |
 | 🟢 | 100 / 100 | **C1Y26** | Peak Elements | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/19_C1Y26_Peak_Elements) | 🕰️ 100 เก่า |
 | 🟢 | 100 / 100 | **C1T19** | มูลช้าง | 2.000 seconds / 256 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/20_C1T19_มูลช้าง) | 🕰️ 100 เก่า |
-| 🔴 | 0 / 100 | **C1T20** | ตาเดินเกมเศรษฐี | 2.000 seconds / 256 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/21_C1T20_ตาเดินเกมเศรษฐี) |  |
+| 🟢 | 100 / 100 | **C1T20** | ตาเดินเกมเศรษฐี | 2.000 seconds / 256 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/_done/21_C1T20_ตาเดินเกมเศรษฐี) |  |
 | 🔴 | 0 / 100 | **C1T21** | กล่องของเล่นของ TA | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/22_C1T21_กล่องของเล่นของ_TA) |  |
 | 🔴 | 0 / 100 | **C1T22** | Distributed Computing | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/23_C1T22_Distributed_Computing) |  |
 | 🔴 | 0 / 100 | **C1T23** | Matrix | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/24_C1T23_Matrix) |  |
@@ -303,8 +328,45 @@ python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 →
 | 🔴 | 0 / 100 | **C1C04** | N Pens | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/55_C1C04_N_Pens) |  |
 | 🔴 | 0 / 100 | **C1T46** | Stack using array | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/56_C1T46_Stack_using_array) |  |
 | 🔴 | 0 / 100 | **C1T47** | Queue using array | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/57_C1T47_Queue_using_array) |  |
+| 🔴 | 0 / 100 | **C1T49** | Georgette Me, Georgette You | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/cmu-grader/58_C1T49_Georgette_Me,_Georgette_You) |  |
 
 > 🕰️ 100 เก่า = ได้เต็มจากการส่งโค้ดเก่าซ้ำ (โค้ดจากปี 68 · ไม่ได้เขียนใหม่ปีนี้) — 23 ข้อ
+
+### ค่าย 1 ครึ่งหลัง (YRC) — ได้เต็ม **5 / 31** ข้อ
+
+| สถานะ | คะแนน | Task | ชื่อโจทย์ | ลิมิต | ไฟล์ |
+| :---: | :---: | :--- | :--- | :---: | :---: |
+| 🔴 | 0 / 10 | **S01** | String Level 1 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/01_S01_String_Level_1) |
+| 🔴 | 0 / 10 | **S02** | String Level 2 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/02_S02_String_Level_2) |
+| 🔴 | 0 / 10 | **S03** | String Level 3 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/03_S03_String_Level_3) |
+| 🔴 | 0 / 10 | **S04** | String Level 4 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/04_S04_String_Level_4) |
+| 🔴 | 0 / 10 | **S05** | String Level 5 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/05_S05_String_Level_5) |
+| 🔴 | 0 / 10 | **S06** | String Level 6 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/06_S06_String_Level_6) |
+| 🔴 | 0 / 100 | **PatrickJane** | PatrickJane | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/07_PatrickJane) |
+| 🔴 | 0 / 100 | **LongestValidParentheses** | LongestValidParentheses | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/08_LongestValidParentheses) |
+| 🔴 | 0 / 100 | **F01** | Function Level 1 | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/09_F01_Function_Level_1) |
+| 🔴 | 0 / 100 | **F02** | Function Level 2 | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/10_F02_Function_Level_2) |
+| 🔴 | 0 / 100 | **F03** | Function Level 3 | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/11_F03_Function_Level_3) |
+| 🔴 | 0 / 100 | **F04** | Function Level 4 | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/12_F04_Function_Level_4) |
+| 🟢 | 100 / 100 | **F05** | Function Level 5 | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/_done/13_F05_Function_Level_5) |
+| 🔴 | 0 / 100 | **F06** | Function Level 6 | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/14_F06_Function_Level_6) |
+| 🟢 | 100 / 100 | **AplusB** | A + B | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/_done/15_AplusB_A_+_B) |
+| 🟢 | 100 / 100 | **GeorgetteMeGeorgetteYou** | Georgette Me, Georgette You | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/_done/16_GeorgetteMeGeorgetteYou_Georgette_Me,_Georgette_You) |
+| 🟡 | 10 / 100 | **KingOfPointers** | KingOfPointers | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/17_KingOfPointers) |
+| 🔴 | 0 / 100 | **P01** | Pointer Level 1 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/18_P01_Pointer_Level_1) |
+| 🔴 | 0 / 100 | **P02** | Pointer Level 2 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/19_P02_Pointer_Level_2) |
+| 🔴 | 0 / 100 | **P03** | Pointer Level 3 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/20_P03_Pointer_Level_3) |
+| 🔴 | 0 / 100 | **P04** | Pointer Level 4 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/21_P04_Pointer_Level_4) |
+| 🔴 | 0 / 100 | **P05** | Pointer Level 5 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/22_P05_Pointer_Level_5) |
+| 🟢 | 100 / 100 | **P06** | Pointer Level 6 | 1.000 second / 64.0 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/_done/23_P06_Pointer_Level_6) |
+| 🔴 | 0 / 100 | **ST1** | Struct Level 1 | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/24_ST1_Struct_Level_1) |
+| 🔴 | 0 / 100 | **ST2** | Struct Level 2 | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/25_ST2_Struct_Level_2) |
+| 🔴 | 0 / 100 | **ST3** | Struct Level 3 | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/26_ST3_Struct_Level_3) |
+| 🔴 | 0 / 100 | **ST4** | Struct Level 4 | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/27_ST4_Struct_Level_4) |
+| 🔴 | 0 / 100 | **ST5** | Struct Level 5 | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/28_ST5_Struct_Level_5) |
+| 🟢 | 100 / 100 | **ST6** | Struct Level 6 | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/_done/29_ST6_Struct_Level_6) |
+| 🔴 | 0 / 100 | **BallerinaFrog** | BallerinaFrog | 1.000 second / 256 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/30_BallerinaFrog) |
+| 🔴 | 0 / 100 | **Spinning** | Spinning | 1.000 second / 8.00 MiB | [📁](problems/2_incamp/2_second_half/yrc-grader/31_Spinning) |
 <!-- SCORE:END -->
 
 ---

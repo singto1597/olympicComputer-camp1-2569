@@ -1,0 +1,43 @@
+# ค่าย 1 ครึ่งหลัง — YRC grader
+#
+# ก็อปจากหน้า Task overview ของ https://grader.yupparaj.ac.th/YRC2026-2 (มี.ค. 2570)
+# ลำดับบรรทัด = ลำดับโฟลเดอร์ (01_ … 31_) และลำดับในตาราง README
+#
+# โจทย์ชุด S (String) ให้คะแนนเต็ม 10 ส่วนที่เหลือเต็ม 100
+# กลุ่ม F = โจทย์ฟังก์ชัน (เว็บให้ grader.cpp + .h มา) — ของ grader อยู่ใน provided/
+#
+# หมายเหตุ: GeorgetteMeGeorgetteYou — คอลัมน์ Files ตรงกับรหัส Task แต่ในเครื่อง
+# ไฟล์ของเราใช้ชื่อ Georgette.cpp ตามที่ provided/compile.sh คอมไพล์ไว้ตายตัว
+
+Score	Task	Name	Time limit	Memory limit	Type	Files
+0 / 10	S01	String Level 1	1.000 second	64.0 MiB	Batch	S01[.cpp|.c|.pas]
+0 / 10	S02	String Level 2	1.000 second	64.0 MiB	Batch	S02[.cpp|.c|.pas]
+0 / 10	S03	String Level 3	1.000 second	64.0 MiB	Batch	S03[.cpp|.c|.pas]
+0 / 10	S04	String Level 4	1.000 second	64.0 MiB	Batch	S04[.cpp|.c|.pas]
+0 / 10	S05	String Level 5	1.000 second	64.0 MiB	Batch	S05[.cpp|.c|.pas]
+0 / 10	S06	String Level 6	1.000 second	64.0 MiB	Batch	S06[.cpp|.c|.pas]
+0 / 100	PatrickJane	PatrickJane	1.000 second	256 MiB	Batch	PatrickJane[.cpp|.c|.pas]
+0 / 100	LongestValidParentheses	LongestValidParentheses	1.000 second	64.0 MiB	Batch	LongestValidParentheses[.cpp|.c|.pas]
+0 / 100	F01	Function Level 1	1.000 second	256 MiB	Batch	F01[.cpp|.c|.pas]
+0 / 100	F02	Function Level 2	1.000 second	256 MiB	Batch	F02[.cpp|.c|.pas]
+0 / 100	F03	Function Level 3	1.000 second	256 MiB	Batch	F03[.cpp|.c|.pas]
+0 / 100	F04	Function Level 4	1.000 second	256 MiB	Batch	F04[.cpp|.c|.pas]
+100 / 100	F05	Function Level 5	1.000 second	256 MiB	Batch	F05[.cpp|.c|.pas]
+0 / 100	F06	Function Level 6	1.000 second	256 MiB	Batch	F06[.cpp|.c|.pas]
+100 / 100	AplusB	A + B	1.000 second	8.00 MiB	Batch	AplusB[.cpp|.c|.pas]
+100 / 100	GeorgetteMeGeorgetteYou	Georgette Me, Georgette You	1.000 second	8.00 MiB	Batch	GeorgetteMeGeorgetteYou[.cpp|.c|.pas]
+10 / 100	KingOfPointers	KingOfPointers	1.000 second	256 MiB	Batch	KingOfPointers[.cpp|.c|.pas]
+0 / 100	P01	Pointer Level 1	1.000 second	64.0 MiB	Batch	P01[.cpp|.c|.pas]
+0 / 100	P02	Pointer Level 2	1.000 second	64.0 MiB	Batch	P02[.cpp|.c|.pas]
+0 / 100	P03	Pointer Level 3	1.000 second	64.0 MiB	Batch	P03[.cpp|.c|.pas]
+0 / 100	P04	Pointer Level 4	1.000 second	64.0 MiB	Batch	P04[.cpp|.c|.pas]
+0 / 100	P05	Pointer Level 5	1.000 second	64.0 MiB	Batch	P05[.cpp|.c|.pas]
+100 / 100	P06	Pointer Level 6	1.000 second	64.0 MiB	Batch	P06[.cpp|.c|.pas]
+0 / 100	ST1	Struct Level 1	1.000 second	256 MiB	Batch	ST1[.cpp|.c|.pas]
+0 / 100	ST2	Struct Level 2	1.000 second	256 MiB	Batch	ST2[.cpp|.c|.pas]
+0 / 100	ST3	Struct Level 3	1.000 second	256 MiB	Batch	ST3[.cpp|.c|.pas]
+0 / 100	ST4	Struct Level 4	1.000 second	256 MiB	Batch	ST4[.cpp|.c|.pas]
+0 / 100	ST5	Struct Level 5	1.000 second	256 MiB	Batch	ST5[.cpp|.c|.pas]
+100 / 100	ST6	Struct Level 6	1.000 second	256 MiB	Batch	ST6[.cpp|.c|.pas]
+0 / 100	BallerinaFrog	BallerinaFrog	1.000 second	256 MiB	Batch	BallerinaFrog[.cpp|.c|.pas]
+0 / 100	Spinning	Spinning	1.000 second	8.00 MiB	Batch	Spinning[.cpp|.c|.pas]
