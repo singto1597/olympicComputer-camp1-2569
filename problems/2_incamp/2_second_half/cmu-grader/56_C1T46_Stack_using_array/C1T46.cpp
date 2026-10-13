@@ -6,29 +6,51 @@ static int arr[MAX];
 static int topIdx = -1;
 
 bool isEmpty() {
-    //your code here
+    if (topIdx == -1) return true;
+    else return false;
 }
 
 bool isFull() {
-    //your code here
+    if (topIdx == MAX - 1) return true;
+    else return false;
 }
 
 void push(int value) {
-    //your code here
+    if (!isFull()){
+        topIdx++;
+        arr[topIdx] = value;
+        return;
+    }
+    cout << "Stack Overflow\n";
 }
 
 void pop() {
-    //your code here
+    if (isEmpty()){
+        cout << "Stack Underflow\n";
+        return;
+    }
+    topIdx--;
 }
 
 int peek() {
-    //your code here
+    if (isEmpty()) {
+        cout << "Stack is empty\n";
+        return -1;
+    }
+    return arr[topIdx];
 }
 
 int size() {
-    //your code here
+    return topIdx + 1;
 }
 
 void display() {
-    //your code here
+    if (isEmpty()) {
+        cout << "Stack is empty\n";
+        return; 
+    }
+    for (int i = topIdx; i >= 0; i--){
+        cout << arr[i] << " ";
+    }
+    cout << "\n";
 }
