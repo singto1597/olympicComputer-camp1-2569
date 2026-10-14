@@ -2,27 +2,20 @@
 
 using namespace std;
 
-long long dp[100];
+// long long dp[100];
 
 long long find_path(long long n){
     if (n == 0){
-        dp[n] = 1;
-        return dp[n];
+        return 1;
     }
     if (n < 0){
         return 0;
     }
-    if (dp[n] > 0) return dp[n];
     long long sum = 0;
     for (int i = 1; i <= 6; i++){
         sum += find_path(n - i);
     }
-
-    dp[n] = sum;
-
-    return dp[n];
-
-
+    return sum;
 }
 
 int main(){
