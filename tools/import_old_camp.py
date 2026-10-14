@@ -16,7 +16,8 @@
   · ไฟล์ข้างในใช้รหัสโจทย์ล้วน ๆ ตามที่ grader บังคับตอน submit
     main.cpp → <รหัส>.cpp · main_optimize.cpp → <รหัส>_optimize.cpp
     <รหัส> (...).pdf → <รหัส>.pdf (ตัดวงเล็บแบบเดียวกับ organize.fish)
-  · ไฟล์คอมไพล์/รัน (main, *.exe, input.in, output.txt) ไม่เอามา — repo ใช้ .run/
+  · ไฟล์คอมไพล์/รัน (main, *.exe, input.in, output.txt) ไม่เอามา — ของที่คอมไพล์แล้ว
+    อยู่ .run/ ส่วน input.in / output.txt ที่ซ้อมใช้ไฟล์เดียวที่ราก repo
   · ข้อที่ต้นทางไม่มีโค้ด จะได้ <รหัส>.cpp จาก template.cpp ไปเริ่มเขียน
   · default = คัดลอก (ต้นทางไม่ถูกแตะ) · --move = ย้ายจริง
 """

@@ -38,12 +38,20 @@
   ├── local/         ← ไฟล์ซ้อม/เวอร์ชันลองของเรา (ไม่ได้ส่ง · commit ไว้ด้วย)
   └── .run/          ← ของที่คอมไพล์/รันออกมา (gitignore)
   ```
-  `provided/` = **ห้ามแก้** (ตั้ง read-only ใน `.vscode/settings.json` แล้ว) · PDF ตัด suffix
+  โฟลเดอร์ของ grader **ชื่ออะไรก็ได้** ไม่บังคับว่า `provided/` — มีอยู่จริงทั้ง `attachment/`
+  และ `provided_yrc/` (`run.py` ดูจากเนื้อใน: มี `.h` หรือ `.cpp` ที่มี `main`)
+  **ห้ามแก้** โฟลเดอร์นั้น (ตั้ง read-only ใน `.vscode/settings.json` แล้ว) · PDF ตัด suffix
   ไทยทิ้ง (`C1T43 (th2).pdf` → `C1T43.pdf`) · zip ของ grader ที่แตกแล้วให้ `git rm` ทิ้ง
+- `input.in` / `output.txt` ที่ใช้ซ้อมอยู่ **ราก repo** ไฟล์เดียวใช้ทุกข้อ (ไม่ใช่ใน `.run/`
+  และไม่หายตอน `--clean`) — `.run/` เก็บแค่ `bin` กับ `<sample>.got`
 - **รันโจทย์ด้วย `python3 tools/run.py <รหัส>`** — สคริปต์กลางตัวเดียว รู้จักทั้งสองทรง
   (`--file` · `--sample N` · `--all-samples` · `-b` · `--asan` · `--list` · `--clean`)
   **ห้ามใส่ `&&` / `<` / `>` ลงใน `args` ของ `.vscode/tasks.json`** — task ใช้ `type: process`
   ไม่ผ่าน shell เพื่อให้ใช้ได้ทั้ง fish/bash/cmd/PowerShell · `isDefault: true` มีได้ตัวเดียว
+- **คีย์ลัด VS Code:** `Ctrl+F5` = build + run · `Ctrl+Shift+B` = build อย่างเดียว
+  คีย์ลัดอยู่ใน `keybindings.json` ของผู้ใช้ (VS Code ไม่มี keybindings ระดับ workspace)
+  ติดตั้งด้วย `python3 tools/vscode_keys.py --apply` บนเครื่องที่เปิดหน้าจอ
+  `args` อ้าง **label** `C++: build + run` ⇒ แก้ label ใน `tasks.json` เมื่อไหร่คีย์ลัดพัง
 - สไลด์ตั้งชื่อ `YYYYMMDD_AM_Topic` / `YYYYMMDD_PM_Topic`
 - `template.cpp` คือโค้ดตั้งต้นของทุกข้อ — แก้ได้ตามใจ ผู้ใช้เป็นเจ้าของสไตล์นี้
 

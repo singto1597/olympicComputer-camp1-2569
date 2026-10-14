@@ -53,9 +53,10 @@ olympicComputer-camp1-2569/
 | statement ที่เว็บให้มาเป็น HTML | เก็บเป็น `.html` | `C1PC01.html` |
 | สไลด์/ชีทเรียน | `YYYYMMDD_AM\|PM_หัวข้อ` | `20261005_AM_BasicC/` |
 | เทสเคส | `testcases/1.in`, `1.out` | ซ้อนในโฟลเดอร์โจทย์ |
-| ของที่ grader ให้มา (โจทย์ฟังก์ชัน) | ซ้อนใน **`provided/`** — ห้ามแก้ | `provided/grader.cpp`, `provided/C1T43.h` |
+| ของที่ grader ให้มา (โจทย์ฟังก์ชัน) | ซ้อนในโฟลเดอร์ของมันเอง — ห้ามแก้ (ชื่ออะไรก็ได้) | `provided/grader.cpp`, `provided_yrc/C1T49.h` |
 | ไฟล์ซ้อม/เวอร์ชันลองของเรา (ไม่ได้ส่ง) | ซ้อนใน **`local/`** | `local/C1T38_localtestnew.cpp` |
-| ของที่คอมไพล์/รันออกมา | **`.run/`** (gitignore) | `.run/bin`, `.run/input.in`, `.run/output.txt` |
+| ของที่คอมไพล์/รันออกมา | **`.run/`** ของโฟลเดอร์โจทย์ (gitignore) | `.run/bin`, `.run/sample1.got` |
+| input/output ที่ซ้อมรัน | **ราก repo** — ไฟล์เดียวใช้ทุกข้อ (gitignore) | `input.in`, `output.txt` |
 
 - **โฟลเดอร์มีเลขนำหน้า** เพราะลำดับโจทย์บนเว็บไม่เหมือนลำดับรหัส (เว็บเรียง C1PC → C1PR →
   C1PE แต่เรียงตามตัวอักษรได้ C1PC → C1PE → C1PR) เลขลำดับมาจากบรรทัดใน
@@ -68,11 +69,16 @@ olympicComputer-camp1-2569/
   · `IF02` → `Y_IF_ELSE_02.pdf`
 - เลขนำหน้ามีแค่ระดับ phase (`1_precamp` → `2_incamp` → `3_endcamp`) เพราะต้องเรียงตามเวลา
 - **โจทย์แบบฟังก์ชัน** (เว็บให้ `grader.cpp` + `.h` มา เราเขียนแค่ตัวฟังก์ชัน) — ของที่ grader
-  ให้มาอยู่ใน `provided/` ทั้งก้อน ส่วนไฟล์ที่เราแก้+ส่งอยู่ **ชั้นบนสุด** ของโฟลเดอร์โจทย์
+  ให้มาอยู่ในโฟลเดอร์ของมันเองทั้งก้อน ส่วนไฟล์ที่เราแก้+ส่งอยู่ **ชั้นบนสุด** ของโฟลเดอร์โจทย์
   ชื่อตามคอลัมน์ Files เหมือนเดิม (`C1T43.cpp` · `exchange.cpp` · `find_max_and_min.cpp` ·
-  `n_pens.cpp`) · `provided/` ถูกตั้งเป็น read-only ใน VS Code (`.vscode/settings.json`)
-- ไฟล์ที่คอมไพล์/รันออกมาไปที่ **`.run/`** ของโฟลเดอร์โจทย์ (ไม่ใช่ราก repo) ไม่ขึ้น git
-  — ดู `.gitignore` · `sample/*.out` กับ `testcases/*.out` **ขึ้น git** (เป็นคำตอบที่ grader ให้มา)
+  `n_pens.cpp`) · โฟลเดอร์นั้นถูกตั้งเป็น read-only ใน VS Code (`.vscode/settings.json`)
+  **ชื่อโฟลเดอร์ไม่ต้องเป็น `provided`** — `attachment/` · `provided_yrc/` หรืออะไรก็ได้
+  `run.py` ดูเนื้อในไม่ได้ดูชื่อ (มี `.h` หรือ `.cpp` ที่มี `main()` ไหม) จึงไม่ต้อง rename
+- ไฟล์ที่คอมไพล์/รันออกมาอยู่ **`.run/`** ของโฟลเดอร์โจทย์ ไม่ขึ้น git — ดู `.gitignore`
+  · `sample/*.out` กับ `testcases/*.out` **ขึ้น git** (เป็นคำตอบที่ grader ให้มา)
+- **`input.in` กับ `output.txt` อยู่ที่ราก repo ไม่ใช่ใน `.run/`** — ทำทีละข้ออยู่แล้ว
+  ก็อป input ทับได้เลย เปิดแท็บค้างไว้ได้ ไม่ต้องลากไฟล์ใหม่ และไม่หายตอน `--clean`
+  (⚠️ ไฟล์เดียวใช้ร่วมทุกข้อ — `run.py` พิมพ์บอกทุกครั้งว่าใช้ input ไฟล์ไหน)
 
 ---
 
@@ -91,11 +97,13 @@ fish tools/organize.fish ~/Downloads --cpp
 #    สไลด์/ชีทเรียนก็ใช้ตัวเดียวกัน แต่มักต้องเติมวันที่นำหน้า
 fish tools/organize.fish docs/sheets --prefix 20261005_AM --dry-run
 
-# 3. เขียนโค้ด — แล้ว build + run ด้วยคำสั่งเดียว (จำรหัสโจทย์ ไม่ต้อง cd)
-python3 tools/run.py C1PR01           # คอมไพล์ + รัน (ใช้ .run/input.in ถ้ามี)
+# 3. ก็อป input ที่ราก repo → input.in (สคริปต์สร้างไฟล์เปล่าไว้ให้แล้ว)
+#    เขียนโค้ด — แล้ว build + run ด้วยคำสั่งเดียว (จำรหัสโจทย์ ไม่ต้อง cd)
+python3 tools/run.py C1PR01           # คอมไพล์ + รันด้วย input.in ที่ราก repo
 python3 tools/run.py C1T43 --sample 1 # โจทย์ฟังก์ชันก็ใช้คำสั่งเดียวกัน
 python3 tools/run.py C1T43 --all-samples
-#    หรือเปิดไฟล์แล้วกด Ctrl+Shift+B ใน VS Code (เรียกตัวเดียวกันนี้)
+#    หรือเปิดไฟล์แล้วกด Ctrl+F5 = build + run · Ctrl+Shift+B = build อย่างเดียว
+#    (ติดตั้งคีย์ลัดครั้งเดียวด้วย python3 tools/vscode_keys.py --apply)
 
 # 4. ก็อปตารางคะแนนจากหน้าเว็บ → tools/scores/precamp.txt แล้วรัน
 python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 → _done/ และอัปเดตตารางข้างล่าง
@@ -104,8 +112,8 @@ python3 tools/sync_done.py     # ย้ายข้อที่ได้ 100 →
 รหัสโจทย์ไม่ซ้ำกันระหว่างค่าย — `sync_done.py` หาโฟลเดอร์เจอเองโดยไม่ต้องบอกว่า
 ข้อไหนอยู่ช่วงไหน ส่วนรายชื่อ contest ทั้งหมดดูที่ `tools/graders.txt`
 
-รายละเอียดของ `run.py` (โหมดทั้งหมด · โครง `provided/` · วิธี debug) อยู่ที่
-[`tools/README.md`](tools/README.md)
+รายละเอียดของ `run.py` (โหมดทั้งหมด · การหาโฟลเดอร์ grader · วิธี debug) และวิธีติดตั้ง
+คีย์ลัด `Ctrl+F5` อยู่ที่ [`tools/README.md`](tools/README.md)
 
 ---
 

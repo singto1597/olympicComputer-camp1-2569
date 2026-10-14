@@ -15,15 +15,19 @@
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 800,
   "files.exclude": {
-    // ห้ามซ่อน **/.run — ข้างในมี output.txt / input.in / <sample>.got
-    // ที่ต้องเปิดอ่านและแก้มือ (files.exclude ซ่อนจาก Ctrl+P ด้วย ไม่ใช่แค่ Explorer)
+    // ห้ามซ่อน **/.run — ข้างในมี bin กับ <sample>.got ที่เทียบไม่ผ่าน
+    // (files.exclude ซ่อนจาก Ctrl+P ด้วย ไม่ใช่แค่ Explorer)
+    // ส่วน input.in / output.txt ที่ซ้อมใช้อยู่ราก repo ไม่ได้อยู่ใน .run/ แล้ว
     "**/*.exe": true,
     "**/a.out": true
   },
   // เผลอแก้ไฟล์ของ grader ไม่ได้ — ไฟล์ชุดนี้เป็นของที่โจทย์ให้มา ห้ามแก้
   // (ยังเปิดอ่าน/ diff ได้ปกติ แค่พิมพ์แก้ไม่ได้)
+  // ⚠️ glob ของ VS Code จับ "เนื้อใน" ไม่ได้ จึงต้องครอบด้วยชื่อ — `provided*` ไว้
+  // ให้ของจริงอย่าง `provided_yrc/` (ดู 58_C1T49) ถูกตั้ง read-only ด้วย
   "files.readonlyInclude": {
-    "**/problems/**/provided/**": true
+    "**/problems/**/provided*/**": true,
+    "**/problems/**/attachment*/**": true
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

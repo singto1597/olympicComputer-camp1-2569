@@ -406,6 +406,10 @@
         <code class="cmd">python3 tools/<span class="flag">run.py</span> C1T43</code>
       </li>
       <li>
+        <span class="q">อยากกด <kbd>Ctrl+F5</kbd> แล้ว build + run เลย<em>ติดตั้งครั้งเดียวต่อเครื่อง</em></span>
+        <code class="cmd">python3 tools/<span class="flag">vscode_keys.py</span> --apply</code>
+      </li>
+      <li>
         <span class="q">โหลด PDF มาแล้ว อยากให้เข้าโฟลเดอร์เป็นระเบียบ<em>สร้าง .cpp จาก template ให้ด้วย</em></span>
         <code class="cmd">fish tools/<span class="flag">organize.fish</span> ~/Downloads --cpp</code>
       </li>
@@ -441,9 +445,9 @@
         <span class="tool-role">python · ตัวที่ใช้บ่อยที่สุด</span>
       </div>
       <p>
-        คอมไพล์ + รันโจทย์ C++ <b>สคริปต์กลางตัวเดียว</b> — ทั้งจาก terminal และจากปุ่ม
-        <b>Ctrl+Shift+B</b> ใน VS Code (เรียกตัวเดียวกัน) มันรู้จักโจทย์สองทรงเอง จึงใช้
-        คำสั่งเดียวได้หมด ไม่ต้อง cd ไป path ลึก ๆ อีก
+        คอมไพล์ + รันโจทย์ C++ <b>สคริปต์กลางตัวเดียว</b> — ทั้งจาก terminal และจากคีย์ลัด
+        ใน VS Code (<kbd>Ctrl+F5</kbd> = build + run · <kbd>Ctrl+Shift+B</kbd> = build อย่างเดียว)
+        มันรู้จักโจทย์สองทรงเอง จึงใช้คำสั่งเดียวได้หมด ไม่ต้อง cd ไป path ลึก ๆ อีก
       </p>
       <div>
         <code class="cmd">python3 tools/run.py C1T43                  <span class="cmt"># หาโฟลเดอร์จากรหัส แล้วคอมไพล์ + รัน</span></code>
@@ -454,23 +458,83 @@
         <code class="cmd">python3 tools/run.py C1T43 --list           <span class="cmt"># โชว์ layout/ไฟล์/sample แล้วจบ</span></code>
       </div>
       <p class="note">
-        ของที่ออกมาอยู่ใต้ <code class="inline">.run/</code> ของ<b>โฟลเดอร์โจทย์</b> (ไม่ใช่ราก repo)
-        — <code class="inline">bin</code> · <code class="inline">output.txt</code> ·
-        <code class="inline">input.in</code> · <code class="inline">&lt;sample&gt;.got</code>
-        ตอนเทียบไม่ผ่าน · ลำดับการหา input: <code class="inline">--stdin</code> →
-        <code class="inline">--sample</code> → <code class="inline">.run/input.in</code> →
-        sample แรก (พิมพ์บอกให้รู้) → ว่าง + คำใบ้
+        <code class="inline">input.in</code> กับ <code class="inline">output.txt</code>
+        อยู่ที่ <b>ราก repo</b> — ไฟล์เดียวใช้ทุกข้อ เพราะทำทีละข้ออยู่แล้ว ก็อป input ทับได้เลย
+        เปิดแท็บค้างไว้ได้ ไม่ต้องลากไฟล์ใหม่ และ<b>ไม่หายตอน <code class="inline">--clean</code></b>
+        · <code class="inline">.run/</code> ของโฟลเดอร์โจทย์เหลือแค่
+        <code class="inline">bin</code> กับ <code class="inline">&lt;sample&gt;.got</code>
+        ตอนเทียบไม่ผ่าน (ตรงกับ <code class="inline">launch.json</code>) ·
+        ลำดับการหา input: <code class="inline">--stdin</code> →
+        <code class="inline">--sample</code> → <code class="inline">input.in</code> (ราก repo) →
+        <code class="inline">.run/input.in</code> (ที่อยู่เก่า) → sample แรก → สร้างไฟล์เปล่าให้
+      </p>
+      <p class="note">
+        <b>สคริปต์พิมพ์ทุกครั้งว่าใช้ input ไฟล์ไหน</b> — ไฟล์เดียวใช้ร่วมทุกข้อ ถ้าเปลี่ยนข้อแล้ว
+        ลืมเปลี่ยน input มันจะเงียบ ๆ ใช้ของเก่า · ไม่ต้องมี input เลยก็รันได้ (จะเจอ EOF)
+      </p>
+      <p class="note">
+        <b>หาโฟลเดอร์ของ grader จากเนื้อใน ไม่ได้ดูชื่อ</b> — โฟลเดอร์ลูกอันไหนมี
+        <code class="inline">.h</code> หรือ <code class="inline">.cpp</code> ที่มี
+        <code class="inline">main()</code> ก็คือของ grader จึงรองรับ
+        <code class="inline">provided/</code> · <code class="inline">attachment/</code> ·
+        <code class="inline">provided_yrc/</code> และชื่ออะไรก็ได้ <b>โดยไม่ต้อง rename</b>
       </p>
       <p class="note">
         <b>โจทย์สองทรงที่มันแยกเอง:</b> ทรง <i>ไฟล์เดียว</i> คอมไพล์ไฟล์นั้นไฟล์เดียว ·
-        ทรง <i>โจทย์ฟังก์ชัน</i> (มี <code class="inline">provided/grader.cpp</code>)
-        คอมไพล์ <code class="inline">-I provided provided/grader.cpp &lt;ไฟล์เรา&gt;.cpp</code>
+        ทรง <i>โจทย์ฟังก์ชัน</i> คอมไพล์
+        <code class="inline">&lt;grader&gt;/grader.cpp &lt;ไฟล์เรา&gt;.cpp</code>
         ให้ด้วย · <code class="inline">-std=</code> อ่านจาก
-        <code class="inline">provided/compile*.sh</code> ของข้อนั้นเอง
+        <code class="inline">compile*.sh</code> ของโฟลเดอร์ grader ที่จับคู่ได้
         (<code class="inline">C1T43</code> ได้ <code class="inline">c++17</code> ·
-        <code class="inline">AplusB</code>/<code class="inline">Georgette</code> ได้
-        <code class="inline">gnu++20</code>) · timeout 10 วิ กัน infinite loop ·
-        error เป็นภาษาไทยที่บอกทางออก ไม่ปล่อย traceback
+        <code class="inline">Georgette</code> ได้ <code class="inline">gnu++20</code>) ·
+        timeout 10 วิ กัน infinite loop · error เป็นภาษาไทยที่บอกทางออก ไม่ปล่อย traceback
+      </p>
+      <p class="note">
+        <b>จับคู่ "ไฟล์เรา ↔ โฟลเดอร์ grader" จาก <code class="inline">#include "…"</code></b>
+        ในไฟล์เรา — สัญญาณที่โจทย์บังคับอยู่แล้ว จึงแยก grader สองชุดที่อยู่ในโฟลเดอร์เดียวกันได้:
+      </p>
+      <div>
+        <code class="cmd">C1T49.cpp      #include "C1T49.h"      <span class="cmt">→ provided/       (compile.sh ใช้ gnu++17)</span></code>
+        <code class="cmd">Georgette.cpp  #include "Georgette.h"  <span class="cmt">→ provided_yrc/   (compile.sh ใช้ gnu++20)</span></code>
+      </div>
+      <p class="note">
+        <b>ถ้าจับคู่ไม่ได้หรือกำกวม สคริปต์จะหยุดแล้วบอก ไม่เดาต่อ</b> — เดาผิดแล้วคอมไพล์ผ่าน
+        คือกรณีที่แย่ที่สุด (ได้คำตอบผิดแบบเงียบ ๆ) · อยากรู้ว่ามันเลือกอะไรเพราะอะไร ใช้
+        <code class="inline">--list</code> · ชี้เองด้วย <code class="inline">--file</code>
+        / <code class="inline">--with</code>
+      </p>
+    </div>
+
+    <div class="tool">
+      <div class="tool-head">
+        <h3 class="tool-name">vscode_keys.py</h3>
+        <span class="tool-role">python · ติดตั้งคีย์ลัดครั้งเดียว</span>
+      </div>
+      <p>
+        ติดตั้ง <kbd>Ctrl+F5</kbd> = task <code class="inline">C++: build + run</code>
+        (คอมไพล์ + รัน ในคีย์เดียว) ให้ VS Code
+      </p>
+      <div>
+        <code class="cmd">python3 tools/vscode_keys.py            <span class="cmt"># ดูเฉย ๆ ว่าจะเขียนอะไร ลงที่ไหน</span></code>
+        <code class="cmd">python3 tools/vscode_keys.py --apply    <span class="cmt"># เขียนจริง (รันซ้ำได้ ไม่ซ้อน)</span></code>
+        <code class="cmd">python3 tools/vscode_keys.py --print    <span class="cmt"># พิมพ์ JSON ให้ก็อปวางเอง</span></code>
+        <code class="cmd">python3 tools/vscode_keys.py --apply --remove     <span class="cmt"># ถอนออก</span></code>
+      </div>
+      <p class="note">
+        VS Code <b>ไม่มี</b> keybindings ระดับ workspace (ไม่มี
+        <code class="inline">.vscode/keybindings.json</code>) — คีย์ลัดเป็นเรื่องของ
+        <b>เครื่องที่เปิดหน้าจอ</b> จึงต้องเขียนลงไฟล์ของผู้ใช้ สคริปต์หาโฟลเดอร์นั้นให้เอง
+        ทั้ง Linux / macOS / Windows (รวม VSCodium · Cursor · Insiders · flatpak)
+        แล้วแทรกเป็นสมาชิกตัวสุดท้ายแบบ textual มี marker คอมเมนต์ล้อม ⇒ รันซ้ำได้ไม่ซ้อน
+        และคอมเมนต์/คีย์ลัดเดิมไม่ถูกแตะ
+      </p>
+      <p class="note">
+        ⚠️ เครื่องที่รันคำสั่งนี้ต้องเป็นเครื่องเดียวกับที่เปิด VS Code — VPS นี้ไม่มี VS Code
+        ถ้าไม่เจอโฟลเดอร์ให้ใช้ <code class="inline">--print</code> แล้วก็อปไปวางที่
+        <code class="inline">Ctrl+Shift+P → Preferences: Open Keyboard Shortcuts (JSON)</code>
+        · <b>ห้ามเปลี่ยน label <code class="inline">C++: build + run</code></b> ใน
+        <code class="inline">tasks.json</code> — <code class="inline">args</code> ของคีย์ลัด
+        อ้าง label นี้ตรง ๆ
       </p>
     </div>
 
@@ -523,7 +587,8 @@
         <code class="inline">&lt;รหัส&gt;.pdf</code> ·
         ไฟล์คอมไพล์/รัน (<code class="inline">main</code>, <code class="inline">*.exe</code>,
         <code class="inline">input.in</code>, <code class="inline">output.txt</code>) ไม่เอามา
-        (repo ใช้ <code class="inline">.run/</code>) · ข้อที่ต้นทางไม่มีโค้ดได้
+        (ของที่คอมไพล์แล้วอยู่ <code class="inline">.run/</code> ส่วน input/output ที่ซ้อมใช้
+        คือไฟล์เดียวที่ราก repo) · ข้อที่ต้นทางไม่มีโค้ดได้
         <code class="inline">&lt;รหัส&gt;.cpp</code> จาก <code class="inline">template.cpp</code> ·
         <b>default = คัดลอก</b> ต้นทางไม่ถูกแตะ (<code class="inline">--move</code> ถ้าอยากย้ายจริง)
         · ข้อที่ไม่มีต้นทางเลยจะถูกรายงาน — ปกติคือโจทย์ใหม่ของปีนี้ ให้โหลด PDF แล้วใช้
@@ -702,14 +767,21 @@
       </li>
       <li>
         <div class="step-body">
-          <p class="step-title">เขียนโค้ด แล้ว build + run ด้วยคำสั่งเดียว</p>
-          <code class="cmd">python3 tools/run.py C1PR01              <span class="cmt"># ใช้ .run/input.in ถ้ามี</span></code>
+          <p class="step-title">ก็อป input → input.in ที่ราก repo แล้ว build + run</p>
+          <code class="cmd">python3 tools/run.py C1PR01              <span class="cmt"># อ่าน input.in ที่ราก repo</span></code>
           <code class="cmd">python3 tools/run.py C1T43 --sample 1     <span class="cmt"># โจทย์ฟังก์ชันก็คำสั่งเดียวกัน</span></code>
           <p>
             หรือเปิด <code class="inline">problems/.../13_C1PR01_Test/C1PR01.cpp</code>
-            แล้วกด <b>Ctrl+Shift+B</b> ใน VS Code — เรียก <code class="inline">run.py</code>
-            ตัวเดียวกัน · ไฟล์ที่คอมไพล์/รันออกมาอยู่ที่
-            <code class="inline">&lt;โฟลเดอร์โจทย์&gt;/.run/</code> ไม่ใช่ราก repo
+            แล้วกด <kbd>Ctrl+F5</kbd> (build + run) หรือ <kbd>Ctrl+Shift+B</kbd> (build อย่างเดียว)
+            ใน VS Code — เรียก <code class="inline">run.py</code> ตัวเดียวกัน ·
+            <code class="inline">input.in</code> / <code class="inline">output.txt</code>
+            อยู่ที่ <b>ราก repo</b> ไฟล์เดียวใช้ทุกข้อ เปิดแท็บค้างไว้ได้ และไม่หายตอน
+            <code class="inline">--clean</code> · ในโฟลเดอร์โจทย์เหลือแค่
+            <code class="inline">.run/</code> ที่เก็บ <code class="inline">bin</code>
+          </p>
+          <p>
+            ติดตั้งคีย์ลัดครั้งเดียวต่อเครื่องด้วย
+            <code class="inline">python3 tools/vscode_keys.py --apply</code>
           </p>
         </div>
       </li>
@@ -823,20 +895,38 @@
 <pre class="tree"><span class="dir">50_C1T43_Kuromi_s_Energy/</span>
 ├── C1T43.cpp      <span class="cmt">← ไฟล์ที่เราแก้+ส่ง ชั้นบนสุดเสมอ (ชื่อตามคอลัมน์ Files)</span>
 ├── C1T43.pdf
-├── <span class="dir">provided/</span>      <span class="cmt">← ของที่ grader ให้มา ห้ามแก้</span>
+├── <span class="dir">provided/</span>      <span class="cmt">← ของที่ grader ให้มา ห้ามแก้ (ชื่อโฟลเดอร์อะไรก็ได้)</span>
 │   ├── C1T43.h · grader.cpp          <span class="cmt">← .h = ประกาศฟังก์ชัน · grader.cpp = main</span>
 │   ├── compile_cpp.sh · run_cpp.sh   <span class="cmt">← run.py อ่าน -std= จากไฟล์นี้</span>
 │   └── sample/                       <span class="cmt">← ถ้าโจทย์ให้มา</span>
 ├── <span class="dir">local/</span>         <span class="cmt">← ไฟล์ซ้อม/เวอร์ชันลองของเรา (ไม่ได้ส่ง · commit ไว้ด้วย)</span>
-└── <span class="dir">.run/</span>          <span class="cmt">← ของที่คอมไพล์/รันออกมา (gitignore)</span>
+└── <span class="dir">.run/</span>          <span class="cmt">← แค่ bin ที่คอมไพล์แล้ว + .got ที่เทียบไม่ผ่าน (gitignore)</span>
 </pre>
     <p class="note">
-      <code class="inline">provided/</code> ถูกตั้งเป็น read-only ใน VS Code
+      โฟลเดอร์ของ grader ถูกตั้งเป็น read-only ใน VS Code
       (<code class="inline">files.readonlyInclude</code>) — กันเผลอแก้ <code class="inline">.h</code>
       ของ grader · เคสที่คอลัมน์ Files ไม่ตรงกับรหัส Task (เช่น
       <code class="inline">C1C02</code> → <code class="inline">exchange.cpp</code>)
-      ให้ดึงไฟล์นั้นขึ้นมาชั้นบนสุด <b>อย่าปล่อยไว้ใน <code class="inline">provided/</code></b>
+      ให้ดึงไฟล์นั้นขึ้นมาชั้นบนสุด <b>อย่าปล่อยไว้ในโฟลเดอร์ของ grader</b>
       ไม่งั้นจะชนสัญลักษณ์กับไฟล์ของเรา
+    </p>
+    <p class="note">
+      <b>ชื่อโฟลเดอร์ของ grader ไม่ต้องเป็น <code class="inline">provided</code></b> —
+      <code class="inline">attachment/</code> · <code class="inline">provided_yrc/</code>
+      หรืออะไรก็ได้ <code class="inline">run.py</code> ดูเนื้อใน (มี
+      <code class="inline">.h</code> หรือ <code class="inline">.cpp</code> ที่มี
+      <code class="inline">main()</code> ไหม) ไม่ได้ดูชื่อ จึง<b>ไม่ต้อง rename</b>
+      · ถ้าโฟลเดอร์เดียวมี grader สองชุด (เช่น <code class="inline">58_C1T49</code>
+      ที่มีทั้ง <code class="inline">provided/</code> กับ
+      <code class="inline">provided_yrc/</code>) มันจับคู่ให้จาก
+      <code class="inline">#include</code> ในไฟล์เรา
+    </p>
+    <p class="note">
+      <b><code class="inline">input.in</code> กับ <code class="inline">output.txt</code>
+      อยู่ที่ราก repo ไม่ใช่ใน <code class="inline">.run/</code></b> — ไฟล์เดียวใช้ทุกข้อ
+      เพราะทำทีละข้ออยู่แล้ว ก็อปทับได้เลย เปิดแท็บค้างไว้ได้ และไม่หายตอน
+      <code class="inline">--clean</code> · <code class="inline">run.py</code> พิมพ์บอกทุกครั้ง
+      ว่าใช้ input ไฟล์ไหน (กันลืมเปลี่ยนแล้วเงียบ ๆ ใช้ของเก่า)
     </p>
   </section>
 
@@ -874,19 +964,36 @@
         <code class="inline">.exe</code>) ส่วนไฟล์รันชั่วคราวอยู่ใน <code class="inline">.run/</code>
       </li>
       <li>
-        <b>โจทย์ฟังก์ชัน: ของ grader อยู่ใน <code class="inline">provided/</code> ห้ามแก้</b> —
+        <b>โจทย์ฟังก์ชัน: ของ grader อยู่ในโฟลเดอร์ของมันเอง ห้ามแก้</b> —
         ตั้ง read-only ไว้แล้วใน <code class="inline">.vscode/settings.json</code>
         ไฟล์ที่เราแก้+ส่งอยู่ <b>ชั้นบนสุด</b> และชื่อตามคอลัมน์ Files
         (บางข้อไม่ตรงกับรหัส Task เช่น <code class="inline">C1T43</code> →
         <code class="inline">C1T43.cpp</code> แต่ <code class="inline">C1C02</code> →
-        <code class="inline">exchange.cpp</code>)
+        <code class="inline">exchange.cpp</code>) · <b>ชื่อโฟลเดอร์ของ grader อะไรก็ได้</b>
+        (<code class="inline">provided/</code> · <code class="inline">attachment/</code> ·
+        <code class="inline">provided_yrc/</code>) — <code class="inline">run.py</code>
+        ดูเนื้อในไม่ได้ดูชื่อ ไม่ต้อง rename
       </li>
       <li>
         <b>คอมไพล์ + รันใช้ <code class="inline">tools/run.py</code> ตัวเดียว</b> —
-        ทั้งจาก terminal และจาก <kbd>Ctrl+Shift+B</kbd> ใน VS Code
-        ของที่ออกมาอยู่ที่ <code class="inline">&lt;โฟลเดอร์โจทย์&gt;/.run/</code>
-        ไม่ใช่ราก repo · <code class="inline">-std=</code> อ่านจาก
-        <code class="inline">provided/compile*.sh</code> ของข้อนั้นเอง ไม่ต้องจำ
+        ทั้งจาก terminal และจากคีย์ลัดใน VS Code (<kbd>Ctrl+F5</kbd> = build + run ·
+        <kbd>Ctrl+Shift+B</kbd> = build อย่างเดียว · ติดตั้งครั้งเดียวด้วย
+        <code class="inline">python3 tools/vscode_keys.py --apply</code>)
+        · <code class="inline">-std=</code> อ่านจาก
+        <code class="inline">compile*.sh</code> ของโฟลเดอร์ grader ที่จับคู่ได้ ไม่ต้องจำ
+      </li>
+      <li>
+        <b><code class="inline">input.in</code> / <code class="inline">output.txt</code>
+        อยู่ที่ราก repo</b> ไม่ใช่ใน <code class="inline">.run/</code> — ไฟล์เดียวใช้ทุกข้อ
+        ก็อป input ทับได้เลย เปิดแท็บค้างไว้ได้ ไม่ต้องลากไฟล์ใหม่ และไม่หายตอน
+        <code class="inline">--clean</code> · <code class="inline">.run/</code> ของโฟลเดอร์โจทย์
+        เหลือแค่ <code class="inline">bin</code> กับ <code class="inline">&lt;sample&gt;.got</code>
+      </li>
+      <li>
+        <b>ห้ามเปลี่ยน label <code class="inline">C++: build + run</code> ใน
+        <code class="inline">.vscode/tasks.json</code></b> — คีย์ลัด
+        <kbd>Ctrl+F5</kbd> อ้าง label นี้ตรง ๆ ใน <code class="inline">args</code>
+        แก้ชื่อ task แล้วคีย์ลัดจะเงียบ
       </li>
       <li>
         <b>ห้ามใส่ <code class="inline">&amp;&amp;</code> หรือ <code class="inline">&lt;</code>
@@ -961,18 +1068,30 @@
           </tr>
           <tr>
             <td class="mono">run.py: ไม่มี main และไม่มี grader</td>
-            <td>ของ grader ยังไม่ถูกย้ายเข้า <code class="inline">provided/</code> — ย้ายก่อนแล้ว run.py จะรู้จักเอง · หรือถ้าโจทย์นั้นให้เขียน <code class="inline">main</code> เอง ก็ใส่ลงไฟล์เรา</td>
+            <td>ของ grader ยังไม่ถูกย้ายเข้าโฟลเดอร์ของมัน — ย้ายก่อนแล้ว run.py จะรู้จักเอง · หรือถ้าโจทย์นั้นให้เขียน <code class="inline">main</code> เอง ก็ใส่ลงไฟล์เรา · ถ้า driver อยู่ที่อื่นจริง ๆ ใช้ <code class="inline">--with "&lt;ไฟล์ที่มี main&gt;"</code> (ข้อความ error พิมพ์ path มาให้ก็อป)</td>
+          </tr>
+          <tr>
+            <td class="mono">run.py: จับคู่ไฟล์กับ grader ไม่ได้ / กำกวม</td>
+            <td>มันไม่เดาต่อโดยตั้งใจ — ใช้ <code class="inline">--list</code> ดูว่าเจอ grader อะไรบ้าง แล้วชี้ด้วย <code class="inline">--file "&lt;ไฟล์ของเรา&gt;"</code></td>
           </tr>
           <tr>
             <td class="mono">run.py คอมไพล์ผ่านแต่รันแล้วเจอ EOF</td>
-            <td>ยังไม่มี input — วางที่ <code class="inline">.run/input.in</code> หรือใช้ <code class="inline">--sample N</code> / <code class="inline">--stdin</code> / <code class="inline">-i</code></td>
+            <td>ยังไม่มี input — วางที่ <code class="inline">input.in</code> ราก repo (สคริปต์สร้างไฟล์เปล่าไว้ให้แล้ว) หรือใช้ <code class="inline">--sample N</code> / <code class="inline">--stdin</code> / <code class="inline">-i</code></td>
+          </tr>
+          <tr>
+            <td class="mono">run.py ใช้ input ผิดข้อ</td>
+            <td><code class="inline">input.in</code> เป็นไฟล์เดียวใช้ร่วมทุกข้อ — เช็คบรรทัด <code class="inline">ℹ️ input:</code> ที่สคริปต์พิมพ์ทุกครั้ง</td>
+          </tr>
+          <tr>
+            <td class="mono">กด <kbd>Ctrl+F5</kbd> แล้วไม่เกิดอะไร / เด้งให้เลือก task</td>
+            <td>ยังไม่ได้ติดตั้งคีย์ลัด หรือ label ของ task ถูกแก้ — <code class="inline">python3 tools/vscode_keys.py --apply</code> (สคริปต์เตือนถ้า label ไม่ตรง)</td>
           </tr>
           <tr>
             <td class="mono">run.py รันค้างไม่จบ</td>
             <td>ตัดจบเองที่ 10 วิ แล้วรายงาน <code class="inline">⏱ เกิน …</code> — ปรับด้วย <code class="inline">--timeout</code> (เจอบ่อยตอนทำ linked list/queue ที่ลิงก์วน)</td>
           </tr>
           <tr>
-            <td class="mono">แก้ <code class="inline">provided/</code> ไม่ได้ (พิมพ์ไม่ติด)</td>
+            <td class="mono">แก้ไฟล์ในโฟลเดอร์ grader ไม่ได้ (พิมพ์ไม่ติด)</td>
             <td>ตั้งใจ — เป็นของที่ grader ให้มา ตั้ง read-only ไว้ใน <code class="inline">.vscode/settings.json</code></td>
           </tr>
           <tr>
@@ -985,7 +1104,7 @@
   </section>
 
   <footer>
-    อัปเดต 12 ต.ค. 2569 · คู่มือฉบับเต็มอยู่ใน tools/README.md ของ repo
+    อัปเดต 14 ต.ค. 2569 · คู่มือฉบับเต็มอยู่ใน tools/README.md ของ repo
   </footer>
 
 </div>
